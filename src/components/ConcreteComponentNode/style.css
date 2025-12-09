@@ -1,0 +1,49 @@
+.concrete-component-node {
+  border: 1.04px solid;
+  border-color: #001137;
+  border-radius: 11.41px;
+  height: 26px;
+  left: 3472px;
+  overflow: scroll;
+  position: relative;
+  top: 110px;
+  width: 84px;
+}
+
+.concrete-component-node .rectangle-4 {
+  background-color: #001137;
+  border-radius: 11.41px;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 33.27%;
+}
+
+.concrete-component-node .text-wrapper-11 {
+  color: #001137;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  height: 45.71%;
+  left: 44.14%;
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 26.74%;
+  white-space: nowrap;
+  width: 41.76%;
+}
+
+.concrete-component-node .like-me-10 {
+  height: 48.97%;
+  left: 13.12%;
+  position: absolute;
+  top: 25.10%;
+  width: 6.97%;
+}
+
+.concrete-component-node::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}

@@ -1,0 +1,54 @@
+.group {
+  height: 10px;
+  left: 20px;
+  position: relative;
+  width: 79px;
+}
+
+.group .like-me-5 {
+  height: 100%;
+  left: 84.89%;
+  position: absolute;
+  top: 0;
+  width: 15.11%;
+}
+
+.group .like-me-6 {
+  height: 100%;
+  left: 42.08%;
+  position: absolute;
+  top: 0;
+  width: 15.11%;
+}
+
+.group .like-me-7 {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 15.11%;
+}
+
+.group .like-me-8 {
+  height: 100%;
+  left: 63.49%;
+  position: absolute;
+  top: 0;
+  width: 15.11%;
+}
+
+.group .like-me-9 {
+  height: 100%;
+  left: 20.68%;
+  position: absolute;
+  top: 0;
+  width: 15.11%;
+}
+
+.group.property-1-0-default {
+  top: 20px;
+}
+
+.group.property-1-0-variant-2 {
+  top: 50px;
+}

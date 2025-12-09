@@ -1,0 +1,33 @@
+.group-wrapper {
+  background-color: #001137;
+  border-radius: 11.41px;
+  height: 26px;
+  left: 4768px;
+  overflow: scroll;
+  position: relative;
+  top: 110px;
+  width: 78px;
+}
+
+.group-wrapper .text-wrapper-7 {
+  color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  height: 45.71%;
+  left: 17.17%;
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  text-align: right;
+  top: 24.27%;
+  white-space: nowrap;
+  width: 65.44%;
+}
+
+.group-wrapper::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}

@@ -1,0 +1,31 @@
+.group-10250 {
+  border: 1.04px solid;
+  border-color: #001137;
+  border-radius: 11.41px;
+  height: 26px;
+  left: 3579px;
+  overflow: scroll;
+  position: relative;
+  top: 110px;
+  width: 79px;
+}
+
+.group-10250 .text-wrapper-10 {
+  color: #001137;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  height: 45.71%;
+  left: 17.78%;
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 26.74%;
+  white-space: nowrap;
+  width: 63.49%;
+}
+
+.group-10250::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}

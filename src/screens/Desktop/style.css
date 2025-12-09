@@ -1,0 +1,971 @@
+.desktop {
+  background-color: var(
+    --functional-colors-neutral-colors-high-high-pure-duplicate
+  );
+  min-height: 4880px;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.desktop .rectangle-5 {
+  background: linear-gradient(
+    180deg,
+    rgba(246, 207, 251, 0) 6%,
+    rgba(246, 207, 251, 1) 50%,
+    rgba(235, 125, 198, 1) 100%
+  );
+  height: 315px;
+  left: 0;
+  position: absolute;
+  top: 4598px;
+  width: 100%;
+  right: 0;
+}
+
+.desktop .group-8 {
+  height: 880px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 4px;
+  width: 100%;
+  max-width: 2284px;
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .desktop .group-8 {
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+/* Posicionamento ORIGINAL do Figma */
+.desktop .img-2 {
+  position: absolute;
+  top: 149px;
+  left: 1207px;
+  width: 554px;
+  height: auto;
+}
+
+.desktop .like-me-11 {
+  position: absolute;
+  left: calc(50% - 446px);
+  top: calc(50% - 288px);
+  width: 540px;
+  height: auto;
+  z-index: 2;
+}
+
+.desktop .like-me-12 {
+  position: absolute;
+  left: calc(50% - 743px);
+  top: calc(50% - 444px);
+  width: 439px;
+  height: auto;
+  z-index: 1;
+}
+
+.desktop .img-3 {
+  position: absolute;
+  top: 236px;
+  left: 929px;
+  width: 393px;
+  height: auto;
+}
+
+.desktop .img-4 {
+  position: absolute;
+  top: -4px;
+  left: 1444px;
+  width: 394px;
+  height: auto;
+}
+
+/* Responsividade - escala proporcional */
+@media (max-width: 1440px) {
+  .desktop .group-8 {
+    max-width: 100%;
+  }
+  
+  .desktop .img-2,
+  .desktop .like-me-11,
+  .desktop .like-me-12,
+  .desktop .img-3,
+  .desktop .img-4 {
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktop .img-2,
+  .desktop .like-me-11,
+  .desktop .like-me-12,
+  .desktop .img-3,
+  .desktop .img-4 {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop .img-2,
+  .desktop .like-me-11,
+  .desktop .like-me-12,
+  .desktop .img-3,
+  .desktop .img-4 {
+    transform: scale(0.4);
+    opacity: 0.8;
+  }
+}
+
+.desktop .group-9 {
+  height: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: calc(50.00% - 2030px);
+  width: min(393px, calc(100% - 40px));
+  max-width: 393px;
+}
+
+.desktop .text-wrapper-12 {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: clamp(40px, 6.3vw, 90.8px);
+  font-weight: 400;
+  left: max(30px, calc((100% - 1440px) / 2 + 30px));
+  letter-spacing: -1.82px;
+  line-height: 81.7px;
+  position: absolute;
+  top: 4109px;
+  width: min(653px, calc(100% - 60px));
+  max-width: 653px;
+}
+
+.desktop .text-wrapper-13 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4320px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-14 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(401px, calc((100% - 1440px) / 2 + 401px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4320px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-15 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: -0.33px;
+  line-height: 18.0px;
+  position: absolute;
+  text-decoration: underline;
+  top: 4361px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-16 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(434px, calc((100% - 1440px) / 2 + 434px));
+  letter-spacing: -0.33px;
+  line-height: 18.0px;
+  position: absolute;
+  top: 4361px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-17 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(434px, calc((100% - 1440px) / 2 + 434px));
+  letter-spacing: -0.33px;
+  line-height: 18.0px;
+  position: absolute;
+  top: 4395px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-18 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(434px, calc((100% - 1440px) / 2 + 434px));
+  letter-spacing: -0.33px;
+  line-height: 18.0px;
+  position: absolute;
+  top: 4429px;
+  white-space: nowrap;
+}
+
+.desktop .group-10 {
+  height: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: calc(50.00% + 2215px);
+  width: min(130px, calc(100% - 40px));
+  max-width: 130px;
+}
+
+.desktop .group-11 {
+  height: 21px;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  position: absolute;
+  top: 4823px;
+  width: 59px;
+}
+
+.desktop .rectangle-6 {
+  background-color: #001137;
+  border-radius: 9.29px;
+  height: 21px;
+  left: 1px;
+  position: absolute;
+  top: 0;
+  width: 57px;
+}
+
+.desktop .text-wrapper-19 {
+  color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 10px;
+  font-weight: 500;
+  left: 11px;
+  letter-spacing: 0;
+  line-height: 10.0px;
+  position: absolute;
+  text-align: right;
+  top: 5px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-20 {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: 0;
+  line-height: 16.4px;
+  position: absolute;
+  top: 4712px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-21 {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(828px, calc((100% - 1440px) / 2 + 828px));
+  letter-spacing: 0;
+  line-height: 16.4px;
+  position: absolute;
+  top: 4712px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-22 {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 16.4px;
+  font-weight: 400;
+  left: max(1088px, calc((100% - 1440px) / 2 + 1088px));
+  letter-spacing: 0;
+  line-height: 16.4px;
+  position: absolute;
+  top: 4712px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-23 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 13.1px;
+  font-weight: 400;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: -0.26px;
+  line-height: 17.1px;
+  position: absolute;
+  top: 4740px;
+  width: min(451px, calc(100% - 66px));
+  max-width: 451px;
+}
+
+.desktop .privacy-policy {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 13.1px;
+  font-weight: 400;
+  left: max(828px, calc((100% - 1440px) / 2 + 828px));
+  letter-spacing: -0.26px;
+  line-height: 17.1px;
+  position: absolute;
+  top: 4740px;
+  width: min(126px, calc(100% - 860px));
+  max-width: 126px;
+}
+
+.desktop .social-icons {
+  height: 16px !important;
+  left: max(1184px, calc((100% - 1440px) / 2 + 1184px)) !important;
+  position: absolute !important;
+  top: 4743px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-1 {
+  height: 16px !important;
+  left: max(129px, calc((100% - 1440px) / 2 + 129px)) !important;
+  position: absolute !important;
+  top: 4395px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-2 {
+  height: 16px !important;
+  left: max(1088px, calc((100% - 1440px) / 2 + 1088px)) !important;
+  position: absolute !important;
+  top: 4743px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-3 {
+  height: 16px !important;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px)) !important;
+  position: absolute !important;
+  top: 4395px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-5 {
+  height: 16px !important;
+  left: max(1120px, calc((100% - 1440px) / 2 + 1120px)) !important;
+  position: absolute !important;
+  top: 4743px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-4 {
+  height: 16px !important;
+  left: max(65px, calc((100% - 1440px) / 2 + 65px)) !important;
+  position: absolute !important;
+  top: 4395px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-7 {
+  height: 16px !important;
+  left: max(1152px, calc((100% - 1440px) / 2 + 1152px)) !important;
+  position: absolute !important;
+  top: 4743px !important;
+  width: 16px !important;
+}
+
+.desktop .social-icons-6 {
+  height: 16px !important;
+  left: max(97px, calc((100% - 1440px) / 2 + 97px)) !important;
+  position: absolute !important;
+  top: 4395px !important;
+  width: 16px !important;
+}
+
+.desktop .rectangle-7 {
+  -webkit-backdrop-filter: blur(1.83px) brightness(100%);
+  backdrop-filter: blur(1.83px) brightness(100%);
+  background-color: #fdfbee;
+  border-radius: 20.37px;
+  height: 48px;
+  left: max(822px, calc((100% - 1440px) / 2 + 822px));
+  position: absolute;
+  top: 4319px;
+  width: min(585px, calc(100% - 860px));
+  max-width: 585px;
+}
+
+.desktop .rectangle-8 {
+  -webkit-backdrop-filter: blur(1.83px) brightness(100%);
+  backdrop-filter: blur(1.83px) brightness(100%);
+  background-color: #fdfbee;
+  border-radius: 20.37px;
+  height: 48px;
+  left: max(822px, calc((100% - 1440px) / 2 + 822px));
+  position: absolute;
+  top: 4383px;
+  width: min(585px, calc(100% - 860px));
+  max-width: 585px;
+}
+
+.desktop .rectangle-9 {
+  -webkit-backdrop-filter: blur(1.83px) brightness(100%);
+  backdrop-filter: blur(1.83px) brightness(100%);
+  background-color: #fdfbee;
+  border-radius: 20.37px;
+  height: 48px;
+  left: max(822px, calc((100% - 1440px) / 2 + 822px));
+  position: absolute;
+  top: 4447px;
+  width: min(585px, calc(100% - 860px));
+  max-width: 585px;
+}
+
+.desktop .rectangle-10 {
+  -webkit-backdrop-filter: blur(1.83px) brightness(100%);
+  backdrop-filter: blur(1.83px) brightness(100%);
+  background-color: #fdfbee;
+  border-radius: 20.37px;
+  height: 93px;
+  left: max(822px, calc((100% - 1440px) / 2 + 822px));
+  position: absolute;
+  top: 4511px;
+  width: min(585px, calc(100% - 860px));
+  max-width: 585px;
+}
+
+.desktop .rectangle-11 {
+  height: 810px;
+  left: 0;
+  right: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 2083px;
+  width: 100%;
+}
+
+.desktop .text-wrapper-24 {
+  color: var(--functional-colors-main-colors-primary-primary-medium-duplicate);
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(846px, calc((100% - 1440px) / 2 + 846px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4336px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-25 {
+  color: var(--functional-colors-main-colors-primary-primary-medium-duplicate);
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(846px, calc((100% - 1440px) / 2 + 846px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4400px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-26 {
+  color: var(--functional-colors-main-colors-primary-primary-medium-duplicate);
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(846px, calc((100% - 1440px) / 2 + 846px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4464px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-27 {
+  color: var(--functional-colors-main-colors-primary-primary-medium-duplicate);
+  font-family: "DM Sans", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  left: max(846px, calc((100% - 1440px) / 2 + 846px));
+  letter-spacing: -0.24px;
+  line-height: 13.2px;
+  position: absolute;
+  top: 4528px;
+  white-space: nowrap;
+}
+
+.desktop .like-me-instance {
+  left: max(401px, calc((100% - 1440px) / 2 + 401px)) !important;
+  position: absolute !important;
+  top: 4360px !important;
+}
+
+.desktop .design-component-instance-node {
+  left: max(401px, calc((100% - 1440px) / 2 + 401px)) !important;
+  position: absolute !important;
+  top: 4394px !important;
+}
+
+.desktop .like-me-13 {
+  left: max(401px, calc((100% - 1440px) / 2 + 401px)) !important;
+  position: absolute !important;
+  top: 4428px !important;
+}
+
+.desktop .rectangle-12 {
+  background-color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  border-radius: 45.05px;
+  height: 608px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 3200px;
+  width: min(1374px, calc(100% - 40px));
+  max-width: 1374px;
+}
+
+.desktop .mask-group {
+  height: 599px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 3209px;
+  width: min(1332px, calc(100% - 40px));
+  max-width: 1332px;
+}
+
+.desktop .LIKEME-MOCKUP-cel {
+  aspect-ratio: 0.97;
+  height: 724px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 3075px;
+  width: min(701px, calc(100% - 40px));
+  max-width: 701px;
+}
+
+.desktop .your-well-being-in {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: clamp(40px, 7.3vw, 105.6px);
+  font-weight: 400;
+  left: max(80px, calc((100% - 1440px) / 2 + 80px));
+  letter-spacing: -2.11px;
+  line-height: 95.0px;
+  position: absolute;
+  top: 3240px;
+  width: min(517px, calc(100% - 160px));
+  max-width: 517px;
+}
+
+.desktop .text-wrapper-28 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.3px;
+  font-weight: 400;
+  left: max(85px, calc((100% - 1440px) / 2 + 85px));
+  letter-spacing: -0.35px;
+  line-height: 19.1px;
+  position: absolute;
+  top: 3623px;
+  width: min(479px, calc(100% - 170px));
+  max-width: 479px;
+}
+
+.desktop .rectangle-13 {
+  border: 1.42px solid;
+  border-color: #001137;
+  border-radius: 19.7px;
+  height: 46px;
+  left: 50%;
+  transform: translateX(calc(-50% + 200px));
+  position: absolute;
+  top: 3836px;
+  width: min(167px, calc(100% - 40px));
+  max-width: 167px;
+}
+
+.desktop .googleplay {
+  height: 0;
+  left: 50%;
+  transform: translateX(calc(-50% + 200px));
+  position: absolute;
+  top: 78.81%;
+  width: min(6.79%, 100px);
+}
+
+.desktop .rectangle-14 {
+  -webkit-backdrop-filter: blur(1.16px) brightness(100%);
+  backdrop-filter: blur(1.16px) brightness(100%);
+  background-color: #001137;
+  border-radius: 12.94px;
+  height: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 3844px;
+  width: min(184px, calc(100% - 40px));
+  max-width: 184px;
+}
+
+.desktop .rectangle-15 {
+  border: 1.42px solid;
+  border-color: #001137;
+  border-radius: 19.7px;
+  height: 46px;
+  left: 50%;
+  transform: translateX(calc(-50% - 200px));
+  position: absolute;
+  top: 3836px;
+  width: min(167px, calc(100% - 40px));
+  max-width: 167px;
+}
+
+.desktop .appstore {
+  height: 30px;
+  left: 50%;
+  transform: translateX(calc(-50% - 200px));
+  position: absolute;
+  top: 3844px;
+  width: min(116px, calc(100% - 40px));
+  max-width: 116px;
+}
+
+.desktop .text-wrapper-29 {
+  color: var(--functional-colors-neutral-colors-high-high-pure-duplicate);
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 13.9px;
+  font-weight: 500;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 0;
+  line-height: 13.9px;
+  position: absolute;
+  top: 3852px;
+  white-space: nowrap;
+}
+
+.desktop .frame-1 {
+  left: max(33px, calc((100% - 1440px) / 2 + 33px)) !important;
+  position: absolute !important;
+  top: 1155px !important;
+  width: min(1391px, calc(100% - 66px)) !important;
+  max-width: 1391px;
+}
+
+.desktop .frame-instance {
+  background-image: url(../../../static/img/mask-group-3.png) !important;
+}
+
+.desktop .frame-1-instance {
+  left: -12076.49% !important;
+  top: -9418.04% !important;
+}
+
+.desktop .text-wrapper-30 {
+  color: #f4f3ec;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 3051px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-31 {
+  color: #f4f3ec;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 4014px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-32 {
+  color: #f4f3ec;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  left: max(33px, calc((100% - 1440px) / 2 + 33px));
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 2059px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-33 {
+  color: #f4f3ec;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  left: max(-3px, calc((100% - 1440px) / 2 - 3px));
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 1065px;
+  white-space: nowrap;
+}
+
+.desktop .text-wrapper-34 {
+  color: #f4f3ec;
+  font-family: "Instrument Sans", Helvetica;
+  font-size: 12.3px;
+  font-weight: 500;
+  left: max(471px, calc((100% - 1440px) / 2 + 471px));
+  letter-spacing: 0;
+  line-height: 12.2px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.desktop .group-10254 {
+  left: max(1324px, calc((100% - 1440px) / 2 + 1324px)) !important;
+  position: absolute !important;
+  top: 1836px !important;
+}
+
+.desktop .group-10253 {
+  left: 1329px !important;
+  position: fixed !important;
+  top: 37px !important;
+}
+
+.desktop .group-10252 {
+  left: 357px !important;
+  position: fixed !important;
+  top: 37px !important;
+}
+
+.desktop .group-instance {
+  left: 242px !important;
+  position: fixed !important;
+  top: 37px !important;
+}
+
+.desktop .group-10250-instance {
+  left: 140px !important;
+  position: fixed !important;
+  top: 37px !important;
+}
+
+.desktop .GROUP {
+  left: max(33px, calc((100% - 1440px) / 2 + 33px)) !important;
+  position: fixed !important;
+  top: 37px !important;
+  z-index: 1000;
+}
+
+.desktop .group-10250-instance {
+  left: max(140px, calc((100% - 1440px) / 2 + 140px)) !important;
+  position: fixed !important;
+  top: 37px !important;
+  z-index: 1000;
+}
+
+.desktop .group-instance {
+  left: max(242px, calc((100% - 1440px) / 2 + 242px)) !important;
+  position: fixed !important;
+  top: 37px !important;
+  z-index: 1000;
+}
+
+.desktop .group-10252 {
+  left: max(357px, calc((100% - 1440px) / 2 + 357px)) !important;
+  position: fixed !important;
+  top: 37px !important;
+  z-index: 1000;
+}
+
+.desktop .group-10253 {
+  left: max(1329px, calc((100% - 1440px) / 2 + 1329px)) !important;
+  position: fixed !important;
+  top: 37px !important;
+  z-index: 1000;
+}
+
+/* Media Queries para Responsividade */
+
+@media (max-width: 1024px) {
+  .desktop .rectangle-7,
+  .desktop .rectangle-8,
+  .desktop .rectangle-9,
+  .desktop .rectangle-10 {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: min(585px, calc(100% - 40px)) !important;
+  }
+  
+  .desktop .text-wrapper-24,
+  .desktop .text-wrapper-25,
+  .desktop .text-wrapper-26,
+  .desktop .text-wrapper-27 {
+    left: 50% !important;
+    transform: translateX(calc(-50% + 24px)) !important;
+  }
+  
+  .desktop .text-wrapper-13,
+  .desktop .text-wrapper-14 {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+  
+  .desktop .text-wrapper-15,
+  .desktop .text-wrapper-16,
+  .desktop .text-wrapper-17,
+  .desktop .text-wrapper-18 {
+    position: relative;
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop .text-wrapper-12 {
+    font-size: clamp(32px, 8vw, 60px);
+    line-height: 1.2;
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+  }
+  
+  .desktop .your-well-being-in {
+    font-size: clamp(32px, 8vw, 60px);
+    line-height: 1.2;
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+  }
+  
+  .desktop .text-wrapper-28 {
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+  }
+  
+  .desktop .rectangle-7,
+  .desktop .rectangle-8,
+  .desktop .rectangle-9,
+  .desktop .rectangle-10 {
+    width: calc(100% - 20px) !important;
+    max-width: 585px;
+  }
+  
+  .desktop .text-wrapper-24,
+  .desktop .text-wrapper-25,
+  .desktop .text-wrapper-26,
+  .desktop .text-wrapper-27 {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 40px) !important;
+    text-align: left;
+    margin-left: 0 !important;
+  }
+  
+  .desktop .GROUP,
+  .desktop .group-10250-instance,
+  .desktop .group-instance,
+  .desktop .group-10252,
+  .desktop .group-10253 {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .desktop .frame-1 {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 40px) !important;
+    max-width: 1391px;
+  }
+  
+  .desktop .text-wrapper-20,
+  .desktop .text-wrapper-21,
+  .desktop .text-wrapper-22,
+  .desktop .text-wrapper-23,
+  .desktop .privacy-policy {
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+    position: relative;
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .desktop .social-icons,
+  .desktop .social-icons-1,
+  .desktop .social-icons-2,
+  .desktop .social-icons-3,
+  .desktop .social-icons-4,
+  .desktop .social-icons-5,
+  .desktop .social-icons-6,
+  .desktop .social-icons-7 {
+    position: relative !important;
+    left: auto !important;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .desktop .like-me-instance,
+  .desktop .design-component-instance-node,
+  .desktop .like-me-13 {
+    left: 20px !important;
+    position: relative !important;
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .desktop .rectangle-13,
+  .desktop .rectangle-15,
+  .desktop .appstore,
+  .desktop .googleplay {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 10px 0;
+  }
+  
+  .desktop .rectangle-14,
+  .desktop .text-wrapper-29 {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  
+  .desktop .text-wrapper-30,
+  .desktop .text-wrapper-31,
+  .desktop .text-wrapper-32,
+  .desktop .text-wrapper-33,
+  .desktop .text-wrapper-34 {
+    left: 20px !important;
+  }
+}

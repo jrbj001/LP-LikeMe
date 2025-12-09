@@ -1,0 +1,484 @@
+.frame {
+  left: 20px;
+  position: relative;
+  width: 1391px;
+}
+
+.frame .few-people-working-a {
+  aspect-ratio: 0.89;
+  height: 271px;
+  left: 76.85%;
+  position: absolute;
+  top: 44px;
+  width: 17.40%;
+}
+
+.frame .rectangle {
+  background-color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  border-radius: 42.12px;
+  height: 91.88%;
+  left: 0;
+  position: absolute;
+  top: 8.13%;
+  width: 98.49%;
+}
+
+.frame .text-wrapper {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 105px;
+  font-weight: 400;
+  height: 28.48%;
+  left: 2.95%;
+  letter-spacing: -2.10px;
+  line-height: 94.5px;
+  position: absolute;
+  top: 13.79%;
+  width: 45.08%;
+}
+
+.frame .div {
+  background-image: url(../../../static/img/mask-group.png);
+  background-size: 100% 100%;
+  height: 514px;
+  left: 809px;
+  position: absolute;
+  top: 98px;
+  width: 514px;
+}
+
+.frame .group-2 {
+  height: 71px;
+  left: 59.99%;
+  position: absolute;
+  top: calc(50.00% + 183px);
+  width: 14.43%;
+}
+
+.frame .like-me-2 {
+  aspect-ratio: 2.72;
+  height: 91px;
+  left: 0;
+  position: absolute;
+  top: calc(50.00% - 40px);
+  width: 95.86%;
+}
+
+.frame .navigation-2 {
+  display: flex;
+  height: 99.73%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 39.08%;
+}
+
+.frame .global-wrapper {
+  display: flex;
+  flex: 1;
+  width: 78.46px;
+}
+
+.frame .global-2 {
+  flex: 1;
+  height: 40.38px;
+  margin-left: 24.19%;
+  margin-right: 24.19%;
+  margin-top: 15.1px;
+  overflow: hidden;
+  position: relative;
+  width: 40.49px;
+}
+
+.frame .vector {
+  height: 416.67%;
+  left: -4302.65%;
+  position: absolute;
+  top: -9821.66%;
+  width: 416.67%;
+}
+
+.frame .vector-2 {
+  border: 1.89px solid;
+  border-color: var(--primitives-blue-blue-500-duplicate);
+  border-radius: 5.59px / 13.15px;
+  height: 65.10%;
+  left: 36.20%;
+  position: absolute;
+  top: 17.45%;
+  width: 27.59%;
+}
+
+.frame .vector-3 {
+  height: 0;
+  left: 17.45%;
+  position: absolute;
+  top: 47.66%;
+  width: 60.42%;
+}
+
+.frame .vector-4 {
+  border: 1.89px solid;
+  border-color: var(--primitives-blue-blue-500-duplicate);
+  border-radius: 13.18px / 13.15px;
+  height: 65.10%;
+  left: 17.45%;
+  position: absolute;
+  top: 17.45%;
+  width: 65.09%;
+}
+
+.frame .text-wrapper-2 {
+  align-items: center;
+  color: var(--functional-colors-main-colors-primary-primary-pure-duplicate);
+  display: flex;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.7px;
+  font-weight: 500;
+  height: 32.46%;
+  justify-content: center;
+  left: 34.57%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 32.19%;
+  width: 57.83%;
+}
+
+.frame .this-is-a-space-to {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.3px;
+  font-weight: 400;
+  height: 14.39%;
+  left: 2.95%;
+  letter-spacing: -0.35px;
+  line-height: 19.0px;
+  position: absolute;
+  top: 78.33%;
+  width: 30.77%;
+}
+
+.frame .few-people-working-a-2 {
+  aspect-ratio: 0.95;
+  height: 309px;
+  left: 1033px;
+  position: absolute;
+  top: 16px;
+  width: 293px;
+}
+
+.frame .navigation-3 {
+  height: 16.11%;
+  left: 91.51%;
+  position: absolute;
+  top: 36.90%;
+  width: 8.49%;
+}
+
+.frame .group-wrapper-2 {
+  height: 660px;
+  overflow: hidden;
+  width: 1391px;
+}
+
+.frame .group-3 {
+  height: 101.98%;
+  position: relative;
+  width: 98.92%;
+}
+
+.frame .group-4 {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 99.85%;
+}
+
+.frame .rectangle-2 {
+  background-color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  border-radius: 42.12px;
+  height: 90.10%;
+  left: 0;
+  position: absolute;
+  top: 9.90%;
+  width: 99.71%;
+}
+
+.frame .p {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 111.2px;
+  font-weight: 400;
+  height: 59.43%;
+  left: 50.95%;
+  letter-spacing: -2.22px;
+  line-height: 100.1px;
+  position: absolute;
+  text-align: right;
+  top: 15.50%;
+  width: 45.77%;
+}
+
+.frame .text-wrapper-3 {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.3px;
+  font-weight: 400;
+  height: 11.58%;
+  left: 65.50%;
+  letter-spacing: -0.35px;
+  line-height: 19.0px;
+  position: absolute;
+  text-align: right;
+  top: 82.93%;
+  width: 31.19%;
+}
+
+.frame .group-5 {
+  height: 625px;
+  left: 3.49%;
+  position: absolute;
+  top: 0;
+  width: 42.52%;
+}
+
+.frame .group-6 {
+  height: 514px;
+  left: 0;
+  position: absolute;
+  top: 111px;
+  width: 514px;
+}
+
+.frame .woman-years-old {
+  aspect-ratio: 1.9;
+  height: 257px;
+  left: 0;
+  position: absolute;
+  top: 13px;
+  width: 87.98%;
+}
+
+.frame .navigation-4 {
+  background-image: url(../../../static/img/like-me-15.svg);
+  background-size: 100% 100%;
+  height: 17.00%;
+  left: 79.45%;
+  position: absolute;
+  top: 60.25%;
+  width: 20.21%;
+}
+
+.frame .like-me-3 {
+  aspect-ratio: 2.35;
+  height: 91px;
+  left: 3.78%;
+  position: absolute;
+  top: calc(50.00% + 208px);
+  width: 28.54%;
+}
+
+.frame .navigation-wrapper {
+  display: flex;
+  height: 11.32%;
+  left: 5.51%;
+  position: absolute;
+  top: 84.12%;
+  width: 13.46%;
+}
+
+.frame .navigation-components {
+  background-image: url(../../../static/img/like-me-14.svg) !important;
+  flex: 1 !important;
+  height: unset !important;
+  left: unset !important;
+  position: unset !important;
+  top: unset !important;
+  width: 78.61px !important;
+}
+
+.frame .airplay-1 {
+  aspect-ratio: 1 !important;
+  flex: 1 !important;
+  height: 40.57px !important;
+  margin-left: 24.19% !important;
+  margin-right: 24.19% !important;
+  margin-top: 15.2px !important;
+  position: relative !important;
+  width: 40.57px !important;
+}
+
+.frame .text-wrapper-4 {
+  align-items: center;
+  color: var(--functional-colors-main-colors-primary-primary-pure-duplicate);
+  display: flex;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.7px;
+  font-weight: 500;
+  height: 3.64%;
+  justify-content: center;
+  left: 17.23%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 87.96%;
+  width: 16.06%;
+}
+
+.frame .airplay-instance {
+  aspect-ratio: 1 !important;
+  height: 75px !important;
+  left: 83.05% !important;
+  position: absolute !important;
+  top: 393px !important;
+  width: 12.84% !important;
+}
+
+.frame .rectangle-3 {
+  background-color: var(
+    --functional-colors-main-colors-secondary-secondary-light-duplicate
+  );
+  border-radius: 42.12px;
+  height: 90.10%;
+  left: 0;
+  position: absolute;
+  top: 9.90%;
+  width: 99.56%;
+}
+
+.frame .text-wrapper-5 {
+  color: #001137;
+  font-family: "Bricolage Grotesque", Helvetica;
+  font-size: 105px;
+  font-weight: 400;
+  height: 41.90%;
+  left: 63.37%;
+  letter-spacing: -2.10px;
+  line-height: 94.5px;
+  position: absolute;
+  text-align: right;
+  top: 15.45%;
+  width: 33.21%;
+}
+
+.frame .well-being-starts {
+  color: #001137;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.3px;
+  font-weight: 400;
+  height: 14.56%;
+  left: 65.41%;
+  letter-spacing: -0.35px;
+  line-height: 19.0px;
+  position: absolute;
+  text-align: right;
+  top: 78.30%;
+  width: 31.18%;
+}
+
+.frame .group-7 {
+  background-image: url(../../../static/img/mask-group-1.png);
+  background-size: 100% 100%;
+  height: 514px;
+  left: 48px;
+  position: absolute;
+  top: 111px;
+  width: 514px;
+}
+
+.frame .woman-years-old-2 {
+  aspect-ratio: 1.9;
+  height: 257px;
+  left: 3.50%;
+  position: absolute;
+  top: 13px;
+  width: 37.35%;
+}
+
+.frame .navigation-5 {
+  background-image: url(../../../static/img/like-me-15.svg);
+  background-size: 100% 100%;
+  height: 15.80%;
+  left: 37.22%;
+  position: absolute;
+  top: 55.99%;
+  width: 8.58%;
+}
+
+.frame .like-me-4 {
+  aspect-ratio: 2.35;
+  height: 91px;
+  left: 5.09%;
+  position: absolute;
+  top: calc(50.00% + 184px);
+  width: 12.12%;
+}
+
+.frame .navigation-6 {
+  height: 10.52%;
+  left: 5.83%;
+  position: absolute;
+  top: 78.09%;
+  width: 5.71%;
+}
+
+.frame .text-wrapper-6 {
+  align-items: center;
+  color: var(--functional-colors-main-colors-primary-primary-pure-duplicate);
+  display: flex;
+  font-family: "DM Sans", Helvetica;
+  font-size: 17.7px;
+  font-weight: 500;
+  height: 3.38%;
+  justify-content: center;
+  left: 10.80%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 81.73%;
+  width: 6.82%;
+}
+
+.frame .flashlight-wrapper {
+  align-items: flex-start;
+  aspect-ratio: 1;
+  display: flex;
+  gap: 20.23px;
+  height: 75px;
+  left: 38.75%;
+  position: absolute;
+  top: 393px;
+  width: 5.45%;
+}
+
+.frame .flashlight {
+  align-self: stretch;
+  flex: 1;
+  flex-grow: 1;
+  position: relative;
+}
+
+.frame .vector-5 {
+  height: 56.25%;
+  left: 26.86%;
+  position: absolute;
+  top: 20.61%;
+  width: 43.75%;
+}
+
+.frame.property-1-default {
+  height: 660px;
+  overflow: hidden;
+  top: 20px;
+}
+
+.frame.property-1-variant-2 {
+  display: flex;
+  top: 700px;
+}

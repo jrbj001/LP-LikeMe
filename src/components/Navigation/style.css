@@ -1,0 +1,37 @@
+.navigation {
+  display: flex;
+  height: 56px;
+  position: relative;
+  width: 62px;
+}
+
+.navigation .file-wrapper {
+  background-image: url(../../../static/img/like-me-18.svg);
+  background-size: 100% 100%;
+  display: flex;
+  flex: 1;
+  width: 62px;
+}
+
+.navigation .airplay-2 {
+  aspect-ratio: 1 !important;
+  flex: 1 !important;
+  height: 32px !important;
+  margin-left: 24.19% !important;
+  margin-right: 24.19% !important;
+  margin-top: 12px !important;
+  position: relative !important;
+  width: 32px !important;
+}
+
+.navigation.type-activity {
+  background-image: url(../../../static/img/like-me-17.svg);
+  background-size: 100% 100%;
+  left: 20px;
+  top: 20px;
+}
+
+.navigation.dark.type-file {
+  left: 108px;
+  top: 160px;
+}

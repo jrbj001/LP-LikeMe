@@ -1,0 +1,1 @@
+export { LikeMe } from "./LikeMe";

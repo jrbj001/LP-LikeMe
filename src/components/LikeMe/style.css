@@ -1,0 +1,23 @@
+.like-me {
+  aspect-ratio: 1.11;
+  height: 20px;
+  left: 20px;
+  position: relative;
+  width: 22px;
+}
+
+.like-me .img {
+  height: 100%;
+  left: -3.73%;
+  position: absolute;
+  top: -4.14%;
+  width: 100%;
+}
+
+.like-me.default {
+  top: 20px;
+}
+
+.like-me.variant-2 {
+  top: 60px;
+}
