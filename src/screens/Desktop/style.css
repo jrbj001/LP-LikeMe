@@ -27,12 +27,11 @@
 
 .desktop .group-8 {
   height: 880px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   position: absolute;
   top: 4px;
   width: 100%;
-  max-width: 2284px;
   overflow: visible;
 }
 
@@ -43,83 +42,149 @@
   }
 }
 
-/* Posicionamento ORIGINAL do Figma */
+/* Posicionamento RESPONSIVO - Layout Figma */
 .desktop .img-2 {
   position: absolute;
-  top: 149px;
-  left: 1207px;
-  width: 554px;
+  top: 17%;
+  right: -5%;
+  width: 38%;
+  max-width: 554px;
   height: auto;
 }
 
 .desktop .like-me-11 {
   position: absolute;
-  left: calc(50% - 446px);
-  top: calc(50% - 288px);
-  width: 540px;
+  left: 50%;
+  top: 32%;
+  transform: translateX(-50%);
+  width: 32%;
+  max-width: 540px;
   height: auto;
   z-index: 2;
 }
 
 .desktop .like-me-12 {
   position: absolute;
-  left: calc(50% - 743px);
-  top: calc(50% - 444px);
-  width: 439px;
+  left: -8%;
+  top: 8%;
+  width: 35%;
+  max-width: 439px;
   height: auto;
   z-index: 1;
 }
 
 .desktop .img-3 {
   position: absolute;
-  top: 236px;
-  left: 929px;
-  width: 393px;
+  top: 30%;
+  left: 36%;
+  width: 24%;
+  max-width: 393px;
   height: auto;
 }
 
 .desktop .img-4 {
   position: absolute;
-  top: -4px;
-  left: 1444px;
-  width: 394px;
+  top: 2%;
+  right: -2%;
+  width: 28%;
+  max-width: 394px;
   height: auto;
 }
 
-/* Responsividade - escala proporcional */
-@media (max-width: 1440px) {
+/* Responsividade para Tablet e Mobile */
+@media (max-width: 1024px) {
   .desktop .group-8 {
-    max-width: 100%;
+    height: 600px;
   }
   
-  .desktop .img-2,
-  .desktop .like-me-11,
-  .desktop .like-me-12,
-  .desktop .img-3,
-  .desktop .img-4 {
-    transform: scale(0.8);
-    transform-origin: center center;
+  .desktop .img-2 {
+    width: 42%;
+    right: -8%;
   }
-}
-
-@media (max-width: 1024px) {
-  .desktop .img-2,
-  .desktop .like-me-11,
-  .desktop .like-me-12,
-  .desktop .img-3,
+  
+  .desktop .like-me-11 {
+    width: 36%;
+  }
+  
+  .desktop .like-me-12 {
+    width: 38%;
+    left: -10%;
+  }
+  
+  .desktop .img-3 {
+    width: 28%;
+  }
+  
   .desktop .img-4 {
-    transform: scale(0.6);
+    width: 32%;
+    right: -5%;
   }
 }
 
 @media (max-width: 768px) {
-  .desktop .img-2,
-  .desktop .like-me-11,
-  .desktop .like-me-12,
-  .desktop .img-3,
+  .desktop .group-8 {
+    height: 500px;
+    min-height: 500px;
+  }
+  
+  .desktop .img-2 {
+    width: 50%;
+    right: -12%;
+    top: 15%;
+  }
+  
+  .desktop .like-me-11 {
+    width: 45%;
+    top: 28%;
+  }
+  
+  .desktop .like-me-12 {
+    width: 48%;
+    left: -15%;
+    top: 5%;
+  }
+  
+  .desktop .img-3 {
+    width: 35%;
+    left: 33%;
+  }
+  
   .desktop .img-4 {
-    transform: scale(0.4);
-    opacity: 0.8;
+    width: 40%;
+    right: -8%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop .group-8 {
+    height: 400px;
+    min-height: 400px;
+  }
+  
+  .desktop .img-2 {
+    width: 60%;
+    right: -18%;
+  }
+  
+  .desktop .like-me-11 {
+    width: 55%;
+    top: 25%;
+  }
+  
+  .desktop .like-me-12 {
+    width: 58%;
+    left: -20%;
+  }
+  
+  .desktop .img-3 {
+    width: 42%;
+    left: 30%;
+  }
+  
+  .desktop .img-4 {
+    width: 48%;
+    right: -12%;
   }
 }
 
@@ -854,6 +919,10 @@
 }
 
 @media (max-width: 768px) {
+  .desktop {
+    min-height: auto;
+  }
+  
   .desktop .text-wrapper-12 {
     font-size: clamp(32px, 8vw, 60px);
     line-height: 1.2;
@@ -871,13 +940,14 @@
   .desktop .text-wrapper-28 {
     left: 20px !important;
     width: calc(100% - 40px) !important;
+    font-size: 15px;
   }
   
   .desktop .rectangle-7,
   .desktop .rectangle-8,
   .desktop .rectangle-9,
   .desktop .rectangle-10 {
-    width: calc(100% - 20px) !important;
+    width: calc(100% - 40px) !important;
     max-width: 585px;
   }
   
@@ -887,7 +957,7 @@
   .desktop .text-wrapper-27 {
     left: 50% !important;
     transform: translateX(-50%) !important;
-    width: calc(100% - 40px) !important;
+    width: calc(100% - 60px) !important;
     text-align: left;
     margin-left: 0 !important;
   }
@@ -895,13 +965,40 @@
   .desktop .GROUP,
   .desktop .group-10250-instance,
   .desktop .group-instance,
-  .desktop .group-10252,
-  .desktop .group-10253 {
-    position: relative !important;
+  .desktop .group-10252 {
+    position: fixed !important;
     left: auto !important;
-    top: auto !important;
+    top: 15px !important;
     display: inline-block;
-    margin: 5px;
+    margin: 0 3px;
+    font-size: 10px;
+    transform: scale(0.75);
+  }
+  
+  .desktop .GROUP {
+    left: 10px !important;
+  }
+  
+  .desktop .group-10250-instance {
+    left: 70px !important;
+  }
+  
+  .desktop .group-instance {
+    left: 130px !important;
+  }
+  
+  .desktop .group-10252 {
+    left: 200px !important;
+  }
+  
+  .desktop .group-10253 {
+    position: fixed !important;
+    right: 10px !important;
+    left: auto !important;
+    top: 15px !important;
+    display: inline-block;
+    font-size: 10px;
+    transform: scale(0.75);
   }
   
   .desktop .frame-1 {
@@ -967,5 +1064,68 @@
   .desktop .text-wrapper-33,
   .desktop .text-wrapper-34 {
     left: 20px !important;
+  }
+  
+  .desktop .rectangle-12 {
+    width: calc(100% - 40px) !important;
+  }
+  
+  .desktop .mask-group {
+    width: calc(100% - 40px) !important;
+  }
+  
+  .desktop .LIKEME-MOCKUP-cel {
+    width: calc(100% - 40px) !important;
+    height: auto !important;
+  }
+  
+  .desktop .rectangle-11 {
+    height: auto;
+    min-height: 400px;
+  }
+}
+
+/* Media Query para Smartphones Pequenos */
+@media (max-width: 480px) {
+  .desktop .text-wrapper-12 {
+    font-size: clamp(28px, 10vw, 45px);
+    line-height: 1.1;
+  }
+  
+  .desktop .your-well-being-in {
+    font-size: clamp(28px, 10vw, 45px);
+    line-height: 1.1;
+  }
+  
+  .desktop .text-wrapper-28 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .desktop .GROUP,
+  .desktop .group-10250-instance,
+  .desktop .group-instance,
+  .desktop .group-10252,
+  .desktop .group-10253 {
+    transform: scale(0.7);
+    left: 5px !important;
+    top: 15px !important;
+  }
+  
+  .desktop .rectangle-13,
+  .desktop .rectangle-15 {
+    width: calc(100% - 40px) !important;
+    max-width: 140px;
+  }
+  
+  .desktop .appstore,
+  .desktop .googleplay {
+    width: calc(100% - 60px) !important;
+    max-width: 100px;
+  }
+  
+  .desktop .rectangle-14 {
+    width: calc(100% - 60px) !important;
+    max-width: 150px;
   }
 }
