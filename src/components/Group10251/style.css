@@ -8,6 +8,20 @@
   position: relative;
   top: 110px;
   width: 92px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .group-10251 {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: 150px;
+    margin: 5px;
+    display: inline-block;
+  }
 }
 
 .group-10251 .text-wrapper-9 {

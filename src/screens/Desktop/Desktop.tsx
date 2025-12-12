@@ -1,11 +1,5 @@
 import React from "react";
-import { ConcreteComponentNode } from "../../components/ConcreteComponentNode";
-import { DivWrapper } from "../../components/DivWrapper";
 import { Frame } from "../../components/Frame";
-import { Group } from "../../components/Group";
-import { Group10250 } from "../../components/Group10250";
-import { Group10251 } from "../../components/Group10251";
-import { GroupWrapper } from "../../components/GroupWrapper";
 import { LikeMe } from "../../components/LikeMe";
 import { SocialIcons } from "../../icons/SocialIcons";
 import { SocialIcons1 } from "../../icons/SocialIcons1";
@@ -123,12 +117,6 @@ export const Desktop = (): JSX.Element => {
       <div className="rectangle-12" />
 
       <img
-        className="mask-group"
-        alt="Mask group"
-        src="/img/mask-group-2.png"
-      />
-
-      <img
         className="LIKEME-MOCKUP-cel"
         alt="Likeme MOCKUP cel"
         src="/img/likeme-mockup-cel-app-11-1.png"
@@ -170,22 +158,6 @@ export const Desktop = (): JSX.Element => {
         vector="/img/vector-2.svg"
         vectorClassName="frame-1-instance"
       />
-      <div className="text-wrapper-30">DOWLOAD!!!</div>
-
-      <div className="text-wrapper-31">SUBSCRIBE!!!</div>
-
-      <div className="text-wrapper-32">VIDEOCASE!!!</div>
-
-      <div className="text-wrapper-33">FEATURES!!!</div>
-
-      <div className="text-wrapper-34">HOME!!!!!!!!</div>
-
-      <Group className="group-10254" property1="default" />
-      <GroupWrapper className="group-10253" />
-      <DivWrapper className="group-10252" />
-      <Group10251 className="group-instance" />
-      <Group10250 className="group-10250-instance" />
-      <ConcreteComponentNode className="GROUP" />
     </div>
   );
 };

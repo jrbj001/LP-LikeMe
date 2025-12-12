@@ -3,6 +3,19 @@
   left: 20px;
   position: relative;
   width: 79px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .group {
+    left: auto;
+    margin: 10px auto;
+    width: auto;
+    max-width: 150px;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .group .like-me-5 {

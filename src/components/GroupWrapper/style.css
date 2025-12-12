@@ -7,6 +7,20 @@
   position: relative;
   top: 110px;
   width: 78px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .group-wrapper {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: 150px;
+    margin: 5px;
+    display: inline-block;
+  }
 }
 
 .group-wrapper .text-wrapper-7 {

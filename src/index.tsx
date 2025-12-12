@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Desktop } from "./screens/Desktop";
+import "./responsive.css";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>

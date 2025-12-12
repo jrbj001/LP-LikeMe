@@ -2,6 +2,16 @@
   left: 20px;
   position: relative;
   width: 1391px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1391px) {
+  .frame {
+    width: 100%;
+    left: 0;
+    padding: 0 20px;
+  }
 }
 
 .frame .few-people-working-a {
@@ -182,6 +192,14 @@
   height: 660px;
   overflow: hidden;
   width: 1391px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1391px) {
+  .frame .group-wrapper-2 {
+    width: 100%;
+  }
 }
 
 .frame .group-3 {
@@ -481,4 +499,182 @@
 .frame.property-1-variant-2 {
   display: flex;
   top: 700px;
+}
+
+/* Media Queries para Responsividade Mobile e iOS */
+@media (max-width: 768px) {
+  .frame {
+    width: 100% !important;
+    left: 0 !important;
+    padding: 0 10px;
+  }
+  
+  .frame .text-wrapper {
+    font-size: clamp(32px, 8vw, 60px) !important;
+    line-height: 1.2 !important;
+    width: 90% !important;
+    left: 5% !important;
+  }
+  
+  .frame .p {
+    font-size: clamp(28px, 7vw, 55px) !important;
+    line-height: 1.2 !important;
+    width: 90% !important;
+    left: 5% !important;
+    text-align: left !important;
+  }
+  
+  .frame .this-is-a-space-to,
+  .frame .text-wrapper-3,
+  .frame .well-being-starts {
+    font-size: clamp(14px, 4vw, 17px) !important;
+    line-height: 1.4 !important;
+    width: 90% !important;
+    left: 5% !important;
+    text-align: left !important;
+  }
+  
+  .frame .div,
+  .frame .group-6,
+  .frame .group-7 {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+  }
+  
+  .frame .few-people-working-a,
+  .frame .few-people-working-a-2,
+  .frame .woman-years-old,
+  .frame .woman-years-old-2 {
+    width: 50% !important;
+    height: auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 10px auto !important;
+    display: block !important;
+  }
+  
+  .frame .group-2,
+  .frame .group-5 {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: auto !important;
+    height: auto !important;
+    margin: 20px 0 !important;
+  }
+  
+  .frame .like-me-2,
+  .frame .like-me-3,
+  .frame .like-me-4 {
+    width: 80% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 10px auto !important;
+    display: block !important;
+  }
+  
+  .frame .navigation-2,
+  .frame .navigation-3,
+  .frame .navigation-4,
+  .frame .navigation-5,
+  .frame .navigation-6,
+  .frame .navigation-wrapper {
+    position: relative !important;
+    width: auto !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 10px auto !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  .frame .rectangle,
+  .frame .rectangle-2,
+  .frame .rectangle-3 {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: auto !important;
+    min-height: 400px !important;
+    margin: 20px 0 !important;
+  }
+  
+  .frame .group-wrapper-2 {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 600px !important;
+  }
+  
+  .frame.property-1-default {
+    height: auto !important;
+    min-height: 500px !important;
+  }
+  
+  .frame.property-1-variant-2 {
+    top: auto !important;
+    display: block !important;
+  }
+  
+  .frame .text-wrapper-2,
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-6 {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 10px 0 !important;
+    justify-content: center !important;
+  }
+  
+  .frame .airplay-instance,
+  .frame .flashlight-wrapper {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 10px auto !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .frame {
+    padding: 0 15px;
+  }
+  
+  .frame .text-wrapper {
+    font-size: clamp(24px, 10vw, 40px) !important;
+  }
+  
+  .frame .p {
+    font-size: clamp(20px, 9vw, 35px) !important;
+  }
+  
+  .frame .this-is-a-space-to,
+  .frame .text-wrapper-3,
+  .frame .well-being-starts {
+    font-size: 13px !important;
+  }
+  
+  .frame .few-people-working-a,
+  .frame .few-people-working-a-2,
+  .frame .woman-years-old,
+  .frame .woman-years-old-2 {
+    width: 80% !important;
+  }
+  
+  .frame .like-me-2,
+  .frame .like-me-3,
+  .frame .like-me-4 {
+    width: 90% !important;
+  }
 }

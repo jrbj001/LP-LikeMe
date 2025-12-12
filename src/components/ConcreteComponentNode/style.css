@@ -8,6 +8,20 @@
   position: relative;
   top: 110px;
   width: 84px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .concrete-component-node {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    max-width: 150px;
+    margin: 5px;
+    display: inline-block;
+  }
 }
 
 .concrete-component-node .rectangle-4 {
