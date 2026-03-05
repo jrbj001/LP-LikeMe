@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Frame } from "../../components/Frame";
 import { LikeMe } from "../../components/LikeMe";
 import { SocialIcons } from "../../icons/SocialIcons";
@@ -62,11 +63,11 @@ export const Desktop = (): JSX.Element => {
       </p>
 
       <p className="privacy-policy">
-        Privacy Policy
+        <Link to="/privacy">Privacy Policy</Link>
         <br />
         Complaints Policy
         <br />
-        Terms &amp; Conditions
+        <Link to="/terms">Terms &amp; Conditions</Link>
       </p>
 
       <SocialIcons className="social-icons" />

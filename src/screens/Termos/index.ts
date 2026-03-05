@@ -1,0 +1,1 @@
+export { Termos } from "./Termos";
