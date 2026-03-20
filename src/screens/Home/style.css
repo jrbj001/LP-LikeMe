@@ -351,7 +351,12 @@
 }
 
 .footer {
-  background: linear-gradient(180deg, rgba(246, 207, 251, 0) 0%, #f6cffb 58%, #eb7dc6 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(246, 207, 251, 0) 0%,
+    #f6cffb 58%,
+    #eb7dc6 100%
+  );
   padding: 54px 24px 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

@@ -1,14 +1,6 @@
 {
   "nodes": [
     {
-      "id": "src/screens/Desktop/Desktop.tsx",
-      "label": "Desktop",
-      "routes": [
-        "/"
-      ],
-      "isRoot": true
-    },
-    {
       "id": "src/screens/Termos/Termos.tsx",
       "label": "Termos",
       "routes": [
@@ -24,38 +16,6 @@
     }
   ],
   "edges": [
-    {
-      "id": "src/screens/Termos/Termos.tsx:38:8-to-src/screens/Desktop/Desktop.tsx",
-      "source": "src/screens/Termos/Termos.tsx",
-      "target": "src/screens/Desktop/Desktop.tsx",
-      "data": {
-        "viaRoute": "/",
-        "trigger": {
-          "element": "<Link to=\"/\" className=\"termos-menu-link termos-menu-link--active\">\n          Home\n        </Link>",
-          "line": 38,
-          "endLine": 40,
-          "column": 8,
-          "endColumn": 15,
-          "sourceFile": "src/screens/Termos/Termos.tsx"
-        }
-      }
-    },
-    {
-      "id": "src/screens/Termos/Termos.tsx:302:14-to-src/screens/Desktop/Desktop.tsx",
-      "source": "src/screens/Termos/Termos.tsx",
-      "target": "src/screens/Desktop/Desktop.tsx",
-      "data": {
-        "viaRoute": "/",
-        "trigger": {
-          "element": "<Link to=\"/\">\n                <img src=\"/img/like-me-26.svg\" alt=\"Like:Me\" />\n              </Link>",
-          "line": 302,
-          "endLine": 304,
-          "column": 14,
-          "endColumn": 21,
-          "sourceFile": "src/screens/Termos/Termos.tsx"
-        }
-      }
-    },
     {
       "id": "src/screens/Termos/Termos.tsx:313:14-to-src/screens/Termos/Termos.tsx",
       "source": "src/screens/Termos/Termos.tsx",
@@ -85,38 +45,6 @@
           "column": 14,
           "endColumn": 64,
           "sourceFile": "src/screens/Termos/Termos.tsx"
-        }
-      }
-    },
-    {
-      "id": "src/screens/Privacy/Privacy.tsx:34:8-to-src/screens/Desktop/Desktop.tsx",
-      "source": "src/screens/Privacy/Privacy.tsx",
-      "target": "src/screens/Desktop/Desktop.tsx",
-      "data": {
-        "viaRoute": "/",
-        "trigger": {
-          "element": "<Link to=\"/\" className=\"termos-menu-link\">\n          Home\n        </Link>",
-          "line": 34,
-          "endLine": 36,
-          "column": 8,
-          "endColumn": 15,
-          "sourceFile": "src/screens/Privacy/Privacy.tsx"
-        }
-      }
-    },
-    {
-      "id": "src/screens/Privacy/Privacy.tsx:349:14-to-src/screens/Desktop/Desktop.tsx",
-      "source": "src/screens/Privacy/Privacy.tsx",
-      "target": "src/screens/Desktop/Desktop.tsx",
-      "data": {
-        "viaRoute": "/",
-        "trigger": {
-          "element": "<Link to=\"/\">\n                <img src=\"/img/like-me-26.svg\" alt=\"Like:Me\" />\n              </Link>",
-          "line": 349,
-          "endLine": 351,
-          "column": 14,
-          "endColumn": 21,
-          "sourceFile": "src/screens/Privacy/Privacy.tsx"
         }
       }
     },

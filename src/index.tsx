@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./screens/Desktop";
+import { Home } from "./screens/Home";
 import { Termos } from "./screens/Termos";
 import { Privacy } from "./screens/Privacy";
 import "./responsive.css";
