@@ -256,13 +256,18 @@ export const Home = (): JSX.Element => {
               <div className={styles.movementText}>
                 <div className={styles.movementHeading}>
                   <img
-                    className={styles.movementMarker}
+                    className={`${styles.movementMarker} ${styles.movementMarkerMobile}`}
                     src={card.marker}
                     alt=""
                   />
                   <h2>{card.title}</h2>
                 </div>
                 <div className={styles.movementDescription}>
+                  <img
+                    className={`${styles.movementMarker} ${styles.movementMarkerDesktop}`}
+                    src={card.marker}
+                    alt=""
+                  />
                   <p>{card.description}</p>
                 </div>
               </div>

@@ -218,7 +218,7 @@
   border-radius: 44px;
   padding: 44px 44px 44px 116px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 594px;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 43.7%);
   gap: 40px;
   align-items: center;
   min-width: 100%;
@@ -246,7 +246,9 @@
 }
 
 .movement__description {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 .movement__description p {
@@ -262,9 +264,18 @@
   flex: 0 0 auto;
 }
 
+.movement__marker-desktop {
+  display: block;
+}
+
+.movement__marker-mobile {
+  display: none;
+}
+
 .movement__image {
-  width: 594px;
-  height: 514px;
+  width: 100%;
+  aspect-ratio: 594 / 514;
+  height: auto;
   border-radius: 44px;
   object-fit: cover;
 }
@@ -695,8 +706,9 @@
 
   .movement__image {
     order: -1;
-    width: 252px;
-    height: 216px;
+    width: 100%;
+    aspect-ratio: 252 / 216;
+    height: auto;
     border-radius: 20px;
   }
 
@@ -731,6 +743,14 @@
     width: 40px;
     height: 35.816px;
     flex: 0 0 auto;
+  }
+
+  .movement__marker-desktop {
+    display: none;
+  }
+
+  .movement__marker-mobile {
+    display: block;
   }
 
   .movement__description p {

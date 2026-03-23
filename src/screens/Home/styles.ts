@@ -20,6 +20,8 @@ export const styles = {
   movementHeading: "movement__heading",
   movementDescription: "movement__description",
   movementMarker: "movement__marker",
+  movementMarkerDesktop: "movement__marker-desktop",
+  movementMarkerMobile: "movement__marker-mobile",
   movementImage: "movement__image",
   movementPagination: "movement__pagination",
   movementPaginationDot: "movement__pagination-dot",
