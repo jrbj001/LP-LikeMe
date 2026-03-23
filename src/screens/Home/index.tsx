@@ -48,6 +48,14 @@ type MovementCard = {
   marker: string;
 };
 
+type Section4Card = {
+  title: string;
+  description: string;
+  image: string;
+  logo: string;
+  imageClassName?: string;
+};
+
 const MOVEMENT_CARDS: MovementCard[] = [
   {
     title: "Like: o seu Movimento",
@@ -141,9 +149,41 @@ const MOVEMENT_CARDS: MovementCard[] = [
   },
 ];
 
+const SECTION4_CARDS: Section4Card[] = [
+  {
+    title: "Seu Avatar de bem-estar",
+    description:
+      "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
+    image:
+      "https://www.figma.com/api/mcp/asset/a2dbb6d6-642b-4897-abae-5bf07f9c8549",
+    logo: "https://www.figma.com/api/mcp/asset/f1cd772d-2a44-4ab6-8f17-89e3bb5a79a6",
+    imageClassName: styles.avatarSlideImageAvatar,
+  },
+  {
+    title: "Comunidades",
+    description:
+      "Conecte-se com pessoas reais e descubra marcas, profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
+    image:
+      "https://www.figma.com/api/mcp/asset/9c69728b-9256-4cd5-a9e0-73983a5e2d50",
+    logo: "https://www.figma.com/api/mcp/asset/c91e9ddd-ca9c-478d-a6dc-deb6661e87c1",
+    imageClassName: styles.avatarSlideImageCommunity,
+  },
+  {
+    title: "Shop",
+    description:
+      "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
+    image:
+      "https://www.figma.com/api/mcp/asset/4e68cb39-d433-470b-92d8-1115a7a39209",
+    logo: "https://www.figma.com/api/mcp/asset/079737fa-39a0-4702-819f-1dcf1b364fb5",
+    imageClassName: styles.avatarSlideImageShop,
+  },
+];
+
 export const Home = (): JSX.Element => {
   const movementCarouselRef = useRef<HTMLDivElement | null>(null);
+  const section4CarouselRef = useRef<HTMLDivElement | null>(null);
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
+  const [activeSection4Index, setActiveSection4Index] = useState(0);
 
   useEffect(() => {
     const carousel = movementCarouselRef.current;
@@ -201,6 +241,63 @@ export const Home = (): JSX.Element => {
       window.clearInterval(autoplay);
     };
   }, [activeMovementIndex]);
+
+  useEffect(() => {
+    const carousel = section4CarouselRef.current;
+
+    if (!carousel) {
+      return;
+    }
+
+    const getSlideStep = (): number => {
+      const firstSlide = carousel.firstElementChild as HTMLElement | null;
+
+      if (!firstSlide) {
+        return 0;
+      }
+
+      const carouselStyles = window.getComputedStyle(carousel);
+      const gapValue = Number.parseFloat(
+        carouselStyles.columnGap || carouselStyles.gap || "0",
+      );
+
+      return firstSlide.offsetWidth + gapValue;
+    };
+
+    const handleScroll = (): void => {
+      const step = getSlideStep();
+
+      if (!step) {
+        return;
+      }
+
+      const nextIndex = Math.round(carousel.scrollLeft / step);
+      setActiveSection4Index(
+        Math.max(0, Math.min(SECTION4_CARDS.length - 1, nextIndex)),
+      );
+    };
+
+    const autoplay = window.setInterval(() => {
+      const step = getSlideStep();
+
+      if (!step) {
+        return;
+      }
+
+      const nextIndex = (activeSection4Index + 1) % SECTION4_CARDS.length;
+      carousel.scrollTo({
+        left: nextIndex * step,
+        behavior: "smooth",
+      });
+    }, 4200);
+
+    carousel.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      carousel.removeEventListener("scroll", handleScroll);
+      window.clearInterval(autoplay);
+    };
+  }, [activeSection4Index]);
 
   return (
     <main className={styles.landingDesktop}>
@@ -371,19 +468,84 @@ export const Home = (): JSX.Element => {
       </section>
 
       <section className={styles.avatar}>
-        <div className={styles.avatarCard}>
-          <h3>Seu Avatar de bem-estar</h3>
-          <p>
-            Crie seu avatar de bem-estar para te guiar e apoiar diariamente,
-            expandindo sua rotina de autocuidado através de descobertas
-            personalizadas, com base nos seus hábitos e informações de saúde.
-          </p>
+        <div className={styles.avatarCarousel} ref={section4CarouselRef}>
+          {SECTION4_CARDS.map((card) => (
+            <article className={styles.avatarSlide} key={card.title}>
+              <div className={styles.avatarCard}>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </div>
+              <img
+                className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
+                src={card.image}
+                alt={card.title}
+              />
+            </article>
+          ))}
         </div>
-        <img
-          className={styles.avatarPhone}
-          src={ASSETS.avatarPhone}
-          alt="Avatar app"
-        />
+        <div className={styles.avatarPagination} aria-hidden>
+          {SECTION4_CARDS.map((card, index) => (
+            <span
+              className={`${styles.avatarPaginationDot} ${index === activeSection4Index ? styles.avatarPaginationDotActive : ""}`}
+              key={card.title}
+              onClick={() => {
+                const carousel = section4CarouselRef.current;
+
+                if (!carousel) {
+                  return;
+                }
+
+                const firstSlide = carousel.firstElementChild as HTMLElement | null;
+
+                if (!firstSlide) {
+                  return;
+                }
+
+                const carouselStyles = window.getComputedStyle(carousel);
+                const gapValue = Number.parseFloat(
+                  carouselStyles.columnGap || carouselStyles.gap || "0",
+                );
+                const step = firstSlide.offsetWidth + gapValue;
+
+                carousel.scrollTo({
+                  left: index * step,
+                  behavior: "smooth",
+                });
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter" && event.key !== " ") {
+                  return;
+                }
+
+                event.preventDefault();
+                const carousel = section4CarouselRef.current;
+
+                if (!carousel) {
+                  return;
+                }
+
+                const firstSlide = carousel.firstElementChild as HTMLElement | null;
+
+                if (!firstSlide) {
+                  return;
+                }
+
+                const carouselStyles = window.getComputedStyle(carousel);
+                const gapValue = Number.parseFloat(
+                  carouselStyles.columnGap || carouselStyles.gap || "0",
+                );
+                const step = firstSlide.offsetWidth + gapValue;
+
+                carousel.scrollTo({
+                  left: index * step,
+                  behavior: "smooth",
+                });
+              }}
+            />
+          ))}
+        </div>
       </section>
 
       <section className={styles.app}>
