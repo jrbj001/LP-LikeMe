@@ -289,7 +289,7 @@ injectGlobal(`
 
 .movement__carousel-track {
   display: flex;
-  gap: 0;
+  gap: 20px;
 }
 
 .movement__card {
@@ -362,38 +362,45 @@ injectGlobal(`
 .movement__pagination {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 8px;
   width: 100%;
   margin-top: 16px;
 }
 
 .movement__pagination-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: #d9d9d9;
-  box-shadow: inset 0 0 0 1px rgba(0, 17, 55, 0.06);
+  width: 7px;
+  height: 6px;
+  border-radius: 2px;
+  background-color: transparent;
+  background-image: url("/static/img/movement-dot-inactive.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
   cursor: pointer;
+  border: 0;
 }
 
 .movement__pagination-dot--active {
-  background: #0067ff;
+  background-color: transparent;
+  background-image: url("/static/img/movement-dot-active.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   box-shadow: none;
 }
 
 .simplify {
-  padding: 3.75rem 14.625rem;
+  padding: 3.75rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12.5rem;
+  gap: 11.5rem;
 }
 
 .simplify__header {
   position: relative;
   width: min(100%, 58.625rem);
-  padding: 0.4375rem 9.9375rem;
+  padding: 0.4375rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1012,7 +1019,7 @@ injectGlobal(`
 @media (max-width: 1240px) {
   .simplify {
     display: flex;
-    padding: 3.75rem 2rem;
+    padding: 4.5rem 2rem;
     gap: 2.5rem;
   }
 
@@ -1023,10 +1030,11 @@ injectGlobal(`
   }
 
   .simplify__header::before {
-    width: calc(100% - 40px);
-    height: 4rem;
-    top: 0.75rem;
+    width: calc(100% - 84px);
+    height: 3.25rem;
+    top: 0.9rem;
     border-radius: 200px;
+    align-items: center;
   }
 
   .simplify__title {
@@ -1046,8 +1054,9 @@ injectGlobal(`
   }
 
   .simplify__art {
-    width: 100%;
+    width: calc(100% - 3rem);
     height: 278.506px;
+    margin: 0rem 1.5rem;
   }
 
   .simplify__art-image {
@@ -1570,7 +1579,7 @@ injectGlobal(`
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1240px) {
   .movement {
     padding: 0 32px;
     margin-top: 16px;
