@@ -20,6 +20,19 @@ const ASSETS = {
     "https://www.figma.com/api/mcp/asset/18af2641-08b8-4527-900b-10257787fa9d",
   simplifyOval:
     "https://www.figma.com/api/mcp/asset/38e63133-a86c-40a5-95b9-8f8ee130b02c",
+  simplifyDesktopMask:
+    "https://www.figma.com/api/mcp/asset/151d70c0-9048-4bb6-ada2-ccbc0d494951",
+  simplifyDesktopBase:
+    "https://www.figma.com/api/mcp/asset/096500ff-976c-41f6-afa3-e66dcc255544",
+  simplifyDesktopOverlay:
+    "https://www.figma.com/api/mcp/asset/0e02a83d-d2d2-4f2c-82d2-e980d74ba8ac",
+  simplifyMobileMask:
+    "https://www.figma.com/api/mcp/asset/ff4e43a1-7a18-4510-bd16-0b7125ca2e36",
+  simplifyMobileBase:
+    "https://www.figma.com/api/mcp/asset/bc388148-6cc2-434c-987a-c2b35dcc3bcc",
+  simplifyMobileOverlay:
+    "https://www.figma.com/api/mcp/asset/d973d0e7-f4d2-4395-90e8-1e2e27553560",
+  simplifyArtHighRes: "/static/img/section3-simplify-art.png",
   avatarPhone:
     "https://www.figma.com/api/mcp/asset/0b7500c4-bcce-4288-9792-7acc8078e81c",
   appChecklist:
@@ -347,12 +360,13 @@ export const Home = (): JSX.Element => {
       </section>
 
       <section className={styles.simplify}>
-        <h2>Like:Me simplifica e conecta.</h2>
-        <p>Bem-estar que cabe na sua vida real.</p>
-        <small>Sem culpa. Sem pressão. No seu tempo.</small>
+        <div className={styles.simplifyHeader}>
+          <h2 className={styles.simplifyTitle}>Like:Me simplifica e conecta.</h2>
+          <p className={styles.simplifySubtitle}>Bem-estar que cabe na sua vida real.</p>
+          <small className={styles.simplifyTagline}>Sem culpa. Sem pressão. No seu tempo.</small>
+        </div>
         <div className={styles.simplifyArt}>
-          <img src={ASSETS.simplifyBand} alt="" />
-          <img src={ASSETS.simplifyOval} alt="" />
+          <img className={styles.simplifyArtImage} src={ASSETS.simplifyArtHighRes} alt="" />
         </div>
       </section>
 
