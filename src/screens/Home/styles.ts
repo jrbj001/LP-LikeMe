@@ -88,7 +88,7 @@ injectGlobal(`
   position: relative;
   max-width: 90rem;
   margin: 0 auto;
-  padding: 0 0 5.25rem;
+  padding: 0;
 }
 
 .chip {
@@ -155,7 +155,7 @@ injectGlobal(`
   grid-template-columns: minmax(22rem, 33.75rem) minmax(24rem, 1fr);
   gap: 2.5rem;
   align-items: center;
-  padding: 0 clamp(3rem, 10vw, 14.625rem);
+  padding: 0 0 0 clamp(3rem, 10vw, 14.625rem);
   width: 100%;
 }
 
@@ -165,6 +165,7 @@ injectGlobal(`
   width: 100%;
   max-width: 33.75rem;
   gap: 4rem;
+  padding: 0 0 0 100px;
 }
 
 .hero-section__copy > p:not(.hero-section__highlight) {
@@ -218,7 +219,7 @@ injectGlobal(`
   display: block;
   width: 50vw;
   max-width: 61.9375rem;
-  justify-self: start;
+  justify-self: end;
   overflow: hidden;
 }
 
@@ -233,11 +234,12 @@ injectGlobal(`
   .hero-section__content {
     grid-template-columns: minmax(18rem, 28rem) minmax(18rem, 1fr);
     gap: 1.5rem;
-    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    padding: 0;
   }
 
   .hero-section__copy {
     gap: 2.75rem;
+    padding: 0;
   }
 
   .hero-section__copy h1 {
@@ -1007,7 +1009,7 @@ injectGlobal(`
   height: 16.407px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1240px) {
   .simplify {
     display: flex;
     padding: 3.75rem 2rem;
@@ -1056,7 +1058,7 @@ injectGlobal(`
   }
 
   .hero-section {
-    padding: 0 0 40px;
+    padding: 0;
   }
 
   .hero-section__top {
@@ -1201,6 +1203,7 @@ injectGlobal(`
     width: 100%;
     aspect-ratio: 402 / 558;
     overflow: hidden;
+    margin-right: -70px;
   }
 
   .hero-section__phone {
@@ -1299,6 +1302,8 @@ injectGlobal(`
 
   .movement__pagination {
     margin-top: 16px;
+    justify-content: flex-end;
+    padding-right: 0;
   }
 
   .avatar {
@@ -1564,5 +1569,50 @@ injectGlobal(`
     letter-spacing: -0.3279px;
   }
 }
-`);
 
+@media (max-width: 900px) {
+  .movement {
+    padding: 0 32px;
+    margin-top: 16px;
+  }
+
+  .movement__carousel {
+    padding-right: 0;
+  }
+
+  .movement__carousel-track {
+    gap: 12px;
+  }
+
+  .movement__card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    height: auto;
+    min-height: clamp(360px, calc(100vh - 220px), 460px);
+  }
+
+  .movement__pagination {
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .movement__pagination-dot {
+    width: 7px;
+    height: 6px;
+    border-radius: 2px;
+    background-color: transparent;
+    background-image: url("/static/img/movement-dot-inactive.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .movement__pagination-dot--active {
+    background-color: transparent;
+    background-image: url("/static/img/movement-dot-active.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+`);
