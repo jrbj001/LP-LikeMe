@@ -1,3 +1,5 @@
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import { styles } from "./styles";
@@ -180,124 +182,60 @@ const SECTION4_CARDS: Section4Card[] = [
 ];
 
 export const Home = (): JSX.Element => {
-  const movementCarouselRef = useRef<HTMLDivElement | null>(null);
-  const section4CarouselRef = useRef<HTMLDivElement | null>(null);
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeSection4Index, setActiveSection4Index] = useState(0);
+  const movementAutoplayPlugin = useRef(
+    Autoplay({ delay: 3500, stopOnInteraction: false }),
+  );
+  const section4AutoplayPlugin = useRef(
+    Autoplay({ delay: 4200, stopOnInteraction: false }),
+  );
+  const [movementCarouselRef, movementCarouselApi] = useEmblaCarousel(
+    { loop: false, align: "start", containScroll: "keepSnaps" },
+    [movementAutoplayPlugin.current],
+  );
+  const [section4CarouselRef, section4CarouselApi] = useEmblaCarousel(
+    { loop: true, align: "start" },
+    [section4AutoplayPlugin.current],
+  );
 
   useEffect(() => {
-    const carousel = movementCarouselRef.current;
-
-    if (!carousel) {
+    if (!movementCarouselApi) {
       return;
     }
 
-    const getSlideStep = (): number => {
-      const firstSlide = carousel.firstElementChild as HTMLElement | null;
-
-      if (!firstSlide) {
-        return 0;
-      }
-
-      const carouselStyles = window.getComputedStyle(carousel);
-      const gapValue = Number.parseFloat(
-        carouselStyles.columnGap || carouselStyles.gap || "0",
-      );
-
-      return firstSlide.offsetWidth + gapValue;
+    const onSelect = (): void => {
+      setActiveMovementIndex(movementCarouselApi.selectedScrollSnap());
     };
 
-    const handleScroll = (): void => {
-      const step = getSlideStep();
-
-      if (!step) {
-        return;
-      }
-
-      const nextIndex = Math.round(carousel.scrollLeft / step);
-      setActiveMovementIndex(
-        Math.max(0, Math.min(MOVEMENT_CARDS.length - 1, nextIndex)),
-      );
-    };
-
-    const autoplay = window.setInterval(() => {
-      const step = getSlideStep();
-
-      if (!step) {
-        return;
-      }
-
-      const nextIndex = (activeMovementIndex + 1) % MOVEMENT_CARDS.length;
-      carousel.scrollTo({
-        left: nextIndex * step,
-        behavior: "smooth",
-      });
-    }, 3500);
-
-    carousel.addEventListener("scroll", handleScroll, { passive: true });
+    onSelect();
+    movementCarouselApi.on("select", onSelect);
+    movementCarouselApi.on("reInit", onSelect);
 
     return () => {
-      carousel.removeEventListener("scroll", handleScroll);
-      window.clearInterval(autoplay);
+      movementCarouselApi.off("select", onSelect);
+      movementCarouselApi.off("reInit", onSelect);
     };
-  }, [activeMovementIndex]);
+  }, [movementCarouselApi]);
 
   useEffect(() => {
-    const carousel = section4CarouselRef.current;
-
-    if (!carousel) {
+    if (!section4CarouselApi) {
       return;
     }
 
-    const getSlideStep = (): number => {
-      const firstSlide = carousel.firstElementChild as HTMLElement | null;
-
-      if (!firstSlide) {
-        return 0;
-      }
-
-      const carouselStyles = window.getComputedStyle(carousel);
-      const gapValue = Number.parseFloat(
-        carouselStyles.columnGap || carouselStyles.gap || "0",
-      );
-
-      return firstSlide.offsetWidth + gapValue;
+    const onSelect = (): void => {
+      setActiveSection4Index(section4CarouselApi.selectedScrollSnap());
     };
 
-    const handleScroll = (): void => {
-      const step = getSlideStep();
-
-      if (!step) {
-        return;
-      }
-
-      const nextIndex = Math.round(carousel.scrollLeft / step);
-      setActiveSection4Index(
-        Math.max(0, Math.min(SECTION4_CARDS.length - 1, nextIndex)),
-      );
-    };
-
-    const autoplay = window.setInterval(() => {
-      const step = getSlideStep();
-
-      if (!step) {
-        return;
-      }
-
-      const nextIndex = (activeSection4Index + 1) % SECTION4_CARDS.length;
-      carousel.scrollTo({
-        left: nextIndex * step,
-        behavior: "smooth",
-      });
-    }, 4200);
-
-    carousel.addEventListener("scroll", handleScroll, { passive: true });
+    onSelect();
+    section4CarouselApi.on("select", onSelect);
+    section4CarouselApi.on("reInit", onSelect);
 
     return () => {
-      carousel.removeEventListener("scroll", handleScroll);
-      window.clearInterval(autoplay);
+      section4CarouselApi.off("select", onSelect);
+      section4CarouselApi.off("reInit", onSelect);
     };
-  }, [activeSection4Index]);
+  }, [section4CarouselApi]);
 
   return (
     <main className={styles.landingDesktop}>
@@ -361,33 +299,35 @@ export const Home = (): JSX.Element => {
 
       <section className={styles.movement}>
         <div className={styles.movementCarousel} ref={movementCarouselRef}>
-          {MOVEMENT_CARDS.map((card) => (
-            <article className={styles.movementCard} key={card.title}>
-              <div className={styles.movementText}>
-                <div className={styles.movementHeading}>
-                  <img
-                    className={`${styles.movementMarker} ${styles.movementMarkerMobile}`}
-                    src={card.marker}
-                    alt=""
-                  />
-                  <h2>{card.title}</h2>
+          <div className={styles.movementCarouselTrack}>
+            {MOVEMENT_CARDS.map((card) => (
+              <article className={styles.movementCard} key={card.title}>
+                <div className={styles.movementText}>
+                  <div className={styles.movementHeading}>
+                    <img
+                      className={`${styles.movementMarker} ${styles.movementMarkerMobile}`}
+                      src={card.marker}
+                      alt=""
+                    />
+                    <h2>{card.title}</h2>
+                  </div>
+                  <div className={styles.movementDescription}>
+                    <img
+                      className={`${styles.movementMarker} ${styles.movementMarkerDesktop}`}
+                      src={card.marker}
+                      alt=""
+                    />
+                    <p>{card.description}</p>
+                  </div>
                 </div>
-                <div className={styles.movementDescription}>
-                  <img
-                    className={`${styles.movementMarker} ${styles.movementMarkerDesktop}`}
-                    src={card.marker}
-                    alt=""
-                  />
-                  <p>{card.description}</p>
-                </div>
-              </div>
-              <img
-                className={styles.movementImage}
-                src={card.image}
-                alt={card.title}
-              />
-            </article>
-          ))}
+                <img
+                  className={styles.movementImage}
+                  src={card.image}
+                  alt={card.title}
+                />
+              </article>
+            ))}
+          </div>
         </div>
         <div className={styles.movementPagination} aria-hidden>
           {MOVEMENT_CARDS.map((card, index) => (
@@ -395,29 +335,7 @@ export const Home = (): JSX.Element => {
               className={`${styles.movementPaginationDot} ${index === activeMovementIndex ? styles.movementPaginationDotActive : ""}`}
               key={card.title}
               onClick={() => {
-                const carousel = movementCarouselRef.current;
-
-                if (!carousel) {
-                  return;
-                }
-
-                const firstSlide =
-                  carousel.firstElementChild as HTMLElement | null;
-
-                if (!firstSlide) {
-                  return;
-                }
-
-                const carouselStyles = window.getComputedStyle(carousel);
-                const gapValue = Number.parseFloat(
-                  carouselStyles.columnGap || carouselStyles.gap || "0",
-                );
-                const step = firstSlide.offsetWidth + gapValue;
-
-                carousel.scrollTo({
-                  left: index * step,
-                  behavior: "smooth",
-                });
+                movementCarouselApi?.scrollTo(index);
               }}
               role="button"
               tabIndex={0}
@@ -427,29 +345,7 @@ export const Home = (): JSX.Element => {
                 }
 
                 event.preventDefault();
-                const carousel = movementCarouselRef.current;
-
-                if (!carousel) {
-                  return;
-                }
-
-                const firstSlide =
-                  carousel.firstElementChild as HTMLElement | null;
-
-                if (!firstSlide) {
-                  return;
-                }
-
-                const carouselStyles = window.getComputedStyle(carousel);
-                const gapValue = Number.parseFloat(
-                  carouselStyles.columnGap || carouselStyles.gap || "0",
-                );
-                const step = firstSlide.offsetWidth + gapValue;
-
-                carousel.scrollTo({
-                  left: index * step,
-                  behavior: "smooth",
-                });
+                movementCarouselApi?.scrollTo(index);
               }}
             />
           ))}
@@ -458,30 +354,42 @@ export const Home = (): JSX.Element => {
 
       <section className={styles.simplify}>
         <div className={styles.simplifyHeader}>
-          <h2 className={styles.simplifyTitle}>Like:Me simplifica e conecta.</h2>
-          <p className={styles.simplifySubtitle}>Bem-estar que cabe na sua vida real.</p>
-          <small className={styles.simplifyTagline}>Sem culpa. Sem pressão. No seu tempo.</small>
+          <h2 className={styles.simplifyTitle}>
+            Like:Me simplifica e conecta.
+          </h2>
+          <p className={styles.simplifySubtitle}>
+            Bem-estar que cabe na sua vida real.
+          </p>
+          <small className={styles.simplifyTagline}>
+            Sem culpa. Sem pressão. No seu tempo.
+          </small>
         </div>
         <div className={styles.simplifyArt}>
-          <img className={styles.simplifyArtImage} src={ASSETS.simplifyArtHighRes} alt="" />
+          <img
+            className={styles.simplifyArtImage}
+            src={ASSETS.simplifyArtHighRes}
+            alt=""
+          />
         </div>
       </section>
 
       <section className={styles.avatar}>
         <div className={styles.avatarCarousel} ref={section4CarouselRef}>
-          {SECTION4_CARDS.map((card) => (
-            <article className={styles.avatarSlide} key={card.title}>
-              <div className={styles.avatarCard}>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </div>
-              <img
-                className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
-                src={card.image}
-                alt={card.title}
-              />
-            </article>
-          ))}
+          <div className={styles.avatarCarouselTrack}>
+            {SECTION4_CARDS.map((card) => (
+              <article className={styles.avatarSlide} key={card.title}>
+                <div className={styles.avatarCard}>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+                <img
+                  className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
+                  src={card.image}
+                  alt={card.title}
+                />
+              </article>
+            ))}
+          </div>
         </div>
         <div className={styles.avatarPagination} aria-hidden>
           {SECTION4_CARDS.map((card, index) => (
@@ -489,28 +397,7 @@ export const Home = (): JSX.Element => {
               className={`${styles.avatarPaginationDot} ${index === activeSection4Index ? styles.avatarPaginationDotActive : ""}`}
               key={card.title}
               onClick={() => {
-                const carousel = section4CarouselRef.current;
-
-                if (!carousel) {
-                  return;
-                }
-
-                const firstSlide = carousel.firstElementChild as HTMLElement | null;
-
-                if (!firstSlide) {
-                  return;
-                }
-
-                const carouselStyles = window.getComputedStyle(carousel);
-                const gapValue = Number.parseFloat(
-                  carouselStyles.columnGap || carouselStyles.gap || "0",
-                );
-                const step = firstSlide.offsetWidth + gapValue;
-
-                carousel.scrollTo({
-                  left: index * step,
-                  behavior: "smooth",
-                });
+                section4CarouselApi?.scrollTo(index);
               }}
               role="button"
               tabIndex={0}
@@ -520,28 +407,7 @@ export const Home = (): JSX.Element => {
                 }
 
                 event.preventDefault();
-                const carousel = section4CarouselRef.current;
-
-                if (!carousel) {
-                  return;
-                }
-
-                const firstSlide = carousel.firstElementChild as HTMLElement | null;
-
-                if (!firstSlide) {
-                  return;
-                }
-
-                const carouselStyles = window.getComputedStyle(carousel);
-                const gapValue = Number.parseFloat(
-                  carouselStyles.columnGap || carouselStyles.gap || "0",
-                );
-                const step = firstSlide.offsetWidth + gapValue;
-
-                carousel.scrollTo({
-                  left: index * step,
-                  behavior: "smooth",
-                });
+                section4CarouselApi?.scrollTo(index);
               }}
             />
           ))}

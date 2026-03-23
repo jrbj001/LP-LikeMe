@@ -201,16 +201,14 @@
 }
 
 .movement__carousel {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  overflow: hidden;
+  overflow-y: hidden;
+  touch-action: pan-y;
 }
 
-.movement__carousel::-webkit-scrollbar {
-  display: none;
+.movement__carousel-track {
+  display: flex;
+  gap: 0;
 }
 
 .movement__card {
@@ -425,18 +423,14 @@
 }
 
 .avatar__carousel {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
+  overflow: hidden;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  touch-action: pan-x;
+  touch-action: pan-y;
 }
 
-.avatar__carousel::-webkit-scrollbar {
-  display: none;
+.avatar__carousel-track {
+  display: flex;
+  gap: 0;
 }
 
 .avatar__slide {
@@ -528,6 +522,12 @@
 .avatar__pagination-dot--active {
   background: #0067ff;
   box-shadow: none;
+}
+
+.movement__carousel img,
+.avatar__carousel img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .app {
@@ -881,12 +881,12 @@
   }
 
   .movement__carousel {
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    overflow: hidden;
     padding-right: 32px;
+  }
+
+  .movement__carousel-track {
+    gap: 20px;
   }
 
   .movement__card {
@@ -967,6 +967,10 @@
   }
 
   .avatar__carousel {
+    overflow: hidden;
+  }
+
+  .avatar__carousel-track {
     gap: 4px;
   }
 
