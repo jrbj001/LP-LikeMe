@@ -1,3 +1,8 @@
+import { injectGlobal } from "@emotion/css";
+import stylesheet from "./style.css?raw";
+
+injectGlobal(stylesheet);
+
 export const styles = {
   landingDesktop: "landing-desktop",
   heroSection: "hero-section",

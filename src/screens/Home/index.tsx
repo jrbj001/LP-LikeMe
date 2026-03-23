@@ -1,7 +1,6 @@
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useRef, useState } from "react";
-import "./style.css";
 import { styles } from "./styles";
 
 const ASSETS = {
