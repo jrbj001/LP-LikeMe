@@ -37,10 +37,9 @@ const ASSETS = {
   simplifyArtHighRes: "/static/img/section3-simplify-art.png",
   avatarPhone:
     "https://www.figma.com/api/mcp/asset/0b7500c4-bcce-4288-9792-7acc8078e81c",
-  appChecklist:
-    "https://www.figma.com/api/mcp/asset/1259753d-593c-4463-ad3f-e94e26e7ca23",
-  appAvatar:
-    "https://www.figma.com/api/mcp/asset/2a89b917-7134-4202-b99e-0dddcbfab36d",
+  appLastSlide: "/static/img/section5-app-last-slide.png",
+  chevronRight:
+    "https://www.figma.com/api/mcp/asset/2949c660-804b-4f60-adb5-fad7ff1dd893",
 };
 
 type MovementCard = {
@@ -181,6 +180,15 @@ const SECTION4_CARDS: Section4Card[] = [
   },
 ];
 
+const APP_FEATURES = [
+  "Integração de dados, exames, prescrições e outros aplicativos;",
+  "Automação de atividades;",
+  "Shop;",
+  "Cash back e descontos exclusivos;",
+  "Protocolos, serviços e profissionais;",
+  "Comunidades exclusivas.",
+] as const;
+
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeSection4Index, setActiveSection4Index] = useState(0);
@@ -198,6 +206,11 @@ export const Home = (): JSX.Element => {
     { loop: true, align: "start" },
     [section4AutoplayPlugin.current],
   );
+  const [appCarouselRef] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    containScroll: "trimSnaps",
+  });
 
   useEffect(() => {
     if (!movementCarouselApi) {
@@ -416,19 +429,36 @@ export const Home = (): JSX.Element => {
 
       <section className={styles.app}>
         <h3>App</h3>
-        <div className={styles.appGrid}>
-          <article className={styles.appLeft}>
-            <h4>Tudo que importa para o seu bem-estar, em um só lugar.</h4>
-            <p>Ajudando usuários e profissionais a se conectarem.</p>
-            <span>Do seu jeito, no seu tempo</span>
-          </article>
-          <article className={styles.appMiddle}>
-            <img src={ASSETS.appChecklist} alt="" />
-          </article>
-          <article className={styles.appRight}>
-            <img src={ASSETS.appAvatar} alt="" />
-          </article>
+        <div className={styles.appCarousel} ref={appCarouselRef}>
+          <div className={styles.appCarouselTrack}>
+            <article className={styles.appLeft}>
+              <div className={styles.appHighlightGlow} aria-hidden />
+              <h4>Tudo que importa para o seu bem-estar, em um só lugar.</h4>
+              <p>Ajudando usuários e profissionais a se conectarem.</p>
+              <span>Do seu jeito, no seu tempo</span>
+            </article>
+            <article className={styles.appMiddle}>
+              <ul>
+                {APP_FEATURES.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+            </article>
+            <article className={styles.appRight}>
+              <img
+                className={styles.appRightSlideImage}
+                src={ASSETS.appLastSlide}
+                alt=""
+              />
+            </article>
+          </div>
         </div>
+        <button className={styles.appButton} type="button">
+          Experimente a versão Beta
+          <span className={styles.appButtonIcon} aria-hidden>
+            <img src={ASSETS.chevronRight} alt="" />
+          </span>
+        </button>
       </section>
 
       <section className={styles.newsletter}>
