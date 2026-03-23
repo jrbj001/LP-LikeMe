@@ -40,6 +40,16 @@ const ASSETS = {
   appLastSlide: "/static/img/section5-app-last-slide.png",
   chevronRight:
     "https://www.figma.com/api/mcp/asset/2949c660-804b-4f60-adb5-fad7ff1dd893",
+  footerLogo:
+    "https://www.figma.com/api/mcp/asset/f34a7737-a010-47d4-b531-1178f9285c1e",
+  footerSocialX:
+    "https://www.figma.com/api/mcp/asset/7ba243c4-c0c3-4638-b532-6692caa27473",
+  footerSocialInstagram:
+    "https://www.figma.com/api/mcp/asset/761387d1-4367-460a-8888-ce63a53135ca",
+  footerSocialLinkedin:
+    "https://www.figma.com/api/mcp/asset/58541cad-7ac2-4037-a7d7-3d1e5ccf9c1b",
+  footerSocialTiktok:
+    "https://www.figma.com/api/mcp/asset/27ee3b96-bfd6-4c5e-826a-c6b37a9cf73b",
 };
 
 type MovementCard = {
@@ -189,9 +199,17 @@ const APP_FEATURES = [
   "Comunidades exclusivas.",
 ] as const;
 
+const PROFILE_OPTIONS = [
+  "Usuário",
+  "Provedor de Saúde",
+  "Representante comercial",
+] as const;
+
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeSection4Index, setActiveSection4Index] = useState(0);
+  const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
   );
@@ -294,7 +312,9 @@ export const Home = (): JSX.Element => {
             <p className={styles.heroSectionHighlight}>
               Amplie o seu autocuidado, no seu tempo e do seu jeito.
             </p>
-            <button type="button">Experimente a versão Beta</button>
+            <button type="button" disabled>
+              Experimente a versão Beta
+            </button>
           </div>
           <picture className={styles.heroSectionPhoneWrap}>
             <source
@@ -453,7 +473,7 @@ export const Home = (): JSX.Element => {
             </article>
           </div>
         </div>
-        <button className={styles.appButton} type="button">
+        <button className={styles.appButton} type="button" disabled>
           Experimente a versão Beta
           <span className={styles.appButtonIcon} aria-hidden>
             <img src={ASSETS.chevronRight} alt="" />
@@ -461,41 +481,100 @@ export const Home = (): JSX.Element => {
         </button>
       </section>
 
-      <section className={styles.newsletter}>
-        <h3>
-          Receba novidades, acesso antecipado e conteúdos exclusivos sobre
-          bem-estar.
-        </h3>
-        <form>
-          <input placeholder="Primeiro nome" />
-          <input placeholder="Sobrenome" />
-          <select defaultValue="">
-            <option value="" disabled>
-              Qual o seu perfil?
-            </option>
-            <option value="usuario">Usuário</option>
-            <option value="profissional">Profissional</option>
-          </select>
-          <input placeholder="E-mail*" />
-          <textarea rows={3} placeholder="Sua mensagem" />
-          <button type="button">Cadastre-se</button>
-        </form>
-      </section>
+      <div className={styles.footerArea}>
+        <section className={styles.newsletter}>
+          <h3>
+            Receba novidades, acesso antecipado
+            <br />e conteúdos exclusivos sobre bem-estar.
+          </h3>
+          <form>
+            <input placeholder="PRIMEIRO NOME" />
+            <input placeholder="SOBRENOME" />
+            <div className={styles.newsletterSelect}>
+              <button
+                className={`${styles.newsletterSelectButton} ${
+                  isProfileMenuOpen ? styles.newsletterSelectButtonOpen : ""
+                } ${
+                  selectedProfile ? styles.newsletterSelectButtonHasValue : ""
+                }`}
+                type="button"
+                onClick={() => {
+                  setIsProfileMenuOpen((previousValue) => !previousValue);
+                }}
+                aria-haspopup="listbox"
+                aria-expanded={isProfileMenuOpen}
+              >
+                <span className={styles.newsletterSelectLabel}>
+                  {selectedProfile ?? "SELECIONE SEU PERFIL"}
+                </span>
+                <span className={styles.newsletterSelectIcon} aria-hidden>
+                  {isProfileMenuOpen ? "⌃" : "⌄"}
+                </span>
+              </button>
 
-      <footer className={styles.footer}>
-        <div>
-          <strong>LIKE:ME</strong>
-          <p>Faça parte do Like:Me</p>
-        </div>
-        <div>
-          <strong>Contato</strong>
-          <p>like.me@global.com</p>
-        </div>
-        <div>
-          <strong>Links rápidos</strong>
-          <p>Termos e condições</p>
-        </div>
-      </footer>
+              {isProfileMenuOpen ? (
+                <div className={styles.newsletterSelectOptions} role="listbox">
+                  {PROFILE_OPTIONS.map((option) => (
+                    <button
+                      className={styles.newsletterSelectOption}
+                      key={option}
+                      type="button"
+                      onClick={() => {
+                        setSelectedProfile(option);
+                        setIsProfileMenuOpen(false);
+                      }}
+                      role="option"
+                      aria-selected={selectedProfile === option}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+            <input placeholder="E-MAIL *" />
+            <textarea rows={3} placeholder="SUA MENSAGEM" />
+            <button className={styles.newsletterSubmitButton} type="button">
+              Cadastre-se
+            </button>
+          </form>
+        </section>
+
+        <footer className={styles.footer}>
+          <div>
+            <img src={ASSETS.footerLogo} alt="Like:me" />
+            <strong>Faça parte do Like:me</strong>
+            <p>
+              Assine a nossa newsletter e receba dicas, insights e inspirações
+              de autocuidado. Curadoria humana, com conteúdo que faz sentido pra
+              a sua jornada de bem-estar.
+            </p>
+          </div>
+          <div>
+            <strong>Contato</strong>
+            <p>like.me@global.com</p>
+          </div>
+          <div>
+            <strong>Links rápidos</strong>
+            <p>
+              Política de privacidade
+              <br />
+              Política de reclamações
+              <br />
+              Termos e condições
+            </p>
+          </div>
+          <div>
+            <strong>Siga nossas redes</strong>
+            <p>
+              <img src={ASSETS.footerSocialX} alt="X" />
+              <img src={ASSETS.footerSocialInstagram} alt="Instagram" />
+              <img src={ASSETS.footerSocialLinkedin} alt="LinkedIn" />
+              <img src={ASSETS.footerSocialTiktok} alt="TikTok" />
+            </p>
+          </div>
+        </footer>
+      </div>
     </main>
   );
 };

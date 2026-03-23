@@ -60,7 +60,17 @@ export const styles = {
   appRightSlideImage: "app__right-slide-image",
   appButton: "app__button",
   appButtonIcon: "app__button-icon",
+  footerArea: "footer-area",
   newsletter: "newsletter",
+  newsletterSelect: "newsletter__select",
+  newsletterSelectButton: "newsletter__select-button",
+  newsletterSelectButtonOpen: "newsletter__select-button--open",
+  newsletterSelectButtonHasValue: "newsletter__select-button--has-value",
+  newsletterSelectLabel: "newsletter__select-label",
+  newsletterSelectIcon: "newsletter__select-icon",
+  newsletterSelectOptions: "newsletter__select-options",
+  newsletterSelectOption: "newsletter__select-option",
+  newsletterSubmitButton: "newsletter__submit-button",
   footer: "footer",
 } as const;
 
