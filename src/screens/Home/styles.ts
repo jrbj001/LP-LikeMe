@@ -511,8 +511,7 @@ injectGlobal(`
 }
 
 .avatar__carousel {
-  overflow: hidden;
-  overflow-y: hidden;
+  overflow: visible;
   touch-action: pan-y;
 }
 
@@ -593,22 +592,30 @@ injectGlobal(`
 
 .avatar__pagination {
   margin-top: 1rem;
+  margin-right: 24px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 8px;
 }
 
 .avatar__pagination-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: #d9d9d9;
-  box-shadow: inset 0 0 0 1px rgba(0, 17, 55, 0.06);
+  width: 9px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: transparent;
+  background-image: url("/static/img/movement-dot-inactive.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
   cursor: pointer;
+  border: 0;
 }
 
 .avatar__pagination-dot--active {
-  background: #0067ff;
+  background-color: transparent;
+  background-image: url("/static/img/movement-dot-active.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   box-shadow: none;
 }
 
