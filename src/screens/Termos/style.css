@@ -50,21 +50,24 @@
 
 /* Content wrapper */
 .termos-content {
-  max-width: 1440px;
+  width: 100%;
+  max-width: 90rem;
   margin: 0 auto;
+  padding-inline: clamp(1.5rem, 6vw, 7.5rem);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  box-sizing: border-box;
 }
 
 .termos-hero {
   position: relative;
   width: 100%;
-  padding: 208px 234px 64px;
+  padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 5vw, 4rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 1.5rem;
   overflow: hidden;
   background-color: var(--legal-hero-surface, #fdfbee);
 }
@@ -83,34 +86,50 @@
 
 .termos-hero-title {
   font-family: var(--headline-font-family), "Bricolage Grotesque", sans-serif;
-  font-size: clamp(28px, 4.2vw, 60px);
-  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-weight: var(--headline-font-weight, 700);
   color: var(--primitives-blue-blue-900, #001137);
   text-align: center;
-  max-width: 938px;
-  line-height: 1.1;
+  max-width: 58.625rem;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   position: relative;
   z-index: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125em;
+}
+
+.termos-hero-title-line {
+  display: block;
 }
 
 .termos-hero-date {
-  font-family: var(--headline-font-family), "Bricolage Grotesque", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
+  font-family: var(--overline-m-font-family), "DM Sans", sans-serif;
+  font-size: var(--overline-m-font-size, 20px);
+  font-weight: var(--overline-m-font-weight, 700);
+  line-height: var(--overline-m-line-height, 1.25);
+  letter-spacing: var(--overline-m-letter-spacing, 0.2px);
   color: var(--primitives-blue-blue-900, #001137);
   text-transform: uppercase;
   position: relative;
   z-index: 1;
+  margin: 0;
+  text-align: center;
 }
 
 .termos-hero-intro {
-  font-family: var(--body-font-family), "DM Sans", sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  color: #000;
-  max-width: 100%;
-  line-height: 1.4;
+  font-family: var(--BRANDBOOK-texto-font-family), "DM Sans", sans-serif;
+  font-size: var(--BRANDBOOK-texto-font-size, 17px);
+  font-weight: var(--BRANDBOOK-texto-font-weight, 400);
+  line-height: var(--BRANDBOOK-texto-line-height, 1.15);
+  letter-spacing: var(--BRANDBOOK-texto-letter-spacing, 0);
+  color: var(--primitives-blue-blue-900, #001137);
+  max-width: 52.5rem;
+  margin: 0;
+  text-align: center;
   position: relative;
   z-index: 1;
 }
@@ -118,10 +137,10 @@
 /* Seções accordion */
 .termos-sections {
   width: 100%;
-  padding: 120px 234px 60px;
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 7.5rem);
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 1.5rem;
 }
 
 .termos-accordion {
@@ -136,13 +155,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px;
+  padding: 2rem;
   background: none;
   border: none;
   cursor: pointer;
   font: inherit;
   text-align: left;
-  gap: 16px;
+  gap: 1rem;
+}
+
+.termos-accordion-header-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .termos-accordion-header:hover {
@@ -159,39 +186,41 @@
 
 .termos-accordion-title {
   font-family: var(--headline-font-family), "Bricolage Grotesque", sans-serif;
-  font-size: 24px;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
   font-weight: 700;
   color: var(--primitives-blue-blue-900, #001137);
   text-transform: uppercase;
   flex: 1;
+  min-width: 0;
+  line-height: 1.2;
 }
 
-.termos-accordion-icon {
+.termos-accordion-chevron-wrap {
   flex-shrink: 0;
   width: 52px;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  color: var(--primitives-blue-blue-900, #001137);
+}
+
+.termos-accordion-chevron {
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid var(--primitives-blue-blue-900, #001137);
+  border-bottom: 2px solid var(--primitives-blue-blue-900, #001137);
+  transform: rotate(-135deg);
+  margin-top: -4px;
   transition: transform 0.2s ease;
 }
 
-.termos-accordion-icon.is-open {
-  transform: rotate(0deg);
-}
-
-.termos-accordion-icon--right {
-  transform: rotate(-90deg);
-}
-
-.termos-accordion-icon--right.is-open {
-  transform: rotate(0deg);
+.termos-accordion-chevron.is-open {
+  transform: rotate(45deg);
+  margin-top: 0;
 }
 
 .termos-accordion-body {
-  padding: 0 32px 32px;
+  padding: 0 2rem 2rem;
 }
 
 .termos-accordion-body--with-image {
@@ -230,8 +259,13 @@
 }
 
 .termos-accordion-text a {
-  color: var(--primitives-blue-blue-500, #0154f8);
+  color: var(--functional-colors-main-colors-primary-primary-pure, #0154f8);
   text-decoration: underline;
+  font-weight: 600;
+}
+
+.termos-accordion-text a:hover {
+  text-decoration: none;
 }
 
 .termos-accordion-image {
@@ -541,15 +575,17 @@
 /* Responsivo */
 @media (max-width: 1024px) {
   .termos-hero {
-    padding: 120px 24px 48px;
+    padding-block: clamp(2.5rem, 6vw, 4rem) 2.5rem;
+    padding-inline: 0;
   }
 
   .termos-page--with-landing .termos-hero {
-    padding: 32px 24px 48px;
+    padding-top: 2rem;
   }
 
   .termos-sections {
-    padding: 60px 24px 40px;
+    padding-block: 2.5rem 3rem;
+    padding-inline: 0;
   }
 
   .termos-plans-table-header,
@@ -571,15 +607,25 @@
   }
 
   .termos-hero {
-    padding: 80px 16px 32px;
+    padding-block: 2rem 1.75rem;
+    padding-inline: 0;
   }
 
   .termos-page--with-landing .termos-hero {
-    padding: 24px 16px 32px;
+    padding-top: 1.25rem;
   }
 
   .termos-sections {
-    padding: 40px 16px 32px;
+    padding-block: 2rem 2.5rem;
+    padding-inline: 0;
+  }
+
+  .termos-accordion-header {
+    padding: 1.25rem;
+  }
+
+  .termos-accordion-body {
+    padding: 0 1.25rem 1.25rem;
   }
 
   .termos-accordion-body--with-image {
