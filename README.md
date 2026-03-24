@@ -61,6 +61,13 @@ Para build de produção:
 npm run build
 ```
 
+## Formulário “Cadastre-se” (newsletter)
+
+O envio usa [FormSubmit](https://formsubmit.co/) (POST AJAX, sem backend no projeto). O destino padrão é `like.me@global.com` (veja `src/constants/newsletter.ts`).
+
+- **Primeira vez:** o FormSubmit costuma enviar um e-mail de **ativação** para o endereço de destino; é preciso confirmar antes dos cadastros chegarem.
+- **Override:** defina `VITE_NEWSLETTER_TO_EMAIL` no `.env` se quiser outro destinatário em build.
+
 ## Storybook
 
 After installing, you can view your storybook by running:

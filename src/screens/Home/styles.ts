@@ -73,6 +73,9 @@ export const styles = {
   newsletterSelectOptions: "newsletter__select-options",
   newsletterSelectOption: "newsletter__select-option",
   newsletterSubmitButton: "newsletter__submit-button",
+  newsletterFormFeedback: "newsletter__form-feedback",
+  newsletterFormFeedbackSuccess: "newsletter__form-feedback--success",
+  newsletterFormFeedbackError: "newsletter__form-feedback--error",
   footer: "footer",
 } as const;
 
@@ -1023,6 +1026,29 @@ injectGlobal(`
   font-weight: 500;
   line-height: 1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.newsletter__submit-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.newsletter__form-feedback {
+  margin: 12px 0 0;
+  min-height: 1.25em;
+  font-family: "DM Sans", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: center;
+  color: #001137;
+}
+
+.newsletter__form-feedback--success {
+  color: #0d5c2e;
+}
+
+.newsletter__form-feedback--error {
+  color: #b00020;
 }
 
 .footer {

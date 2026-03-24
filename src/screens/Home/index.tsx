@@ -1,5 +1,6 @@
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
+import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -8,6 +9,8 @@ import {
   type SectionAnchorId,
 } from "../../constants/sectionAnchors";
 import { ROUTES } from "../../constants/routes";
+import { submitNewsletterLead } from "../../services/submitNewsletterLead";
+import { isValidEmail } from "../../utils/isValidEmail";
 import { styles } from "./styles";
 
 const ASSETS = {
@@ -226,6 +229,16 @@ export const Home = (): JSX.Element => {
   const [activeSection4Index, setActiveSection4Index] = useState(0);
   const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [newsletterFirstName, setNewsletterFirstName] = useState("");
+  const [newsletterLastName, setNewsletterLastName] = useState("");
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterMessage, setNewsletterMessage] = useState("");
+  const [newsletterSubmitState, setNewsletterSubmitState] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [newsletterFeedback, setNewsletterFeedback] = useState<string | null>(
+    null,
+  );
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
   );
@@ -253,6 +266,52 @@ export const Home = (): JSX.Element => {
 
   const [activeHeaderNav, setActiveHeaderNav] =
     useState<SectionAnchorId>(SECTION_ANCHORS.HERO);
+
+  const handleNewsletterSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault();
+    setNewsletterFeedback(null);
+    setNewsletterSubmitState("idle");
+
+    const email = newsletterEmail.trim();
+    if (!isValidEmail(email)) {
+      setNewsletterFeedback("Informe um e-mail válido.");
+      return;
+    }
+    if (!selectedProfile) {
+      setNewsletterFeedback("Selecione seu perfil.");
+      return;
+    }
+
+    setNewsletterSubmitState("loading");
+    try {
+      await submitNewsletterLead({
+        firstName: newsletterFirstName.trim(),
+        lastName: newsletterLastName.trim(),
+        email,
+        profile: selectedProfile,
+        message: newsletterMessage.trim(),
+      });
+      setNewsletterSubmitState("success");
+      setNewsletterFeedback("Cadastro enviado. Obrigado!");
+      setNewsletterFirstName("");
+      setNewsletterLastName("");
+      setNewsletterEmail("");
+      setNewsletterMessage("");
+      setSelectedProfile(null);
+    } catch (error) {
+      console.error("Falha ao enviar cadastro da newsletter", {
+        operation: "submitNewsletterLead",
+        email,
+        error,
+      });
+      setNewsletterSubmitState("error");
+      setNewsletterFeedback(
+        "Não foi possível enviar agora. Tente novamente em instantes.",
+      );
+    }
+  };
 
   const scrollToSection = (anchorId: SectionAnchorId): void => {
     setActiveHeaderNav(anchorId);
@@ -542,9 +601,31 @@ export const Home = (): JSX.Element => {
             Receba novidades, acesso antecipado
             <br />e conteúdos exclusivos sobre bem-estar.
           </h3>
-          <form>
-            <input placeholder="PRIMEIRO NOME" />
-            <input placeholder="SOBRENOME" />
+          <form
+            onSubmit={(event) => {
+              void handleNewsletterSubmit(event);
+            }}
+            noValidate
+            aria-busy={newsletterSubmitState === "loading"}
+          >
+            <input
+              name="firstName"
+              autoComplete="given-name"
+              placeholder="PRIMEIRO NOME"
+              value={newsletterFirstName}
+              onChange={(event) => {
+                setNewsletterFirstName(event.target.value);
+              }}
+            />
+            <input
+              name="lastName"
+              autoComplete="family-name"
+              placeholder="SOBRENOME"
+              value={newsletterLastName}
+              onChange={(event) => {
+                setNewsletterLastName(event.target.value);
+              }}
+            />
             <div className={styles.newsletterSelect}>
               <button
                 className={`${styles.newsletterSelectButton} ${
@@ -601,11 +682,46 @@ export const Home = (): JSX.Element => {
                 </div>
               ) : null}
             </div>
-            <input placeholder="E-MAIL *" />
-            <textarea rows={3} placeholder="SUA MENSAGEM" />
-            <button className={styles.newsletterSubmitButton} type="button">
-              Cadastre-se
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="E-MAIL *"
+              value={newsletterEmail}
+              onChange={(event) => {
+                setNewsletterEmail(event.target.value);
+              }}
+              required
+            />
+            <textarea
+              name="message"
+              rows={3}
+              placeholder="SUA MENSAGEM"
+              value={newsletterMessage}
+              onChange={(event) => {
+                setNewsletterMessage(event.target.value);
+              }}
+            />
+            <button
+              className={styles.newsletterSubmitButton}
+              type="submit"
+              disabled={newsletterSubmitState === "loading"}
+            >
+              {newsletterSubmitState === "loading" ? "Enviando…" : "Cadastre-se"}
             </button>
+            {newsletterFeedback ? (
+              <p
+                className={`${styles.newsletterFormFeedback} ${
+                  newsletterSubmitState === "success"
+                    ? styles.newsletterFormFeedbackSuccess
+                    : styles.newsletterFormFeedbackError
+                }`}
+                role="status"
+                aria-live="polite"
+              >
+                {newsletterFeedback}
+              </p>
+            ) : null}
           </form>
         </section>
 
