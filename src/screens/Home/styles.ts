@@ -1438,9 +1438,13 @@ injectGlobal(`
   }
 
   .avatar__phone--community {
-    width: 100%;
-    object-position: center top;
-    height: 100%;
+    width: min(100%, 400px);
+    aspect-ratio: 355 / 438;
+    max-height: min(460px, 52vh);
+    object-fit: cover;
+    object-position: 0% 0%;
+    transform: scale(2.1);
+    transform-origin: 50% 22%;
   }
 
   .avatar__phone--shop {
