@@ -2,6 +2,11 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  SECTION_ANCHORS,
+  isSectionAnchorId,
+  type SectionAnchorId,
+} from "../../constants/sectionAnchors";
 import { ROUTES } from "../../constants/routes";
 import { styles } from "./styles";
 
@@ -206,6 +211,16 @@ const PROFILE_OPTIONS = [
   "Representante comercial",
 ] as const;
 
+const HEADER_NAV_ITEMS: readonly {
+  anchorId: SectionAnchorId;
+  label: string;
+}[] = [
+  { anchorId: SECTION_ANCHORS.HERO, label: "Home" },
+  { anchorId: SECTION_ANCHORS.SOBRE, label: "Sobre" },
+  { anchorId: SECTION_ANCHORS.VERSAO_BETA, label: "Versão Beta" },
+  { anchorId: SECTION_ANCHORS.JUNTE_SE, label: "Junte-se a nós" },
+];
+
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeSection4Index, setActiveSection4Index] = useState(0);
@@ -217,6 +232,9 @@ export const Home = (): JSX.Element => {
   const section4AutoplayPlugin = useRef(
     Autoplay({ delay: 4200, stopOnInteraction: false }),
   );
+  const appAutoplayPlugin = useRef(
+    Autoplay({ delay: 4500, stopOnInteraction: false }),
+  );
   const [movementCarouselRef, movementCarouselApi] = useEmblaCarousel(
     { loop: false, align: "start", containScroll: "keepSnaps" },
     [movementAutoplayPlugin.current],
@@ -225,11 +243,38 @@ export const Home = (): JSX.Element => {
     { loop: true, align: "start" },
     [section4AutoplayPlugin.current],
   );
-  const [appCarouselRef] = useEmblaCarousel({
-    loop: false,
-    align: "start",
-    containScroll: "trimSnaps",
-  });
+  const [appCarouselRef] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+    },
+    [appAutoplayPlugin.current],
+  );
+
+  const [activeHeaderNav, setActiveHeaderNav] =
+    useState<SectionAnchorId>(SECTION_ANCHORS.HERO);
+
+  const scrollToSection = (anchorId: SectionAnchorId): void => {
+    setActiveHeaderNav(anchorId);
+    document.getElementById(anchorId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    window.history.replaceState(null, "", `#${anchorId}`);
+  };
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash && isSectionAnchorId(hash)) {
+      setActiveHeaderNav(hash);
+      requestAnimationFrame(() => {
+        document.getElementById(hash)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (!movementCarouselApi) {
@@ -271,7 +316,7 @@ export const Home = (): JSX.Element => {
 
   return (
     <main className={styles.landingDesktop}>
-      <section className={styles.heroSection}>
+      <section className={styles.heroSection} id={SECTION_ANCHORS.HERO}>
         <div className={styles.heroSectionTop}>
           <picture>
             <source media="(max-width: 900px)" srcSet={ASSETS.heroMobileBg} />
@@ -292,12 +337,21 @@ export const Home = (): JSX.Element => {
             </picture>
           </div>
 
-          <div className={styles.heroSectionMenu}>
-            <span className={`${styles.chip} ${styles.chipActive}`}>Home</span>
-            <span className={styles.chip}>Sobre</span>
-            <span className={styles.chip}>Versão Beta</span>
-            <span className={styles.chip}>Junte-se a nós</span>
-          </div>
+          <nav className={styles.heroSectionMenu} aria-label="Seções da página">
+            {HEADER_NAV_ITEMS.map((item) => (
+              <a
+                key={item.anchorId}
+                className={`${styles.chip} ${activeHeaderNav === item.anchorId ? styles.chipActive : ""}`}
+                href={`#${item.anchorId}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToSection(item.anchorId);
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
         </div>
 
         <div className={styles.heroSectionContent}>
@@ -386,7 +440,7 @@ export const Home = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.simplify}>
+      <section className={styles.simplify} id={SECTION_ANCHORS.SOBRE}>
         <div className={styles.simplifyHeader}>
           <h2 className={styles.simplifyTitle}>
             Like:Me simplifica e conecta.
@@ -448,7 +502,7 @@ export const Home = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.app}>
+      <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
         <h3>App</h3>
         <div className={styles.appCarousel} ref={appCarouselRef}>
           <div className={styles.appCarouselTrack}>
@@ -483,7 +537,7 @@ export const Home = (): JSX.Element => {
       </section>
 
       <div className={styles.footerArea}>
-        <section className={styles.newsletter}>
+        <section className={styles.newsletter} id={SECTION_ANCHORS.JUNTE_SE}>
           <h3>
             Receba novidades, acesso antecipado
             <br />e conteúdos exclusivos sobre bem-estar.

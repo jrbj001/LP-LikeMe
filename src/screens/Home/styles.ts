@@ -86,9 +86,11 @@ injectGlobal(`
 
 .hero-section {
   position: relative;
-  max-width: 90rem;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .chip {
@@ -106,6 +108,24 @@ injectGlobal(`
 .chip--active {
   background: #001137;
   color: #fff;
+}
+
+.hero-section__menu a.chip {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.hero-section__menu a.chip--active {
+  color: #fff;
+}
+
+.hero-section,
+.simplify,
+.app,
+.newsletter {
+  scroll-margin-top: 40px;
 }
 
 .hero-section__top {
@@ -364,7 +384,7 @@ injectGlobal(`
   justify-content: flex-end;
   gap: 8px;
   width: 100%;
-  margin-top: 2px;
+  margin-top: 16px;
 }
 
 .movement__pagination-dot {
@@ -614,7 +634,7 @@ injectGlobal(`
 }
 
 .avatar__pagination {
-  margin-top: 2px;
+  margin-top: 16px;
   margin-right: 24px;
   display: flex;
   justify-content: flex-end;
@@ -859,7 +879,8 @@ injectGlobal(`
 }
 
 .newsletter form {
-  max-width: 100%;
+  width: 100%;
+  max-width: min(50vw, 100%);
   margin: 0 auto;
   display: grid;
   gap: 16px;
@@ -1611,6 +1632,7 @@ injectGlobal(`
   }
 
   .newsletter form {
+    max-width: 100%;
     gap: 12px;
   }
 
