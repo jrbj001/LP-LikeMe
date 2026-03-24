@@ -1,6 +1,8 @@
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../constants/routes";
 import { styles } from "./styles";
 
 const ASSETS = {
@@ -507,7 +509,21 @@ export const Home = (): JSX.Element => {
                   {selectedProfile ?? "SELECIONE SEU PERFIL"}
                 </span>
                 <span className={styles.newsletterSelectIcon} aria-hidden>
-                  {isProfileMenuOpen ? "⌃" : "⌄"}
+                  <svg
+                    viewBox="0 0 12 8"
+                    width="12"
+                    height="8"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 1.5L6 6.5L11 1.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </span>
               </button>
 
@@ -556,11 +572,9 @@ export const Home = (): JSX.Element => {
           <div>
             <strong>Links rápidos</strong>
             <p>
-              Política de privacidade
+              <Link to={ROUTES.PRIVACY}>Política de privacidade</Link>
               <br />
-              Política de reclamações
-              <br />
-              Termos e condições
+              <Link to={ROUTES.TERMS}>Termos e condições</Link>
             </p>
           </div>
           <div>

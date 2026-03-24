@@ -270,7 +270,6 @@ injectGlobal(`
 .movement,
 .simplify,
 .avatar,
-.app,
 .newsletter,
 .footer {
   max-width: 1360px;
@@ -365,7 +364,7 @@ injectGlobal(`
   justify-content: flex-end;
   gap: 8px;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 2px;
 }
 
 .movement__pagination-dot {
@@ -522,7 +521,7 @@ injectGlobal(`
 }
 
 .avatar {
-  padding: 7.5rem 0;
+  padding: 7.5rem 0 10rem;
 }
 
 .avatar__carousel {
@@ -615,7 +614,7 @@ injectGlobal(`
 }
 
 .avatar__pagination {
-  margin-top: 1rem;
+  margin-top: 2px;
   margin-right: 24px;
   display: flex;
   justify-content: flex-end;
@@ -650,10 +649,14 @@ injectGlobal(`
 }
 
 .app {
-  padding: 0 24px 80px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 48px) 80px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 80px;
 }
 
@@ -669,22 +672,27 @@ injectGlobal(`
 
 .app__carousel {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .app__carousel-track {
   display: flex;
-  gap: 20px;
+  gap: 32px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .app__left,
 .app__middle,
 .app__right {
-  flex: 0 0 calc((100% - 40px) / 3);
+  flex: 0 0 calc((100% - 64px) / 3);
   min-width: 0;
+  width: calc((100% - 64px) / 3);
   border-radius: 40px;
   height: 619px;
+  box-sizing: border-box;
 }
 
 .app__left {
@@ -701,7 +709,7 @@ injectGlobal(`
 .app__highlight-glow {
   position: absolute;
   left: 52px;
-  top: 130px;
+  top: 96px;
   width: 262px;
   height: 83px;
   border-radius: 41.766px;
@@ -782,6 +790,7 @@ injectGlobal(`
 }
 
 .app__button {
+  align-self: center;
   border: 0;
   min-height: 48px;
   width: 304px;
@@ -925,14 +934,29 @@ injectGlobal(`
 }
 
 .newsletter__select-icon {
-  width: 32px;
-  height: 32px;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin-left: 4px;
+  color: #8fa3a1;
+}
+
+.newsletter__select-icon svg {
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.newsletter__select-button--has-value .newsletter__select-icon,
+.newsletter__select-button--open .newsletter__select-icon {
   color: #001137;
-  font-size: 18px;
-  line-height: 1;
+}
+
+.newsletter__select-button--open .newsletter__select-icon svg {
+  transform: rotate(180deg);
 }
 
 .newsletter__select-options {
@@ -1033,6 +1057,15 @@ injectGlobal(`
   font-size: 16.393px;
   line-height: 1.1;
   letter-spacing: -0.3279px;
+  text-decoration: underline;
+}
+
+.footer > div:nth-child(3) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer > div:nth-child(3) a:hover {
   text-decoration: underline;
 }
 
@@ -1350,19 +1383,19 @@ injectGlobal(`
   }
 
   .movement__pagination {
-    margin-top: 16px;
+    margin-top: 2px;
     justify-content: flex-end;
     padding-right: 0;
   }
 
   .avatar {
     display: block;
-    padding: 24px 0 0;
+    padding: 24px 0 clamp(48px, 14vw, 96px);
   }
 
   .avatar__carousel {
     overflow: hidden;
-    padding-bottom: clamp(12px, 3.5vw, 20px);
+    padding-bottom: 0;
     box-sizing: border-box;
   }
 
@@ -1374,7 +1407,7 @@ injectGlobal(`
     width: 100%;
     min-width: 100%;
     padding: 0 clamp(16px, 5vw, 32px);
-    padding-bottom: clamp(20px, 5vw, 32px);
+    padding-bottom: clamp(4px, 1.5vw, 12px);
     box-sizing: border-box;
     display: flow-root;
   }
@@ -1389,9 +1422,9 @@ injectGlobal(`
     flex: 0 0 auto;
     height: auto;
     min-height: 0;
-    margin: 0 0 clamp(20px, 5vw, 28px);
+    margin: 0 0 clamp(8px, 2vw, 14px);
     padding: clamp(20px, 5vw, 32px) clamp(18px, 4.5vw, 28px)
-      clamp(20px, 5vw, 28px);
+      clamp(16px, 4vw, 24px);
     box-sizing: border-box;
     overflow: hidden;
     background: #fdfbee;
@@ -1458,14 +1491,18 @@ injectGlobal(`
   }
 
   .avatar__pagination {
+    margin-top: 0;
     box-sizing: border-box;
   }
 
   .app {
     display: flex;
-    padding: 0 32px 24px;
+    max-width: none;
+    width: 100%;
+    padding: 0 clamp(16px, 5vw, 32px) 24px;
+    box-sizing: border-box;
     gap: 24px;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   .app h3 {
@@ -1476,13 +1513,15 @@ injectGlobal(`
 
   .app__carousel {
     width: 100%;
+    max-width: 100%;
     overflow: hidden;
     touch-action: pan-y;
     padding-right: 0;
+    box-sizing: border-box;
   }
 
   .app__carousel-track {
-    gap: 0;
+    gap: 16px;
   }
 
   .app__left,
@@ -1500,12 +1539,13 @@ injectGlobal(`
   }
 
   .app__highlight-glow {
-    top: 86px;
+    top: 56px;
     left: 8px;
   }
 
   .app__left h4 {
-    max-width: 272px;
+    max-width: 100%;
+    width: 100%;
     font-size: 32px;
     line-height: 1.06;
     letter-spacing: -0.32px;
@@ -1513,7 +1553,8 @@ injectGlobal(`
 
   .app__left p {
     margin-top: 24px;
-    max-width: 272px;
+    max-width: 100%;
+    width: 100%;
     font-size: 16px;
     line-height: 1.2;
     letter-spacing: -0.32px;
@@ -1665,6 +1706,7 @@ injectGlobal(`
   }
 
   .movement__pagination {
+    margin-top: 2px;
     justify-content: flex-end;
     gap: 4px;
   }

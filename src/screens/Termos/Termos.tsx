@@ -312,7 +312,6 @@ export const Termos = (): JSX.Element => {
               <p className="termos-footer-links-title">Links rápidos</p>
               <Link to="/terms">Termos e condições</Link>
               <Link to="/privacy">Política de privacidade</Link>
-              <a href="/#">Política de reclamações</a>
             </div>
           </div>
         </footer>
