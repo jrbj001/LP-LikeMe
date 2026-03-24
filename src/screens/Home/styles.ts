@@ -1419,10 +1419,8 @@ injectGlobal(`
     position: relative;
     flex: 0 0 auto;
     align-self: center;
-    width: min(100%, 280px);
     height: auto;
     aspect-ratio: 350 / 720;
-    max-height: min(420px, 52vh);
     margin: 0;
     border-radius: 0 0 24px 24px;
     left: auto;
@@ -1436,25 +1434,26 @@ injectGlobal(`
 
   .avatar__phone--avatar {
     object-position: center top;
+    height: 100%;
   }
 
   .avatar__phone--community {
-    width: min(100%, 420px);
-    aspect-ratio: 372 / 459;
-    max-height: min(480px, 55vh);
-    object-position: top center;
+    width: 100%;
+    object-position: center top;
+    height: 100%;
   }
 
   .avatar__phone--shop {
     width: min(100%, 400px);
     aspect-ratio: 355 / 438;
     max-height: min(460px, 52vh);
-    object-position: center;
+    object-fit: cover;
+    object-position: 10% 0%;
+    transform: scale(2.1);
+    transform-origin: 58% 22%;
   }
 
   .avatar__pagination {
-    margin-top: clamp(8px, 2.5vw, 16px);
-    padding: 0 clamp(16px, 5vw, 32px);
     box-sizing: border-box;
   }
 
