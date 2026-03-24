@@ -1,64 +1,25 @@
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
-import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { LandingFooter } from "../../components/layout/LandingFooter";
+import { LandingHeader } from "../../components/layout/LandingHeader";
 import {
   SECTION_ANCHORS,
   isSectionAnchorId,
   type SectionAnchorId,
 } from "../../constants/sectionAnchors";
-import { ROUTES } from "../../constants/routes";
-import { submitNewsletterLead } from "../../services/submitNewsletterLead";
-import { isValidEmail } from "../../utils/isValidEmail";
+import { publicImg } from "../../utils/publicImg";
 import { styles } from "./styles";
 
 const ASSETS = {
-  logo: "https://www.figma.com/api/mcp/asset/09537643-5401-4d23-b0dd-2c3dfcaff836",
-  heroBg:
-    "https://www.figma.com/api/mcp/asset/3044ae66-bdd2-47fe-aa38-4505ec72e07c",
-  heroMobileBg:
-    "https://www.figma.com/api/mcp/asset/6110e62b-970f-445e-bb57-0b412f77ea35",
-  heroMobileLogo:
-    "https://www.figma.com/api/mcp/asset/bb249594-0e06-4b26-b838-0fa6eaaecea1",
   heroMobilePhone:
     "https://www.figma.com/api/mcp/asset/7bf32a0a-ac01-4885-9956-462f9c72ad60",
   heroPhone:
     "https://www.figma.com/api/mcp/asset/af1e6c92-72c8-49f2-b8c2-05a6064123f0",
-  movement:
-    "https://www.figma.com/api/mcp/asset/7b52847a-a711-4f0e-91ad-7eeb952183c5",
-  simplifyBand:
-    "https://www.figma.com/api/mcp/asset/18af2641-08b8-4527-900b-10257787fa9d",
-  simplifyOval:
-    "https://www.figma.com/api/mcp/asset/38e63133-a86c-40a5-95b9-8f8ee130b02c",
-  simplifyDesktopMask:
-    "https://www.figma.com/api/mcp/asset/151d70c0-9048-4bb6-ada2-ccbc0d494951",
-  simplifyDesktopBase:
-    "https://www.figma.com/api/mcp/asset/096500ff-976c-41f6-afa3-e66dcc255544",
-  simplifyDesktopOverlay:
-    "https://www.figma.com/api/mcp/asset/0e02a83d-d2d2-4f2c-82d2-e980d74ba8ac",
-  simplifyMobileMask:
-    "https://www.figma.com/api/mcp/asset/ff4e43a1-7a18-4510-bd16-0b7125ca2e36",
-  simplifyMobileBase:
-    "https://www.figma.com/api/mcp/asset/bc388148-6cc2-434c-987a-c2b35dcc3bcc",
-  simplifyMobileOverlay:
-    "https://www.figma.com/api/mcp/asset/d973d0e7-f4d2-4395-90e8-1e2e27553560",
-  simplifyArtHighRes: "/static/img/section3-simplify-art.png",
-  avatarPhone:
-    "https://www.figma.com/api/mcp/asset/0b7500c4-bcce-4288-9792-7acc8078e81c",
-  appLastSlide: "/static/img/section5-app-last-slide.png",
+  simplifyArtHighRes: publicImg("section3-simplify-art.png"),
+  appLastSlide: publicImg("section5-app-last-slide.png"),
   chevronRight:
     "https://www.figma.com/api/mcp/asset/2949c660-804b-4f60-adb5-fad7ff1dd893",
-  footerLogo:
-    "https://www.figma.com/api/mcp/asset/f34a7737-a010-47d4-b531-1178f9285c1e",
-  footerSocialX:
-    "https://www.figma.com/api/mcp/asset/7ba243c4-c0c3-4638-b532-6692caa27473",
-  footerSocialInstagram:
-    "https://www.figma.com/api/mcp/asset/761387d1-4367-460a-8888-ce63a53135ca",
-  footerSocialLinkedin:
-    "https://www.figma.com/api/mcp/asset/58541cad-7ac2-4037-a7d7-3d1e5ccf9c1b",
-  footerSocialTiktok:
-    "https://www.figma.com/api/mcp/asset/27ee3b96-bfd6-4c5e-826a-c6b37a9cf73b",
 };
 
 type MovementCard = {
@@ -208,37 +169,9 @@ const APP_FEATURES = [
   "Comunidades exclusivas.",
 ] as const;
 
-const PROFILE_OPTIONS = [
-  "Usuário",
-  "Provedor de Saúde",
-  "Representante comercial",
-] as const;
-
-const HEADER_NAV_ITEMS: readonly {
-  anchorId: SectionAnchorId;
-  label: string;
-}[] = [
-  { anchorId: SECTION_ANCHORS.HERO, label: "Home" },
-  { anchorId: SECTION_ANCHORS.SOBRE, label: "Sobre" },
-  { anchorId: SECTION_ANCHORS.VERSAO_BETA, label: "Versão Beta" },
-  { anchorId: SECTION_ANCHORS.JUNTE_SE, label: "Junte-se a nós" },
-];
-
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeSection4Index, setActiveSection4Index] = useState(0);
-  const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [newsletterFirstName, setNewsletterFirstName] = useState("");
-  const [newsletterLastName, setNewsletterLastName] = useState("");
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterMessage, setNewsletterMessage] = useState("");
-  const [newsletterSubmitState, setNewsletterSubmitState] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [newsletterFeedback, setNewsletterFeedback] = useState<string | null>(
-    null,
-  );
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
   );
@@ -264,54 +197,9 @@ export const Home = (): JSX.Element => {
     [appAutoplayPlugin.current],
   );
 
-  const [activeHeaderNav, setActiveHeaderNav] =
-    useState<SectionAnchorId>(SECTION_ANCHORS.HERO);
-
-  const handleNewsletterSubmit = async (
-    event: FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
-    event.preventDefault();
-    setNewsletterFeedback(null);
-    setNewsletterSubmitState("idle");
-
-    const email = newsletterEmail.trim();
-    if (!isValidEmail(email)) {
-      setNewsletterFeedback("Informe um e-mail válido.");
-      return;
-    }
-    if (!selectedProfile) {
-      setNewsletterFeedback("Selecione seu perfil.");
-      return;
-    }
-
-    setNewsletterSubmitState("loading");
-    try {
-      await submitNewsletterLead({
-        firstName: newsletterFirstName.trim(),
-        lastName: newsletterLastName.trim(),
-        email,
-        profile: selectedProfile,
-        message: newsletterMessage.trim(),
-      });
-      setNewsletterSubmitState("success");
-      setNewsletterFeedback("Cadastro enviado. Obrigado!");
-      setNewsletterFirstName("");
-      setNewsletterLastName("");
-      setNewsletterEmail("");
-      setNewsletterMessage("");
-      setSelectedProfile(null);
-    } catch (error) {
-      console.error("Falha ao enviar cadastro da newsletter", {
-        operation: "submitNewsletterLead",
-        email,
-        error,
-      });
-      setNewsletterSubmitState("error");
-      setNewsletterFeedback(
-        "Não foi possível enviar agora. Tente novamente em instantes.",
-      );
-    }
-  };
+  const [activeHeaderNav, setActiveHeaderNav] = useState<SectionAnchorId>(
+    SECTION_ANCHORS.HERO,
+  );
 
   const scrollToSection = (anchorId: SectionAnchorId): void => {
     setActiveHeaderNav(anchorId);
@@ -376,42 +264,11 @@ export const Home = (): JSX.Element => {
   return (
     <main className={styles.landingDesktop}>
       <section className={styles.heroSection} id={SECTION_ANCHORS.HERO}>
-        <div className={styles.heroSectionTop}>
-          <picture>
-            <source media="(max-width: 900px)" srcSet={ASSETS.heroMobileBg} />
-            <img className={styles.heroSectionBg} src={ASSETS.heroBg} alt="" />
-          </picture>
-
-          <div className={styles.heroSectionLogoWrap}>
-            <picture>
-              <source
-                media="(max-width: 900px)"
-                srcSet={ASSETS.heroMobileLogo}
-              />
-              <img
-                className={styles.heroSectionLogo}
-                src={ASSETS.logo}
-                alt="Like:me"
-              />
-            </picture>
-          </div>
-
-          <nav className={styles.heroSectionMenu} aria-label="Seções da página">
-            {HEADER_NAV_ITEMS.map((item) => (
-              <a
-                key={item.anchorId}
-                className={`${styles.chip} ${activeHeaderNav === item.anchorId ? styles.chipActive : ""}`}
-                href={`#${item.anchorId}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToSection(item.anchorId);
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
+        <LandingHeader
+          variant="home"
+          activeHeaderNav={activeHeaderNav}
+          onNavigateSection={scrollToSection}
+        />
 
         <div className={styles.heroSectionContent}>
           <div className={styles.heroSectionCopy}>
@@ -595,169 +452,7 @@ export const Home = (): JSX.Element => {
         </button>
       </section>
 
-      <div className={styles.footerArea}>
-        <section className={styles.newsletter} id={SECTION_ANCHORS.JUNTE_SE}>
-          <h3>
-            Receba novidades, acesso antecipado
-            <br />e conteúdos exclusivos sobre bem-estar.
-          </h3>
-          <form
-            onSubmit={(event) => {
-              void handleNewsletterSubmit(event);
-            }}
-            noValidate
-            aria-busy={newsletterSubmitState === "loading"}
-          >
-            <input
-              name="firstName"
-              autoComplete="given-name"
-              placeholder="PRIMEIRO NOME"
-              value={newsletterFirstName}
-              onChange={(event) => {
-                setNewsletterFirstName(event.target.value);
-              }}
-            />
-            <input
-              name="lastName"
-              autoComplete="family-name"
-              placeholder="SOBRENOME"
-              value={newsletterLastName}
-              onChange={(event) => {
-                setNewsletterLastName(event.target.value);
-              }}
-            />
-            <div className={styles.newsletterSelect}>
-              <button
-                className={`${styles.newsletterSelectButton} ${
-                  isProfileMenuOpen ? styles.newsletterSelectButtonOpen : ""
-                } ${
-                  selectedProfile ? styles.newsletterSelectButtonHasValue : ""
-                }`}
-                type="button"
-                onClick={() => {
-                  setIsProfileMenuOpen((previousValue) => !previousValue);
-                }}
-                aria-haspopup="listbox"
-                aria-expanded={isProfileMenuOpen}
-              >
-                <span className={styles.newsletterSelectLabel}>
-                  {selectedProfile ?? "SELECIONE SEU PERFIL"}
-                </span>
-                <span className={styles.newsletterSelectIcon} aria-hidden>
-                  <svg
-                    viewBox="0 0 12 8"
-                    width="12"
-                    height="8"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 1.5L6 6.5L11 1.5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </button>
-
-              {isProfileMenuOpen ? (
-                <div className={styles.newsletterSelectOptions} role="listbox">
-                  {PROFILE_OPTIONS.map((option) => (
-                    <button
-                      className={styles.newsletterSelectOption}
-                      key={option}
-                      type="button"
-                      onClick={() => {
-                        setSelectedProfile(option);
-                        setIsProfileMenuOpen(false);
-                      }}
-                      role="option"
-                      aria-selected={selectedProfile === option}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-            <input
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="E-MAIL *"
-              value={newsletterEmail}
-              onChange={(event) => {
-                setNewsletterEmail(event.target.value);
-              }}
-              required
-            />
-            <textarea
-              name="message"
-              rows={3}
-              placeholder="SUA MENSAGEM"
-              value={newsletterMessage}
-              onChange={(event) => {
-                setNewsletterMessage(event.target.value);
-              }}
-            />
-            <button
-              className={styles.newsletterSubmitButton}
-              type="submit"
-              disabled={newsletterSubmitState === "loading"}
-            >
-              {newsletterSubmitState === "loading" ? "Enviando…" : "Cadastre-se"}
-            </button>
-            {newsletterFeedback ? (
-              <p
-                className={`${styles.newsletterFormFeedback} ${
-                  newsletterSubmitState === "success"
-                    ? styles.newsletterFormFeedbackSuccess
-                    : styles.newsletterFormFeedbackError
-                }`}
-                role="status"
-                aria-live="polite"
-              >
-                {newsletterFeedback}
-              </p>
-            ) : null}
-          </form>
-        </section>
-
-        <footer className={styles.footer}>
-          <div>
-            <img src={ASSETS.footerLogo} alt="Like:me" />
-            <strong>Faça parte do Like:me</strong>
-            <p>
-              Assine a nossa newsletter e receba dicas, insights e inspirações
-              de autocuidado. Curadoria humana, com conteúdo que faz sentido pra
-              a sua jornada de bem-estar.
-            </p>
-          </div>
-          <div>
-            <strong>Contato</strong>
-            <p>like.me@global.com</p>
-          </div>
-          <div>
-            <strong>Links rápidos</strong>
-            <p>
-              <Link to={ROUTES.PRIVACY}>Política de privacidade</Link>
-              <br />
-              <Link to={ROUTES.TERMS}>Termos e condições</Link>
-            </p>
-          </div>
-          <div>
-            <strong>Siga nossas redes</strong>
-            <p>
-              <img src={ASSETS.footerSocialX} alt="X" />
-              <img src={ASSETS.footerSocialInstagram} alt="Instagram" />
-              <img src={ASSETS.footerSocialLinkedin} alt="LinkedIn" />
-              <img src={ASSETS.footerSocialTiktok} alt="TikTok" />
-            </p>
-          </div>
-        </footer>
-      </div>
+      <LandingFooter showNewsletter />
     </main>
   );
 };

@@ -3,6 +3,7 @@ import { injectGlobal } from "@emotion/css";
 export const styles = {
   landingDesktop: "landing-desktop",
   heroSection: "hero-section",
+  heroSectionLegal: "hero-section--legal",
   heroSectionTop: "hero-section__top",
   heroSectionBg: "hero-section__bg",
   heroSectionLogoWrap: "hero-section__logo-wrap",
@@ -94,6 +95,16 @@ injectGlobal(`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.hero-section--legal .hero-section__top {
+  height: 320px;
+}
+
+@media (max-width: 1240px) {
+  .hero-section--legal .hero-section__top {
+    height: 200px;
+  }
 }
 
 .chip {
@@ -395,7 +406,7 @@ injectGlobal(`
   height: 6px;
   border-radius: 2px;
   background-color: transparent;
-  background-image: url("/static/img/movement-dot-inactive.svg");
+  background-image: url("/img/movement-dot-inactive.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: none;
@@ -405,7 +416,7 @@ injectGlobal(`
 
 .movement__pagination-dot--active {
   background-color: transparent;
-  background-image: url("/static/img/movement-dot-active.svg");
+  background-image: url("/img/movement-dot-active.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: none;
@@ -649,7 +660,7 @@ injectGlobal(`
   height: 8px;
   border-radius: 2px;
   background-color: transparent;
-  background-image: url("/static/img/movement-dot-inactive.svg");
+  background-image: url("/img/movement-dot-inactive.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: none;
@@ -659,7 +670,7 @@ injectGlobal(`
 
 .avatar__pagination-dot--active {
   background-color: transparent;
-  background-image: url("/static/img/movement-dot-active.svg");
+  background-image: url("/img/movement-dot-active.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: none;
@@ -1764,7 +1775,7 @@ injectGlobal(`
     height: 6px;
     border-radius: 2px;
     background-color: transparent;
-    background-image: url("/static/img/movement-dot-inactive.svg");
+    background-image: url("/img/movement-dot-inactive.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     box-shadow: none;
@@ -1773,7 +1784,7 @@ injectGlobal(`
 
   .movement__pagination-dot--active {
     background-color: transparent;
-    background-image: url("/static/img/movement-dot-active.svg");
+    background-image: url("/img/movement-dot-active.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

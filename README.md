@@ -61,6 +61,14 @@ Para build de produção:
 npm run build
 ```
 
+## Imagens em produção (`static/` → `/img/`)
+
+O Vite usa `publicDir: "./static"`: arquivos em `static/img/` viram **`/img/nome-do-arquivo`** no deploy (não existe **`/static/img/`** no `dist`).
+
+- Evite URLs **`/static/img/...`**; use **`publicImg("arquivo.png")`** ou **`/img/...`**.
+- Os PNGs grandes **Simplify** e **slide do App** ficam no repositório em `static/img/` e são referenciados com `publicImg(...)`.
+- URLs **`figma.com/api/mcp/asset/...`** seguem o layout do Figma; se alguma falhar no ar, exporte do Figma para `static/img/` e troque a URL no código.
+
 ## Formulário “Cadastre-se” (newsletter)
 
 O envio usa [FormSubmit](https://formsubmit.co/) (POST AJAX, sem backend no projeto). O destino padrão é `like.me@global.com` (veja `src/constants/newsletter.ts`).

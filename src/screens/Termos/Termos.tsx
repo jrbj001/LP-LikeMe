@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { LandingFooter } from "../../components/layout/LandingFooter";
+import { LandingHeader } from "../../components/layout/LandingHeader";
+import { styles } from "../Home/styles";
 import "./style.css";
 
 const SECTIONS = [
@@ -32,18 +34,13 @@ export const Termos = (): JSX.Element => {
   };
 
   return (
-    <div className="termos-page">
-      {/* Menu */}
-      <nav className="termos-menu">
-        <Link to="/" className="termos-menu-link termos-menu-link--active">
-          Home
-        </Link>
-        <span className="termos-menu-link">Recursos</span>
-        <span className="termos-menu-link">Vídeo</span>
-        <span className="termos-menu-link">Junte-se a nós</span>
-      </nav>
+    <main className={styles.landingDesktop}>
+      <section className={`${styles.heroSection} ${styles.heroSectionLegal}`}>
+        <LandingHeader variant="legal" />
+      </section>
 
-      <div className="termos-content">
+      <div className="termos-page termos-page--with-landing">
+        <div className="termos-content">
         {/* Hero */}
         <section className="termos-hero">
           <div className="termos-hero-bg" aria-hidden />
@@ -274,48 +271,10 @@ export const Termos = (): JSX.Element => {
             </div>
           ))}
         </section>
-
-        {/* Footer / CTA */}
-        <footer className="termos-footer">
-          <div className="termos-footer-bg" aria-hidden />
-          <h2 className="termos-footer-title">Inscreva-se para saber mais!</h2>
-          <div className="termos-footer-grid">
-            <div className="termos-footer-contact">
-              <p className="termos-footer-label">CONTATO</p>
-              <a href="mailto:like.me@global.com" className="termos-footer-link">like.me@global.com</a>
-            </div>
-            <div className="termos-footer-status">
-              <p className="termos-footer-label">STATUS</p>
-              <p>Provedor de saúde</p>
-              <p>Usuário</p>
-              <p>Representante comercial</p>
-            </div>
-            <div className="termos-footer-form">
-              <input type="text" placeholder="PRIMEIRO NOME" className="termos-footer-input" />
-              <input type="text" placeholder="SOBRENOME" className="termos-footer-input" />
-              <input type="email" placeholder="E-MAIL *" className="termos-footer-input" />
-              <textarea placeholder="SUA MENSAGEM" className="termos-footer-input termos-footer-textarea" rows={3} />
-            </div>
-          </div>
-          <div className="termos-footer-bottom">
-            <div className="termos-footer-logo">
-              <Link to="/">
-                <img src="/img/like-me-26.svg" alt="Like:Me" />
-              </Link>
-            </div>
-            <div className="termos-footer-newsletter">
-              <p className="termos-footer-newsletter-title">Faça parte do Like:me</p>
-              <p className="termos-footer-newsletter-desc">Assine a nossa newsletter e receba dicas, insights e inspirações de autocuidado.</p>
-              <button type="button" className="termos-footer-btn">Assine</button>
-            </div>
-            <div className="termos-footer-links">
-              <p className="termos-footer-links-title">Links rápidos</p>
-              <Link to="/terms">Termos e condições</Link>
-              <Link to="/privacy">Política de privacidade</Link>
-            </div>
-          </div>
-        </footer>
+        </div>
       </div>
-    </div>
+
+      <LandingFooter />
+    </main>
   );
 };
