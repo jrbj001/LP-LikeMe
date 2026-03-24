@@ -1,4 +1,5 @@
 import { injectGlobal } from "@emotion/css";
+import { LEGAL_HERO_SURFACE } from "../../constants/landingColors";
 
 export const styles = {
   landingDesktop: "landing-desktop",
@@ -6,6 +7,7 @@ export const styles = {
   heroSectionLegal: "hero-section--legal",
   heroSectionTop: "hero-section__top",
   heroSectionBg: "hero-section__bg",
+  heroSectionBgLegal: "hero-section__bg--legal",
   heroSectionLogoWrap: "hero-section__logo-wrap",
   heroSectionLogo: "hero-section__logo",
   heroSectionMenu: "hero-section__menu",
@@ -86,6 +88,7 @@ injectGlobal(`
   color: #001137;
   font-family: "DM Sans", Helvetica, Arial, sans-serif;
   position: relative;
+  --legal-hero-surface: ${LEGAL_HERO_SURFACE};
 }
 
 .hero-section {
@@ -97,14 +100,12 @@ injectGlobal(`
   box-sizing: border-box;
 }
 
-.hero-section--legal .hero-section__top {
-  height: 320px;
+.hero-section--legal {
+  background-color: ${LEGAL_HERO_SURFACE};
 }
 
-@media (max-width: 1240px) {
-  .hero-section--legal .hero-section__top {
-    height: 200px;
-  }
+.hero-section--legal .hero-section__top {
+  background-color: ${LEGAL_HERO_SURFACE};
 }
 
 .chip {
@@ -161,6 +162,18 @@ injectGlobal(`
   transform-origin: center;
   object-fit: cover;
   opacity: 1;
+}
+
+.hero-section__bg--legal {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  transform-origin: initial;
+  object-fit: cover;
+  object-position: center;
+  background-color: ${LEGAL_HERO_SURFACE};
 }
 
 .hero-section__logo-wrap {
@@ -1220,6 +1233,16 @@ injectGlobal(`
     transform: translate(-50%, -50%) rotate(90deg);
     object-fit: cover;
     max-width: none;
+  }
+
+  .hero-section__bg--legal {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    max-width: none;
+    background-color: ${LEGAL_HERO_SURFACE};
   }
 
   .hero-section__logo-wrap {

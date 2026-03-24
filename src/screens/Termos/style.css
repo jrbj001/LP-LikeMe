@@ -57,7 +57,6 @@
   align-items: center;
 }
 
-/* Hero */
 .termos-hero {
   position: relative;
   width: 100%;
@@ -67,12 +66,18 @@
   align-items: center;
   gap: 24px;
   overflow: hidden;
+  background-color: var(--legal-hero-surface, #fdfbee);
 }
 
 .termos-hero-bg {
   position: absolute;
   inset: -80px -20% 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(246, 207, 251, 0.4) 0%, rgba(235, 125, 198, 0.1) 50%, transparent 70%);
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    rgba(246, 207, 251, 0.4) 0%,
+    rgba(235, 125, 198, 0.1) 50%,
+    var(--legal-hero-surface, #fdfbee) 70%
+  );
   pointer-events: none;
 }
 

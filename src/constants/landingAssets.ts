@@ -1,5 +1,8 @@
+import { publicImg } from "../utils/publicImg";
+
 export const LANDING_HEADER_ASSETS = {
   logo: "https://www.figma.com/api/mcp/asset/09537643-5401-4d23-b0dd-2c3dfcaff836",
+  legalHeroBg: publicImg("hero-terms-privacy.png"),
   heroBg:
     "https://www.figma.com/api/mcp/asset/3044ae66-bdd2-47fe-aa38-4505ec72e07c",
   heroMobileBg:

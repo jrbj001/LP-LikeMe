@@ -17,19 +17,29 @@ export type LandingHeaderProps =
   | { variant: "legal" };
 
 export function LandingHeader(props: LandingHeaderProps): JSX.Element {
+  const isLegal = props.variant === "legal";
+
   return (
     <div className={styles.heroSectionTop}>
-      <picture>
-        <source
-          media="(max-width: 900px)"
-          srcSet={LANDING_HEADER_ASSETS.heroMobileBg}
-        />
+      {isLegal ? (
         <img
-          className={styles.heroSectionBg}
-          src={LANDING_HEADER_ASSETS.heroBg}
+          className={`${styles.heroSectionBg} ${styles.heroSectionBgLegal}`}
+          src={LANDING_HEADER_ASSETS.legalHeroBg}
           alt=""
         />
-      </picture>
+      ) : (
+        <picture>
+          <source
+            media="(max-width: 900px)"
+            srcSet={LANDING_HEADER_ASSETS.heroMobileBg}
+          />
+          <img
+            className={styles.heroSectionBg}
+            src={LANDING_HEADER_ASSETS.heroBg}
+            alt=""
+          />
+        </picture>
+      )}
 
       <div className={styles.heroSectionLogoWrap}>
         {props.variant === "legal" ? (
