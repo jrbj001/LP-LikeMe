@@ -165,7 +165,7 @@ const SECTION4_CARDS: Section4Card[] = [
     description:
       "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
     image:
-      "https://www.figma.com/api/mcp/asset/a2dbb6d6-642b-4897-abae-5bf07f9c8549",
+      "https://www.figma.com/api/mcp/asset/e4d776c0-6370-4d95-b7cf-b1742a076a9e",
     logo: "https://www.figma.com/api/mcp/asset/f1cd772d-2a44-4ab6-8f17-89e3bb5a79a6",
     imageClassName: styles.avatarSlideImageAvatar,
   },

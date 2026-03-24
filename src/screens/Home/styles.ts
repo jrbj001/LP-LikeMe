@@ -399,6 +399,7 @@ injectGlobal(`
 
 .simplify__header {
   position: relative;
+  z-index: 2;
   width: min(100%, 58.625rem);
   padding: 0.4375rem 0rem 0rem;
   display: flex;
@@ -457,17 +458,24 @@ injectGlobal(`
 
 .simplify__art {
   position: relative;
+  z-index: 1;
   width: min(100%, 75rem);
-  height: 27.875rem;
+  height: min(27.875rem, 58vh);
+  min-height: 0;
+  max-height: min(27.875rem, 58vh);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .simplify__art-image {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: center;
 }
 
 @media (max-width: 1240px) {
@@ -502,7 +510,14 @@ injectGlobal(`
   .simplify__art {
     width: min(100%, 68rem);
     aspect-ratio: 1200 / 446;
+    max-height: min(50vh, 28rem);
     height: auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .simplify__art-image {
+    max-height: min(50vh, 28rem);
   }
 }
 
@@ -537,13 +552,13 @@ injectGlobal(`
   width: 100%;
   height: 600px;
   max-height: 600px;
-  padding: 10.5rem 7.25rem;
+  padding: 6rem 5rem 5.5rem;
   overflow: visible;
 }
 
 .avatar__card h3 {
   margin: 0;
-  max-width: 555px;
+  max-width: 480px;
   font-family: "Bricolage Grotesque", Helvetica, Arial, sans-serif;
   font-size: 68px;
   font-weight: 700;
@@ -552,10 +567,11 @@ injectGlobal(`
 }
 
 .avatar__card p {
-  margin: 2.5rem 0 0;
-  max-width: 555px;
+  margin: 1.5rem 0 0;
+  max-width: 480px;
   font-size: 24px;
   line-height: 1.2;
+  white-space: pre-line;
 }
 
 .avatar__phone {
@@ -574,20 +590,27 @@ injectGlobal(`
 }
 
 .avatar__phone--community {
-  width: 372.179px;
-  height: 459.195px;
-  right: 109px;
-  top: 154px;
+  position: absolute;
+  width: 764px;
+  height: 880px;
+  right: 28px;
+  top: -140px;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
 }
 
 .avatar__phone--shop {
-  width: 355px;
-  height: 438px;
-  right: 120px;
-  top: 172px;
+  position: absolute;
+  width: min(764px, 46vw);
+  height: auto;
+  aspect-ratio: 764 / 880;
+  max-height: min(880px, 85vh);
+  right: 24px;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
   object-fit: cover;
+  object-position: center;
 }
 
 .avatar__pagination {
@@ -1062,15 +1085,24 @@ injectGlobal(`
 
   .simplify__art {
     width: calc(100% - 3rem);
-    height: 278.506px;
+    height: min(278.506px, 48vh);
+    max-height: min(278.506px, 48vh);
+    min-height: 0;
     margin: 0rem 1.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: auto;
   }
 
   .simplify__art-image {
-    width: 104%;
-    height: auto;
-    max-width: none;
-    transform: translateX(-2%);
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .hero-section {
@@ -1381,8 +1413,8 @@ injectGlobal(`
   }
 
   .avatar__phone--community {
-    width: 372.179px;
-    height: 459.195px;
+    width: 402px;
+    height: 496px;
     left: 50%;
     right: auto;
     top: auto;
@@ -1391,8 +1423,8 @@ injectGlobal(`
   }
 
   .avatar__phone--shop {
-    width: 355px;
-    height: 438px;
+    width: 384px;
+    height: 474px;
     left: 50%;
     right: auto;
     top: auto;
