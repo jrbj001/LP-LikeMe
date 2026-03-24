@@ -547,6 +547,7 @@ injectGlobal(`
 }
 
 .avatar__card {
+  position: relative;
   background: #fdfbee;
   border-radius: 42.119px;
   width: 100%;
@@ -576,7 +577,7 @@ injectGlobal(`
 
 .avatar__phone {
   position: absolute;
-  right: 175px;
+  right: calc(175px + 5rem);
   top: -57px;
   width: 350px;
   height: 720px;
@@ -593,7 +594,7 @@ injectGlobal(`
   position: absolute;
   width: 764px;
   height: 880px;
-  right: 28px;
+  right: calc(28px + 5rem);
   top: -140px;
   object-fit: cover;
   object-position: top;
@@ -605,7 +606,7 @@ injectGlobal(`
   height: auto;
   aspect-ratio: 764 / 880;
   max-height: min(880px, 85vh);
-  right: 24px;
+  right: calc(24px + 5rem);
   left: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -1361,6 +1362,8 @@ injectGlobal(`
 
   .avatar__carousel {
     overflow: hidden;
+    padding-bottom: clamp(12px, 3.5vw, 20px);
+    box-sizing: border-box;
   }
 
   .avatar__carousel-track {
@@ -1370,70 +1373,89 @@ injectGlobal(`
   .avatar__slide {
     width: 100%;
     min-width: 100%;
-    padding: 24px 32px 24px 32px;
+    padding: 0 clamp(16px, 5vw, 32px);
+    padding-bottom: clamp(20px, 5vw, 32px);
+    box-sizing: border-box;
+    display: flow-root;
   }
 
   .avatar__card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(16px, 4vw, 20px);
     width: 100%;
-    height: 500px;
-    max-height: 500px;
-    min-height: 500px;
-    border-radius: 24px;
-    padding: 32px 28px;
+    max-width: 100%;
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 0;
+    margin: 0 0 clamp(20px, 5vw, 28px);
+    padding: clamp(20px, 5vw, 32px) clamp(18px, 4.5vw, 28px)
+      clamp(20px, 5vw, 28px);
+    box-sizing: border-box;
     overflow: hidden;
+    background: #fdfbee;
+    border-radius: 24px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .avatar__card h3 {
-    font-size: 36px;
+    font-size: clamp(28px, 8.2vw, 36px);
     line-height: 1;
     letter-spacing: -0.02em;
     max-width: 100%;
   }
 
   .avatar__card p {
-    margin-top: 16px;
-    font-size: 16px;
-    line-height: 1.25;
+    margin-top: 0;
+    font-size: clamp(14px, 3.9vw, 16px);
+    line-height: 1.35;
     max-width: 100%;
     white-space: pre-wrap;
   }
 
   .avatar__phone {
-    width: 194.401px;
-    height: 400.195px;
-    left: 50%;
+    position: relative;
+    flex: 0 0 auto;
+    align-self: center;
+    width: min(100%, 280px);
+    height: auto;
+    aspect-ratio: 350 / 720;
+    max-height: min(420px, 52vh);
+    margin: 0;
+    border-radius: 0 0 24px 24px;
+    left: auto;
     right: auto;
     top: auto;
-    bottom: -50px;
-    transform: translateX(-50%);
+    bottom: auto;
+    transform: translateZ(0);
+    object-fit: cover;
+    object-position: center;
   }
 
   .avatar__phone--avatar {
-    bottom: -197.74px;
+    object-position: center top;
   }
 
   .avatar__phone--community {
-    width: 402px;
-    height: 496px;
-    left: 50%;
-    right: auto;
-    top: auto;
-    bottom: -170px;
-    transform: translateX(-50%);
+    width: min(100%, 420px);
+    aspect-ratio: 372 / 459;
+    max-height: min(480px, 55vh);
+    object-position: top center;
   }
 
   .avatar__phone--shop {
-    width: 384px;
-    height: 474px;
-    left: 50%;
-    right: auto;
-    top: auto;
-    bottom: -130px;
-    transform: translateX(-50%);
+    width: min(100%, 400px);
+    aspect-ratio: 355 / 438;
+    max-height: min(460px, 52vh);
+    object-position: center;
   }
 
   .avatar__pagination {
-    margin-top: 0;
+    margin-top: clamp(8px, 2.5vw, 16px);
+    padding: 0 clamp(16px, 5vw, 32px);
+    box-sizing: border-box;
   }
 
   .app {

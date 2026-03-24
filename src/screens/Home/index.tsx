@@ -413,12 +413,12 @@ export const Home = (): JSX.Element => {
                 <div className={styles.avatarCard}>
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
+                  <img
+                    className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
+                    src={card.image}
+                    alt={card.title}
+                  />
                 </div>
-                <img
-                  className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
-                  src={card.image}
-                  alt={card.title}
-                />
               </article>
             ))}
           </div>
