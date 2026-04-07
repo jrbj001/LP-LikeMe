@@ -10,8 +10,5 @@ export const LANDING_HEADER_ASSETS = {
 
 export const LANDING_FOOTER_ASSETS = {
   footerLogo: publicImg("figma-footer-logo.svg"),
-  footerSocialX: publicImg("footer-social-x.svg"),
-  footerSocialInstagram: publicImg("figma-social-instagram-1.svg"),
-  footerSocialLinkedin: publicImg("footer-social-linkedin.svg"),
-  footerSocialTiktok: publicImg("footer-social-tiktok.svg"),
+  footerInstagram: publicImg("footer-social-instagram.svg"),
 } as const;

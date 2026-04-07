@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { NewsletterSection } from "../NewsletterSection";
 import { LANDING_FOOTER_ASSETS } from "../../constants/landingAssets";
+import { NEWSLETTER_INBOX_EMAIL } from "../../constants/newsletter";
+import { INSTAGRAM_PROFILE_URL } from "../../constants/socialLinks";
 import { ROUTES } from "../../constants/routes";
 import { styles } from "../../screens/Home/styles";
 
@@ -27,7 +29,11 @@ export function LandingFooter({
         </div>
         <div>
           <strong>Contato</strong>
-          <p>like.me@global.com</p>
+          <p>
+            <a href={`mailto:${NEWSLETTER_INBOX_EMAIL}`}>
+              {NEWSLETTER_INBOX_EMAIL}
+            </a>
+          </p>
         </div>
         <div>
           <strong>Links rápidos</strong>
@@ -38,18 +44,21 @@ export function LandingFooter({
           </p>
         </div>
         <div>
-          <strong>Siga nossas redes</strong>
+          <strong>Siga no Instagram</strong>
           <p>
-            <img src={LANDING_FOOTER_ASSETS.footerSocialX} alt="X" />
-            <img
-              src={LANDING_FOOTER_ASSETS.footerSocialInstagram}
-              alt="Instagram"
-            />
-            <img
-              src={LANDING_FOOTER_ASSETS.footerSocialLinkedin}
-              alt="LinkedIn"
-            />
-            <img src={LANDING_FOOTER_ASSETS.footerSocialTiktok} alt="TikTok" />
+            <a
+              href={INSTAGRAM_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Like:me no Instagram"
+            >
+              <img
+                src={LANDING_FOOTER_ASSETS.footerInstagram}
+                alt=""
+                width={17}
+                height={17}
+              />
+            </a>
           </p>
         </div>
       </footer>

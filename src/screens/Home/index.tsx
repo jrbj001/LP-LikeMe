@@ -15,7 +15,7 @@ const ASSETS = {
   heroMobilePhone: publicImg("figma-hero-phone-mockup.png"),
   heroPhone: publicImg("figma-hero-phone-mockup.png"),
   simplifyArtHighRes: publicImg("section3-simplify-art.png"),
-  appLastSlide: publicImg("figma-app-phone-layer.png"),
+  appLastSlide: publicImg("group-10321-app-last-slide.svg"),
   chevronRight: publicImg("figma-chevron-right.svg"),
 };
 
@@ -39,77 +39,71 @@ const MOVEMENT_CARDS: MovementCard[] = [
     title: "Like: o seu Movimento",
     description:
       "Seu corpo, seu ritmo. Profissionais e conteúdos que entendem onde você está e te ajudam a ir mais longe.",
-    image: publicImg("figma-movement-photo-01.png"),
-    marker: publicImg("figma-movement-marker-01.svg"),
+    image: publicImg("movement-like-seu-movimento.png"),
+    marker: publicImg("likeme-movement-slide-01.svg"),
   },
   {
     title: "Like: o seu Sono",
     description:
       "Sono reparador não é luxo, é fundamental. Especialistas, protocolos e produtos selecionados para você dormir melhor.",
-    image: publicImg("mask-group.png"),
-    marker: publicImg("like-me-10.svg"),
+    image: publicImg("movement-like-seu-sono.png"),
+    marker: publicImg("likeme-sleep-marker.svg"),
   },
   {
     title: "Like: a sua Nutrição",
     description:
       "Comer bem não precisa ser difícil. Profissionais, comunidade e protocolos que ajudam a traduzir dados em escolhas reais para o seu dia a dia.",
-    image: publicImg("mask-group-3.png"),
-    marker: publicImg("like-me-11.svg"),
+    image: publicImg("movement-like-sua-nutricao.png"),
+    marker: publicImg("likeme-nutrition-marker.svg"),
   },
   {
     title: "Like: os seus Relacionamentos",
     description:
       "Porque conexões reais fazem bem para a saúde, física e mental.",
-    image: publicImg(
-      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png",
-    ),
-    marker: publicImg("like-me-13.svg"),
+    image: publicImg("movement-like-seus-relacionamentos.png"),
+    marker: publicImg("likeme-relationships-marker.svg"),
   },
   {
     title: "Like: o seu Estresse",
     description:
       "Sua saúde emocional é tão importante quanto a física. Descubra conteúdos, produtos e especialistas que te ajudam a viver com mais equilíbrio.",
-    image: publicImg(
-      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d.png",
-    ),
-    marker: publicImg("like-me-14.svg"),
+    image: publicImg("movement-like-seu-estresse.png"),
+    marker: publicImg("likeme-stress-marker.svg"),
   },
   {
     title: "Like: a sua Autoestima",
     description:
       "Hábitos e atitudes que te ajudam a gostar cada vez mais de você.",
-    image: publicImg("mask-group-1.png"),
-    marker: publicImg("like-me-15.svg"),
+    image: publicImg("movement-like-sua-autoestima.png"),
+    marker: publicImg("likeme-self-esteem-marker.svg"),
   },
   {
     title: "Like: a sua Espiritualidade",
     description:
       "Pequenos gestos para além do corpo e mente, que te ajudam a se sentir cada vez melhor.",
-    image: publicImg(
-      "woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png",
-    ),
-    marker: publicImg("like-me-16.svg"),
+    image: publicImg("movement-like-sua-espiritualidade.png"),
+    marker: publicImg("likeme-spirituality-marker.svg"),
   },
   {
     title: "Like: o seu Propósito",
     description:
       "O que te move, importa. Conteúdos e comunidades para você viver com mais sentido e menos ruído.",
-    image: publicImg("likeme-mockup-cel-app-11-1.png"),
-    marker: publicImg("like-me-17.svg"),
+    image: publicImg("movement-like-seu-proposito.png"),
+    marker: publicImg("likeme-purpose-marker.svg"),
   },
   {
     title: "Like: o seu Ambiente",
     description:
       "O espaço onde você vive afeta como você se sente. Pequenas mudanças no ambiente podem fazer uma grande diferença no seu bem-estar.",
-    image: publicImg("mask-group-2.png"),
-    marker: publicImg("like-me-18.svg"),
+    image: publicImg("movement-like-seu-ambiente.png"),
+    marker: publicImg("likeme-environment-marker.svg"),
   },
   {
     title: "Like: a sua Saúde bucal",
     description:
       "Saúde bucal é saúde integral. Profissionais e conteúdos para cuidar do seu sorriso sem medo.",
-    image: publicImg("rectangle-34624226.png"),
-    marker: publicImg("like-me-19.svg"),
+    image: publicImg("movement-like-sua-saude-bucal.png"),
+    marker: publicImg("likeme-oral-health-marker.svg"),
   },
 ];
 
@@ -118,7 +112,7 @@ const SECTION4_CARDS: Section4Card[] = [
     title: "Seu Avatar de bem-estar",
     description:
       "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
-    image: publicImg("figma-section4-avatar-screen.png"),
+    image: publicImg("section4-bem-estar-screen.png"),
     logo: publicImg("figma-section4-logo-container.svg"),
     imageClassName: styles.avatarSlideImageAvatar,
   },
@@ -126,7 +120,7 @@ const SECTION4_CARDS: Section4Card[] = [
     title: "Comunidades",
     description:
       "Conecte-se com pessoas reais e descubra marcas, profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
-    image: publicImg("group-10229.png"),
+    image: publicImg("section4-comunidades-screen.png"),
     logo: publicImg("like-me-11.svg"),
     imageClassName: styles.avatarSlideImageCommunity,
   },
@@ -134,7 +128,7 @@ const SECTION4_CARDS: Section4Card[] = [
     title: "Shop",
     description:
       "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
-    image: publicImg("section5-app-last-slide.png"),
+    image: publicImg("section4-shop-screen.png"),
     logo: publicImg("group-361.png"),
     imageClassName: styles.avatarSlideImageShop,
   },

@@ -640,10 +640,11 @@ injectGlobal(`
   position: absolute;
   width: 764px;
   height: 880px;
-  right: calc(28px + 5rem);
+  right: clamp(-220px, -12vw, -40px);
+  left: auto;
   top: -140px;
   object-fit: cover;
-  object-position: top;
+  object-position: 100% 0%;
 }
 
 .avatar__phone--shop {
@@ -1151,6 +1152,17 @@ injectGlobal(`
   height: 16.407px;
 }
 
+.footer > div:last-child a {
+  display: inline-flex;
+  color: inherit;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.footer > div:last-child a:hover {
+  opacity: 0.82;
+}
+
 @media (max-width: 1240px) {
   .simplify {
     display: flex;
@@ -1552,13 +1564,16 @@ injectGlobal(`
   }
 
   .avatar__phone--community {
+    align-self: flex-end;
     width: min(100%, 400px);
+    margin-right: clamp(-20px, -4vw, -8px);
+    margin-left: auto;
     aspect-ratio: 355 / 438;
     max-height: min(460px, 52vh);
     object-fit: cover;
-    object-position: 0% 0%;
+    object-position: 100% 0%;
     transform: scale(2.1);
-    transform-origin: 50% 22%;
+    transform-origin: top right;
   }
 
   .avatar__phone--shop {
