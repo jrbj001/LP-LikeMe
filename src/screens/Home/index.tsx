@@ -12,14 +12,11 @@ import { publicImg } from "../../utils/publicImg";
 import { styles } from "./styles";
 
 const ASSETS = {
-  heroMobilePhone:
-    "https://www.figma.com/api/mcp/asset/7bf32a0a-ac01-4885-9956-462f9c72ad60",
-  heroPhone:
-    "https://www.figma.com/api/mcp/asset/af1e6c92-72c8-49f2-b8c2-05a6064123f0",
+  heroMobilePhone: publicImg("figma-hero-phone-mockup.png"),
+  heroPhone: publicImg("figma-hero-phone-mockup.png"),
   simplifyArtHighRes: publicImg("section3-simplify-art.png"),
-  appLastSlide: publicImg("section5-app-last-slide.png"),
-  chevronRight:
-    "https://www.figma.com/api/mcp/asset/2949c660-804b-4f60-adb5-fad7ff1dd893",
+  appLastSlide: publicImg("figma-app-phone-layer.png"),
+  chevronRight: publicImg("figma-chevron-right.svg"),
 };
 
 type MovementCard = {
@@ -42,91 +39,77 @@ const MOVEMENT_CARDS: MovementCard[] = [
     title: "Like: o seu Movimento",
     description:
       "Seu corpo, seu ritmo. Profissionais e conteúdos que entendem onde você está e te ajudam a ir mais longe.",
-    image:
-      "https://www.figma.com/api/mcp/asset/2b05b508-6618-437e-adea-82a38d41dbfe",
-    marker:
-      "https://www.figma.com/api/mcp/asset/5fd624e0-031f-45d3-93fd-2e42ad62198a",
+    image: publicImg("figma-movement-photo-01.png"),
+    marker: publicImg("figma-movement-marker-01.svg"),
   },
   {
     title: "Like: o seu Sono",
     description:
       "Sono reparador não é luxo, é fundamental. Especialistas, protocolos e produtos selecionados para você dormir melhor.",
-    image:
-      "https://www.figma.com/api/mcp/asset/e0aa996d-d977-4eb1-92f8-d1cf712f097e",
-    marker:
-      "https://www.figma.com/api/mcp/asset/4c84ee31-68e5-4159-89f8-742f48719e8c",
+    image: publicImg("mask-group.png"),
+    marker: publicImg("like-me-10.svg"),
   },
   {
     title: "Like: a sua Nutrição",
     description:
       "Comer bem não precisa ser difícil. Profissionais, comunidade e protocolos que ajudam a traduzir dados em escolhas reais para o seu dia a dia.",
-    image:
-      "https://www.figma.com/api/mcp/asset/ed7ea4b4-f689-4f07-8f58-11d2bf99b060",
-    marker:
-      "https://www.figma.com/api/mcp/asset/a7ea6526-1139-46ee-8cc8-14c477f163a7",
+    image: publicImg("mask-group-3.png"),
+    marker: publicImg("like-me-11.svg"),
   },
   {
     title: "Like: os seus Relacionamentos",
     description:
       "Porque conexões reais fazem bem para a saúde, física e mental.",
-    image:
-      "https://www.figma.com/api/mcp/asset/faccfab3-bb0b-44d0-bea0-ff21dceb1c82",
-    marker:
-      "https://www.figma.com/api/mcp/asset/90d16550-d497-4701-90c5-426334645f18",
+    image: publicImg(
+      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png",
+    ),
+    marker: publicImg("like-me-13.svg"),
   },
   {
     title: "Like: o seu Estresse",
     description:
       "Sua saúde emocional é tão importante quanto a física. Descubra conteúdos, produtos e especialistas que te ajudam a viver com mais equilíbrio.",
-    image:
-      "https://www.figma.com/api/mcp/asset/e36ca3f0-357a-4557-8f95-8cdb3b00fff8",
-    marker:
-      "https://www.figma.com/api/mcp/asset/a1b4343d-c298-477a-96aa-7c8a23a7b009",
+    image: publicImg(
+      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d.png",
+    ),
+    marker: publicImg("like-me-14.svg"),
   },
   {
     title: "Like: a sua Autoestima",
     description:
       "Hábitos e atitudes que te ajudam a gostar cada vez mais de você.",
-    image:
-      "https://www.figma.com/api/mcp/asset/67ffd6c9-dec1-45c2-a35e-2f4f7fcd0657",
-    marker:
-      "https://www.figma.com/api/mcp/asset/eea316c3-4145-44d5-b7ba-3342a8035328",
+    image: publicImg("mask-group-1.png"),
+    marker: publicImg("like-me-15.svg"),
   },
   {
     title: "Like: a sua Espiritualidade",
     description:
       "Pequenos gestos para além do corpo e mente, que te ajudam a se sentir cada vez melhor.",
-    image:
-      "https://www.figma.com/api/mcp/asset/a66fdaae-333f-4ff6-9674-dba4fc85d732",
-    marker:
-      "https://www.figma.com/api/mcp/asset/028d8f0a-4a1a-48ea-9276-a215cabe98ff",
+    image: publicImg(
+      "woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png",
+    ),
+    marker: publicImg("like-me-16.svg"),
   },
   {
     title: "Like: o seu Propósito",
     description:
       "O que te move, importa. Conteúdos e comunidades para você viver com mais sentido e menos ruído.",
-    image:
-      "https://www.figma.com/api/mcp/asset/7b68c0b6-22c2-4af1-a123-8bf495727902",
-    marker:
-      "https://www.figma.com/api/mcp/asset/3e5a80b9-1bdc-4e11-ac63-fbc106054c01",
+    image: publicImg("likeme-mockup-cel-app-11-1.png"),
+    marker: publicImg("like-me-17.svg"),
   },
   {
     title: "Like: o seu Ambiente",
     description:
       "O espaço onde você vive afeta como você se sente. Pequenas mudanças no ambiente podem fazer uma grande diferença no seu bem-estar.",
-    image:
-      "https://www.figma.com/api/mcp/asset/ba84529e-51b7-4e44-8d85-d59d8582d9b8",
-    marker:
-      "https://www.figma.com/api/mcp/asset/7d15164f-bdc3-45e3-8f1e-760d4154bd74",
+    image: publicImg("mask-group-2.png"),
+    marker: publicImg("like-me-18.svg"),
   },
   {
     title: "Like: a sua Saúde bucal",
     description:
       "Saúde bucal é saúde integral. Profissionais e conteúdos para cuidar do seu sorriso sem medo.",
-    image:
-      "https://www.figma.com/api/mcp/asset/b53ea40a-5929-44f1-9fd5-0280c6c0fbef",
-    marker:
-      "https://www.figma.com/api/mcp/asset/6f570639-8094-484a-8f1f-a03ad6e18b0c",
+    image: publicImg("rectangle-34624226.png"),
+    marker: publicImg("like-me-19.svg"),
   },
 ];
 
@@ -135,27 +118,24 @@ const SECTION4_CARDS: Section4Card[] = [
     title: "Seu Avatar de bem-estar",
     description:
       "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
-    image:
-      "https://www.figma.com/api/mcp/asset/e4d776c0-6370-4d95-b7cf-b1742a076a9e",
-    logo: "https://www.figma.com/api/mcp/asset/f1cd772d-2a44-4ab6-8f17-89e3bb5a79a6",
+    image: publicImg("figma-section4-avatar-screen.png"),
+    logo: publicImg("figma-section4-logo-container.svg"),
     imageClassName: styles.avatarSlideImageAvatar,
   },
   {
     title: "Comunidades",
     description:
       "Conecte-se com pessoas reais e descubra marcas, profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
-    image:
-      "https://www.figma.com/api/mcp/asset/9c69728b-9256-4cd5-a9e0-73983a5e2d50",
-    logo: "https://www.figma.com/api/mcp/asset/c91e9ddd-ca9c-478d-a6dc-deb6661e87c1",
+    image: publicImg("group-10229.png"),
+    logo: publicImg("like-me-11.svg"),
     imageClassName: styles.avatarSlideImageCommunity,
   },
   {
     title: "Shop",
     description:
       "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
-    image:
-      "https://www.figma.com/api/mcp/asset/4e68cb39-d433-470b-92d8-1115a7a39209",
-    logo: "https://www.figma.com/api/mcp/asset/079737fa-39a0-4702-819f-1dcf1b364fb5",
+    image: publicImg("section5-app-last-slide.png"),
+    logo: publicImg("group-361.png"),
     imageClassName: styles.avatarSlideImageShop,
   },
 ];

@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 89 79.6904" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="LIKe.Me" d="M43.9763 79.6904C29.3175 79.6904 18.3234 76.5653 10.994 70.315C3.66453 63.7176 0 53.6478 0 40.1056C0 26.2162 3.66453 16.1464 10.994 9.89618C18.3234 3.29872 29.3175 0 43.9763 0C58.9842 0 70.1529 3.29872 77.4824 9.89618C85.1608 16.1464 89 26.2162 89 40.1056C89 66.4955 73.992 79.6904 43.9763 79.6904Z" fill="url(#paint0_radial_0_79)"/>
+<defs>
+<radialGradient id="paint0_radial_0_79" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(44.3824 88.6801) rotate(-90) scale(89.1235 532.66)">
+<stop stop-color="#003191"/>
+<stop offset="0.0865384" stop-color="#003EB8"/>
+<stop offset="0.447115" stop-color="#0154F8"/>
+<stop offset="1" stop-color="#B7CFFF"/>
+</radialGradient>
+</defs>
+</svg>
