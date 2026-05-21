@@ -5,7 +5,7 @@
   "source": "./index.html",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npx vite",
     "build": "vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

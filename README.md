@@ -46,14 +46,23 @@ Para começar, instale as dependências:
 npm install
 ```
 
-Execute o projeto em modo de desenvolvimento:
+Crie o arquivo `.env.local` na raiz (copie de `.env.example` e complete com as variáveis Mailchimp). O `vercel dev` pode acrescentar/atualizar `VERCEL_OIDC_TOKEN` nesse mesmo arquivo — **não apague** esse bloco ao editar as chaves Mailchimp.
+
+Para sincronizar variáveis do painel Vercel sem perder o Mailchimp local, cadastre também as `MAILCHIMP_*` em **Vercel → Settings → Environment Variables** e rode `vercel env pull .env.local`.
+
+Execute o projeto em modo de desenvolvimento (Vite + API serverless, igual à produção):
 
 ```bash
-npm run dev
+vercel dev
 ```
 
-Após alguns segundos, o projeto estará acessível em:
-[http://localhost:5173/](http://localhost:5173/)
+O `vercel dev` usa internamente `npm run dev` (Vite). **Não** coloque `vercel dev` no script `dev` do `package.json` — isso causa loop recursivo.
+
+Requer a [CLI do Vercel](https://vercel.com/docs/cli) instalada (`npm i -g vercel`).
+
+Após alguns segundos, use a URL que o terminal mostrar (geralmente [http://localhost:5173/](http://localhost:5173/) ou [http://localhost:3000/](http://localhost:3000/)). O plugin Vite expõe `/api/newsletter` na mesma porta do frontend durante o `vercel dev`.
+
+Se o formulário falhar com erro genérico, confira no DevTools (aba Network) se `POST /api/newsletter` retorna 404 — nesse caso reinicie com `vercel dev` após `npm install`.
 
 Para build de produção:
 
@@ -69,12 +78,22 @@ O Vite usa `publicDir: "./static"`: arquivos em `static/img/` viram **`/img/nome
 - Os PNGs grandes **Simplify** e **slide do App** ficam no repositório em `static/img/` e são referenciados com `publicImg(...)`.
 - URLs **`figma.com/api/mcp/asset/...`** seguem o layout do Figma; se alguma falhar no ar, exporte do Figma para `static/img/` e troque a URL no código.
 
-## Formulário “Cadastre-se” (newsletter)
+## Formulário “Cadastre-se” (newsletter + Mailchimp)
 
-O envio usa [FormSubmit](https://formsubmit.co/) (POST AJAX, sem backend no projeto). O destino padrão é `suporte@likeme.global` (veja `src/constants/newsletter.ts`).
+O envio chama `POST /api/newsletter` (função serverless em `api/newsletter.ts`), que inscreve o contato na audiência Mailchimp e aplica a tag `landing-page` (régua de boas-vindas da landing).
 
-- **Primeira vez:** o FormSubmit costuma enviar um e-mail de **ativação** para o endereço de destino; é preciso confirmar antes dos cadastros chegarem.
-- **Override:** defina `VITE_NEWSLETTER_TO_EMAIL` no `.env` se quiser outro destinatário em build.
+Variáveis de ambiente (`.env.local` e **Vercel → Settings → Environment Variables**):
+
+| Variável | Descrição |
+|----------|-----------|
+| `MAILCHIMP_API_KEY` | Chave da API (formato `xxxx-us14`) |
+| `MAILCHIMP_SERVER_PREFIX` | Prefixo do datacenter (ex.: `us14`) |
+| `MAILCHIMP_AUDIENCE_ID` | ID da audiência (lista Like:Me) |
+| `MAILCHIMP_WELCOME_CAMPAIGN_ID` | ID da campanha **01.1 Boas-Vindas — Cadastro na Landing Page** (`c8aad8e134`) |
+
+Após o cadastro, a API inscreve o contato na lista e dispara o envio da campanha `01.1` para o e-mail informado (endpoint Mailchimp `campaigns/{id}/actions/test`, que entrega o HTML/desgin da campanha em rascunho).
+
+Mantenha a campanha `01.1` com o conteúdo atualizado no Mailchimp; alterações no editor passam a valer nos próximos cadastros sem mudar código.
 
 ## Storybook
 

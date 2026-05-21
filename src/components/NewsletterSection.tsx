@@ -58,9 +58,11 @@ export function NewsletterSection(): JSX.Element {
         error,
       });
       setSubmitState("error");
-      setFeedback(
-        "Não foi possível enviar agora. Tente novamente em instantes.",
-      );
+      const serverMessage =
+        error instanceof Error && error.message.length > 0
+          ? error.message
+          : "Não foi possível enviar agora. Tente novamente em instantes.";
+      setFeedback(serverMessage);
     }
   };
 
