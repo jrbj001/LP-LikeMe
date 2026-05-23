@@ -1,5 +1,9 @@
 import { handleNewsletterPost } from "../lib/mailchimp/handleNewsletterPost";
 
+export const config = {
+  maxDuration: 30,
+};
+
 function parseRequestBody(body: unknown): unknown {
   if (typeof body === "string") {
     try {

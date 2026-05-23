@@ -1,22 +1,9 @@
 import { addListMember } from "./addListMember";
+import { readMailchimpConfig } from "./readMailchimpConfig";
 import { sendWelcomeCampaign } from "./sendWelcomeCampaign";
-import type { MailchimpConfig, NewsletterApiPayload } from "./types";
+import type { NewsletterApiPayload } from "./types";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function readMailchimpConfig(): MailchimpConfig {
-  const apiKey = process.env.MAILCHIMP_API_KEY?.trim();
-  const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX?.trim();
-  const audienceId = process.env.MAILCHIMP_AUDIENCE_ID?.trim();
-
-  if (!apiKey || !serverPrefix || !audienceId) {
-    throw new Error(
-      "Configuração Mailchimp incompleta (MAILCHIMP_API_KEY, MAILCHIMP_SERVER_PREFIX, MAILCHIMP_AUDIENCE_ID)",
-    );
-  }
-
-  return { apiKey, serverPrefix, audienceId };
-}
 
 function parsePayload(body: unknown): NewsletterApiPayload {
   if (!body || typeof body !== "object") {
@@ -46,7 +33,12 @@ function parsePayload(body: unknown): NewsletterApiPayload {
 
 export type NewsletterHandlerResult = {
   status: number;
-  body: { ok: boolean; message?: string; error?: string };
+  body: {
+    ok: boolean;
+    message?: string;
+    error?: string;
+    welcomeEmailSent?: boolean;
+  };
 };
 
 export async function handleNewsletterPost(
@@ -55,29 +47,35 @@ export async function handleNewsletterPost(
   try {
     const payload = parsePayload(rawBody);
     const config = readMailchimpConfig();
+
     await addListMember(config, payload);
 
     try {
       await sendWelcomeCampaign(config, payload.email);
+      return {
+        status: 200,
+        body: {
+          ok: true,
+          welcomeEmailSent: true,
+          message: "Cadastro realizado com sucesso.",
+        },
+      };
     } catch (welcomeError) {
       console.error("Cadastro na lista OK, mas e-mail de boas-vindas falhou", {
         email: payload.email,
         error: welcomeError,
       });
+
       return {
         status: 200,
         body: {
           ok: true,
+          welcomeEmailSent: false,
           message:
-            "Cadastro realizado. O e-mail de boas-vindas pode demorar alguns minutos ou verifique o spam.",
+            "Cadastro realizado, mas o e-mail de boas-vindas não foi enviado. Verifique a configuração Mailchimp na Vercel ou tente novamente em instantes.",
         },
       };
     }
-
-    return {
-      status: 200,
-      body: { ok: true, message: "Cadastro realizado com sucesso." },
-    };
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Erro ao processar cadastro";

@@ -10,11 +10,12 @@ type NewsletterApiResponse = {
   ok: boolean;
   message?: string;
   error?: string;
+  welcomeEmailSent?: boolean;
 };
 
 export async function submitNewsletterLead(
   payload: NewsletterLeadPayload,
-): Promise<void> {
+): Promise<NewsletterApiResponse> {
   const response = await fetch("/api/newsletter", {
     method: "POST",
     headers: {
@@ -37,4 +38,6 @@ export async function submitNewsletterLead(
       data?.error ?? `Envio do cadastro falhou: HTTP ${response.status}`;
     throw new Error(reason);
   }
+
+  return data;
 }

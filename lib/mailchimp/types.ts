@@ -2,6 +2,7 @@ export type MailchimpConfig = {
   apiKey: string;
   serverPrefix: string;
   audienceId: string;
+  welcomeCampaignId: string;
 };
 
 export type NewsletterApiPayload = {

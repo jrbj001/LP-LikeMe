@@ -14,14 +14,6 @@ function authHeader(apiKey: string): string {
   return `Basic ${token}`;
 }
 
-function readWelcomeCampaignId(): string {
-  const campaignId = process.env.MAILCHIMP_WELCOME_CAMPAIGN_ID?.trim();
-  if (!campaignId) {
-    throw new Error("MAILCHIMP_WELCOME_CAMPAIGN_ID não configurado");
-  }
-  return campaignId;
-}
-
 export async function ensureWelcomeCampaignContent(
   config: MailchimpConfig,
 ): Promise<void> {
@@ -29,8 +21,7 @@ export async function ensureWelcomeCampaignContent(
     return;
   }
 
-  const campaignId = readWelcomeCampaignId();
-  const contentUrl = `${mailchimpBaseUrl(config.serverPrefix)}/campaigns/${campaignId}/content`;
+  const contentUrl = `${mailchimpBaseUrl(config.serverPrefix)}/campaigns/${config.welcomeCampaignId}/content`;
 
   const getResponse = await fetch(contentUrl, {
     headers: { Authorization: authHeader(config.apiKey) },

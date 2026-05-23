@@ -95,6 +95,13 @@ Após o cadastro, a API inscreve o contato na lista e dispara o envio da campanh
 
 Mantenha a campanha `01.1` com o conteúdo atualizado no Mailchimp; alterações no editor passam a valer nos próximos cadastros sem mudar código.
 
+### E-mail não chega após deploy
+
+1. **Branch em produção:** a integração Mailchimp está na branch `mailchimp-integracao`. A `main` ainda não inclui `api/newsletter` — em `likeme.global` o `POST /api/newsletter` pode responder 405/HTML até fazer merge/deploy dessa branch.
+2. **Variáveis na Vercel (Production):** cadastre as quatro `MAILCHIMP_*` em Settings → Environment Variables (não só Development).
+3. **Teste rápido:** após o deploy, `POST https://www.likeme.global/api/newsletter` deve retornar JSON (`ok: true`), não HTML da landing.
+4. **Spam:** confira também a pasta de spam; o envio usa a campanha `01.1` via API Mailchimp.
+
 ## Storybook
 
 After installing, you can view your storybook by running:
