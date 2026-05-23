@@ -28,6 +28,12 @@ function authHeader(apiKey: string): string {
   return `Basic ${token}`;
 }
 
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function mailchimpRequest(
   config: MailchimpConfig,
   path: string,
@@ -53,6 +59,10 @@ async function parseMailchimpError(response: Response): Promise<string> {
   } catch {
     return `HTTP ${response.status}`;
   }
+}
+
+function isRecipientsNotReadyError(message: string): boolean {
+  return message.toLowerCase().includes("recipients not ready");
 }
 
 let templateContentCache: { html: string; plainText: string } | null = null;
@@ -140,9 +150,50 @@ async function deleteCampaign(
   }).catch(() => undefined);
 }
 
-async function createSegmentedCampaign(
+async function deleteSegment(
+  config: MailchimpConfig,
+  segmentId: number,
+): Promise<void> {
+  await mailchimpRequest(
+    config,
+    `/lists/${config.audienceId}/segments/${segmentId}`,
+    { method: "DELETE" },
+  ).catch(() => undefined);
+}
+
+async function createStaticSegment(
   config: MailchimpConfig,
   email: string,
+): Promise<number> {
+  const normalizedEmail = email.trim().toLowerCase();
+  const response = await mailchimpRequest(
+    config,
+    `/lists/${config.audienceId}/segments`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        name: `LP welcome ${Date.now()}`,
+        static_segment: [normalizedEmail],
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    const reason = await parseMailchimpError(response);
+    throw new Error(`Mailchimp: falha ao criar segmento (${reason})`);
+  }
+
+  const segment = (await response.json()) as { id?: number; member_count?: number };
+  if (!segment.id) {
+    throw new Error("Mailchimp: resposta sem id do segmento");
+  }
+
+  return segment.id;
+}
+
+async function createSegmentedCampaign(
+  config: MailchimpConfig,
+  segmentId: number,
 ): Promise<string> {
   const response = await mailchimpRequest(config, "/campaigns", {
     method: "POST",
@@ -151,15 +202,7 @@ async function createSegmentedCampaign(
       recipients: {
         list_id: config.audienceId,
         segment_opts: {
-          match: "all",
-          conditions: [
-            {
-              condition_type: "EmailAddress",
-              field: "EMAIL",
-              op: "is",
-              value: email.trim().toLowerCase(),
-            },
-          ],
+          saved_segment_id: segmentId,
         },
       },
       settings: {
@@ -185,6 +228,68 @@ async function createSegmentedCampaign(
   return campaign.id;
 }
 
+async function waitForCampaignReady(
+  config: MailchimpConfig,
+  campaignId: string,
+  maxAttempts = 15,
+): Promise<void> {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const [campaignResponse, checklistResponse] = await Promise.all([
+      mailchimpRequest(config, `/campaigns/${campaignId}`),
+      mailchimpRequest(config, `/campaigns/${campaignId}/send-checklist`),
+    ]);
+
+    if (campaignResponse.ok && checklistResponse.ok) {
+      const campaign = (await campaignResponse.json()) as {
+        recipients?: { recipient_count?: number };
+      };
+      const checklist = (await checklistResponse.json()) as {
+        is_ready?: boolean;
+      };
+
+      const recipientCount = campaign.recipients?.recipient_count ?? 0;
+      if (recipientCount > 0 && checklist.is_ready) {
+        return;
+      }
+    }
+
+    await delay(800);
+  }
+
+  throw new Error(
+    "Mailchimp: destinatários do e-mail ainda não ficaram prontos para envio",
+  );
+}
+
+async function sendCampaignWhenReady(
+  config: MailchimpConfig,
+  campaignId: string,
+): Promise<void> {
+  const maxSendAttempts = 4;
+
+  for (let attempt = 1; attempt <= maxSendAttempts; attempt += 1) {
+    await waitForCampaignReady(config, campaignId);
+
+    const sendResponse = await mailchimpRequest(
+      config,
+      `/campaigns/${campaignId}/actions/send`,
+      { method: "POST" },
+    );
+
+    if (sendResponse.status === 204) {
+      return;
+    }
+
+    const reason = await parseMailchimpError(sendResponse);
+    if (isRecipientsNotReadyError(reason) && attempt < maxSendAttempts) {
+      await delay(1000 * attempt);
+      continue;
+    }
+
+    throw new Error(`Mailchimp: falha ao enviar e-mail (${reason})`);
+  }
+}
+
 export async function sendWelcomeEmailToSubscriber(
   config: MailchimpConfig,
   email: string,
@@ -192,7 +297,8 @@ export async function sendWelcomeEmailToSubscriber(
   await syncWelcomeTemplateContent(config);
   const template = await loadTemplateContent(config);
 
-  const sendCampaignId = await createSegmentedCampaign(config, email);
+  const segmentId = await createStaticSegment(config, email);
+  const sendCampaignId = await createSegmentedCampaign(config, segmentId);
 
   try {
     const contentResponse = await mailchimpRequest(
@@ -212,17 +318,9 @@ export async function sendWelcomeEmailToSubscriber(
       throw new Error(`Mailchimp: falha ao aplicar conteúdo (${reason})`);
     }
 
-    const sendResponse = await mailchimpRequest(
-      config,
-      `/campaigns/${sendCampaignId}/actions/send`,
-      { method: "POST" },
-    );
-
-    if (sendResponse.status !== 204) {
-      const reason = await parseMailchimpError(sendResponse);
-      throw new Error(`Mailchimp: falha ao enviar e-mail (${reason})`);
-    }
+    await sendCampaignWhenReady(config, sendCampaignId);
   } finally {
     await deleteCampaign(config, sendCampaignId);
+    await deleteSegment(config, segmentId);
   }
 }

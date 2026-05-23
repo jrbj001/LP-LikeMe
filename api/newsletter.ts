@@ -2,7 +2,7 @@ import { handleNewsletterPost } from "./lib/mailchimp/handleNewsletterPost";
 import { formatErrorMessage } from "./lib/formatErrorMessage";
 
 export const config = {
-  maxDuration: 10,
+  maxDuration: 30,
 };
 
 function parseRequestBody(body: unknown): unknown {
