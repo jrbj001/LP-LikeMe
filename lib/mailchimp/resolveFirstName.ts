@@ -1,4 +1,4 @@
-import type { NewsletterApiPayload } from "./types";
+import type { NewsletterApiPayload } from "./types.js";
 
 export function resolveFirstName(payload: NewsletterApiPayload): string {
   const first = payload.firstName.trim();

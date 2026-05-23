@@ -1,4 +1,4 @@
-import type { MailchimpConfig } from "./types";
+import type { MailchimpConfig } from "./types.js";
 
 export const WELCOME_EMAIL_SUBJECT = "Que bom ter você no Like:Me";
 

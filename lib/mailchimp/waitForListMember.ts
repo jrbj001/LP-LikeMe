@@ -1,5 +1,5 @@
-import type { MailchimpConfig } from "./types";
-import { subscriberHash } from "./subscriberHash";
+import type { MailchimpConfig } from "./types.js";
+import { subscriberHash } from "./subscriberHash.js";
 
 function mailchimpBaseUrl(serverPrefix: string): string {
   return `https://${serverPrefix}.api.mailchimp.com/3.0`;

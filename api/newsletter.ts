@@ -1,5 +1,5 @@
-import { handleNewsletterPost } from "./lib/mailchimp/handleNewsletterPost";
-import { formatErrorMessage } from "./lib/formatErrorMessage";
+import { handleNewsletterPost } from "../lib/mailchimp/handleNewsletterPost.js";
+import { formatErrorMessage } from "../lib/formatErrorMessage.js";
 
 export const config = {
   maxDuration: 30,

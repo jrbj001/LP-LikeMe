@@ -1,6 +1,6 @@
-import { sendWelcomeEmailToSubscriber } from "./sendWelcomeEmail";
-import type { MailchimpConfig } from "./types";
-import { waitForListMember } from "./waitForListMember";
+import { sendWelcomeEmailToSubscriber } from "./sendWelcomeEmail.js";
+import type { MailchimpConfig } from "./types.js";
+import { waitForListMember } from "./waitForListMember.js";
 
 export async function sendWelcomeCampaign(
   config: MailchimpConfig,

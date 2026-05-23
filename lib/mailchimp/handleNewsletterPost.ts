@@ -1,7 +1,7 @@
-import { addListMember } from "./addListMember";
-import { readMailchimpConfig } from "./readMailchimpConfig";
-import { sendWelcomeCampaign } from "./sendWelcomeCampaign";
-import type { NewsletterApiPayload } from "./types";
+import { addListMember } from "./addListMember.js";
+import { readMailchimpConfig } from "./readMailchimpConfig.js";
+import { sendWelcomeCampaign } from "./sendWelcomeCampaign.js";
+import type { NewsletterApiPayload } from "./types.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -1,7 +1,7 @@
-import { MAILCHIMP_TAG_LANDING } from "./constants";
-import { resolveFirstName } from "./resolveFirstName";
-import type { MailchimpConfig, MailchimpMemberBody, NewsletterApiPayload } from "./types";
-import { subscriberHash } from "./subscriberHash";
+import { MAILCHIMP_TAG_LANDING } from "./constants.js";
+import { resolveFirstName } from "./resolveFirstName.js";
+import type { MailchimpConfig, MailchimpMemberBody, NewsletterApiPayload } from "./types.js";
+import { subscriberHash } from "./subscriberHash.js";
 
 function mailchimpBaseUrl(serverPrefix: string): string {
   return `https://${serverPrefix}.api.mailchimp.com/3.0`;

@@ -1,7 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
-import { handleNewsletterPost } from "./api/lib/mailchimp/handleNewsletterPost";
+import { handleNewsletterPost } from "./lib/mailchimp/handleNewsletterPost";
 import { formatErrorMessage } from "./src/utils/formatErrorMessage";
 
 function readJsonBody(req: IncomingMessage): Promise<unknown> {

@@ -1,4 +1,4 @@
-import type { MailchimpConfig } from "./types";
+import type { MailchimpConfig } from "./types.js";
 
 export function readMailchimpConfig(): MailchimpConfig {
   const apiKey = process.env.MAILCHIMP_API_KEY?.trim();
