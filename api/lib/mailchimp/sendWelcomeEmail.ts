@@ -178,86 +178,11 @@ async function deleteCampaign(
   }).catch(() => undefined);
 }
 
-async function deleteSegment(
-  config: MailchimpConfig,
-  segmentId: number,
-): Promise<void> {
-  await mailchimpRequest(
-    config,
-    `/lists/${config.audienceId}/segments/${segmentId}`,
-    { method: "DELETE" },
-  ).catch(() => undefined);
-}
-
-async function getSegmentMemberCount(
-  config: MailchimpConfig,
-  segmentId: number,
-): Promise<number> {
-  const response = await mailchimpRequest(
-    config,
-    `/lists/${config.audienceId}/segments/${segmentId}`,
-  );
-
-  if (!response.ok) {
-    return 0;
-  }
-
-  const segment = (await response.json()) as { member_count?: number };
-  return segment.member_count ?? 0;
-}
-
-async function createStaticSegment(
+async function createSubscriberCampaign(
   config: MailchimpConfig,
   email: string,
-): Promise<number> {
-  const normalizedEmail = email.trim().toLowerCase();
-  const response = await mailchimpRequest(
-    config,
-    `/lists/${config.audienceId}/segments`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        name: `LP welcome ${Date.now()}`,
-        static_segment: [normalizedEmail],
-      }),
-    },
-  );
-
-  if (!response.ok) {
-    const reason = await parseMailchimpError(response);
-    throw new Error(`Mailchimp: falha ao criar segmento (${reason})`);
-  }
-
-  const segment = (await response.json()) as { id?: number };
-  if (!segment.id) {
-    throw new Error("Mailchimp: resposta sem id do segmento");
-  }
-
-  return segment.id;
-}
-
-async function waitForStaticSegmentMember(
-  config: MailchimpConfig,
-  segmentId: number,
-  maxAttempts = 12,
-): Promise<void> {
-  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-    const memberCount = await getSegmentMemberCount(config, segmentId);
-    if (memberCount > 0) {
-      return;
-    }
-    await delay(700);
-  }
-
-  throw new Error(
-    "Mailchimp: segmento do e-mail ficou vazio antes do envio de boas-vindas",
-  );
-}
-
-async function createSegmentedCampaign(
-  config: MailchimpConfig,
-  segmentId: number,
 ): Promise<string> {
+  const normalizedEmail = email.trim().toLowerCase();
   const response = await mailchimpRequest(config, "/campaigns", {
     method: "POST",
     body: JSON.stringify({
@@ -265,7 +190,15 @@ async function createSegmentedCampaign(
       recipients: {
         list_id: config.audienceId,
         segment_opts: {
-          saved_segment_id: segmentId,
+          match: "all",
+          conditions: [
+            {
+              condition_type: "EmailAddress",
+              field: "EMAIL",
+              op: "is",
+              value: normalizedEmail,
+            },
+          ],
         },
       },
       settings: {
@@ -407,10 +340,7 @@ export async function sendWelcomeEmailToSubscriber(
   await syncWelcomeTemplateContent(config);
   const template = await loadTemplateContent(config);
 
-  const segmentId = await createStaticSegment(config, email);
-  await waitForStaticSegmentMember(config, segmentId);
-
-  const sendCampaignId = await createSegmentedCampaign(config, segmentId);
+  const sendCampaignId = await createSubscriberCampaign(config, email);
 
   try {
     const contentResponse = await mailchimpRequest(
@@ -432,8 +362,6 @@ export async function sendWelcomeEmailToSubscriber(
 
     await sendCampaignWhenReady(config, sendCampaignId);
   } finally {
-    await delay(2000);
     await deleteCampaign(config, sendCampaignId);
-    await deleteSegment(config, segmentId);
   }
 }
