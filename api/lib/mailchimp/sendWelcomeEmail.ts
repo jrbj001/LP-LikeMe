@@ -67,6 +67,34 @@ function isRecipientsNotReadyError(message: string): boolean {
 
 let templateContentCache: { html: string; plainText: string } | null = null;
 
+type CampaignSnapshot = {
+  status: string;
+  emailsSent: number;
+  recipientCount: number;
+};
+
+async function getCampaignSnapshot(
+  config: MailchimpConfig,
+  campaignId: string,
+): Promise<CampaignSnapshot | null> {
+  const response = await mailchimpRequest(config, `/campaigns/${campaignId}`);
+  if (!response.ok) {
+    return null;
+  }
+
+  const campaign = (await response.json()) as {
+    status?: string;
+    emails_sent?: number;
+    recipients?: { recipient_count?: number };
+  };
+
+  return {
+    status: campaign.status ?? "",
+    emailsSent: campaign.emails_sent ?? 0,
+    recipientCount: campaign.recipients?.recipient_count ?? 0,
+  };
+}
+
 async function loadTemplateContent(
   config: MailchimpConfig,
 ): Promise<{ html: string; plainText: string }> {
@@ -161,6 +189,23 @@ async function deleteSegment(
   ).catch(() => undefined);
 }
 
+async function getSegmentMemberCount(
+  config: MailchimpConfig,
+  segmentId: number,
+): Promise<number> {
+  const response = await mailchimpRequest(
+    config,
+    `/lists/${config.audienceId}/segments/${segmentId}`,
+  );
+
+  if (!response.ok) {
+    return 0;
+  }
+
+  const segment = (await response.json()) as { member_count?: number };
+  return segment.member_count ?? 0;
+}
+
 async function createStaticSegment(
   config: MailchimpConfig,
   email: string,
@@ -183,12 +228,30 @@ async function createStaticSegment(
     throw new Error(`Mailchimp: falha ao criar segmento (${reason})`);
   }
 
-  const segment = (await response.json()) as { id?: number; member_count?: number };
+  const segment = (await response.json()) as { id?: number };
   if (!segment.id) {
     throw new Error("Mailchimp: resposta sem id do segmento");
   }
 
   return segment.id;
+}
+
+async function waitForStaticSegmentMember(
+  config: MailchimpConfig,
+  segmentId: number,
+  maxAttempts = 12,
+): Promise<void> {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const memberCount = await getSegmentMemberCount(config, segmentId);
+    if (memberCount > 0) {
+      return;
+    }
+    await delay(700);
+  }
+
+  throw new Error(
+    "Mailchimp: segmento do e-mail ficou vazio antes do envio de boas-vindas",
+  );
 }
 
 async function createSegmentedCampaign(
@@ -231,25 +294,32 @@ async function createSegmentedCampaign(
 async function waitForCampaignReady(
   config: MailchimpConfig,
   campaignId: string,
-  maxAttempts = 15,
+  maxAttempts = 20,
 ): Promise<void> {
-  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-    const [campaignResponse, checklistResponse] = await Promise.all([
-      mailchimpRequest(config, `/campaigns/${campaignId}`),
-      mailchimpRequest(config, `/campaigns/${campaignId}/send-checklist`),
-    ]);
+  let readyStreak = 0;
 
-    if (campaignResponse.ok && checklistResponse.ok) {
-      const campaign = (await campaignResponse.json()) as {
-        recipients?: { recipient_count?: number };
-      };
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const snapshot = await getCampaignSnapshot(config, campaignId);
+    const checklistResponse = await mailchimpRequest(
+      config,
+      `/campaigns/${campaignId}/send-checklist`,
+    );
+
+    if (snapshot && checklistResponse.ok) {
       const checklist = (await checklistResponse.json()) as {
         is_ready?: boolean;
       };
 
-      const recipientCount = campaign.recipients?.recipient_count ?? 0;
-      if (recipientCount > 0 && checklist.is_ready) {
-        return;
+      if (
+        snapshot.recipientCount > 0 &&
+        checklist.is_ready === true
+      ) {
+        readyStreak += 1;
+        if (readyStreak >= 2) {
+          return;
+        }
+      } else {
+        readyStreak = 0;
       }
     }
 
@@ -258,6 +328,38 @@ async function waitForCampaignReady(
 
   throw new Error(
     "Mailchimp: destinatários do e-mail ainda não ficaram prontos para envio",
+  );
+}
+
+async function waitForCampaignDelivered(
+  config: MailchimpConfig,
+  campaignId: string,
+  maxAttempts = 25,
+): Promise<void> {
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const snapshot = await getCampaignSnapshot(config, campaignId);
+    if (!snapshot) {
+      await delay(1000);
+      continue;
+    }
+
+    if (snapshot.emailsSent >= 1) {
+      return;
+    }
+
+    if (
+      snapshot.status === "sent" &&
+      snapshot.emailsSent === 0 &&
+      attempt >= 8
+    ) {
+      break;
+    }
+
+    await delay(1000);
+  }
+
+  throw new Error(
+    "Mailchimp: envio aceito, mas nenhum e-mail foi entregue na fila",
   );
 }
 
@@ -276,17 +378,25 @@ async function sendCampaignWhenReady(
       { method: "POST" },
     );
 
-    if (sendResponse.status === 204) {
+    if (sendResponse.status !== 204) {
+      const reason = await parseMailchimpError(sendResponse);
+      if (isRecipientsNotReadyError(reason) && attempt < maxSendAttempts) {
+        await delay(1000 * attempt);
+        continue;
+      }
+      throw new Error(`Mailchimp: falha ao enviar e-mail (${reason})`);
+    }
+
+    try {
+      await waitForCampaignDelivered(config, campaignId);
       return;
+    } catch (deliveryError) {
+      if (attempt < maxSendAttempts) {
+        await delay(1500 * attempt);
+        continue;
+      }
+      throw deliveryError;
     }
-
-    const reason = await parseMailchimpError(sendResponse);
-    if (isRecipientsNotReadyError(reason) && attempt < maxSendAttempts) {
-      await delay(1000 * attempt);
-      continue;
-    }
-
-    throw new Error(`Mailchimp: falha ao enviar e-mail (${reason})`);
   }
 }
 
@@ -298,6 +408,8 @@ export async function sendWelcomeEmailToSubscriber(
   const template = await loadTemplateContent(config);
 
   const segmentId = await createStaticSegment(config, email);
+  await waitForStaticSegmentMember(config, segmentId);
+
   const sendCampaignId = await createSegmentedCampaign(config, segmentId);
 
   try {
@@ -320,6 +432,7 @@ export async function sendWelcomeEmailToSubscriber(
 
     await sendCampaignWhenReady(config, sendCampaignId);
   } finally {
+    await delay(2000);
     await deleteCampaign(config, sendCampaignId);
     await deleteSegment(config, segmentId);
   }
