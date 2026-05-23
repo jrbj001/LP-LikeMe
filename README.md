@@ -64,6 +64,22 @@ Após alguns segundos, use a URL que o terminal mostrar (geralmente [http://loca
 
 Se o formulário falhar com erro genérico, confira no DevTools (aba Network) se `POST /api/newsletter` retorna 404 — nesse caso reinicie com `vercel dev` após `npm install`.
 
+**Teste local da integração Mailchimp (sem subir deploy):**
+
+```bash
+vercel dev
+```
+
+Com o servidor rodando, cadastre no formulário ou:
+
+```bash
+curl -X POST http://localhost:5173/api/newsletter \
+  -H "Content-Type: application/json" \
+  -d '{"firstName":"João","lastName":"Silva","email":"seu@gmail.com","profile":"Usuário","message":""}'
+```
+
+Deve retornar JSON com `"ok": true`.
+
 Para build de produção:
 
 ```bash
@@ -91,7 +107,7 @@ Variáveis de ambiente (`.env.local` e **Vercel → Settings → Environment Var
 | `MAILCHIMP_AUDIENCE_ID` | ID da audiência (lista Like:Me) |
 | `MAILCHIMP_WELCOME_CAMPAIGN_ID` | ID da campanha **01.1 Boas-Vindas — Cadastro na Landing Page** (`c8aad8e134`) |
 
-Após o cadastro, a API inscreve o contato na lista e dispara o envio da campanha `01.1` para o e-mail informado (endpoint Mailchimp `campaigns/{id}/actions/test`, que entrega o HTML/desgin da campanha em rascunho).
+Após o cadastro, a API inscreve o contato na lista e envia a campanha **01.1** como envio real (segmento com o e-mail do cadastro), com assunto **Que bom ter você no Like:Me** e nome personalizado via `*|FNAME|*`.
 
 Mantenha a campanha `01.1` com o conteúdo atualizado no Mailchimp; alterações no editor passam a valer nos próximos cadastros sem mudar código.
 

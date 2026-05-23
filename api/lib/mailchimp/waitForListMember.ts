@@ -19,7 +19,7 @@ function delay(ms: number): Promise<void> {
 export async function waitForListMember(
   config: MailchimpConfig,
   email: string,
-  maxAttempts = 6,
+  maxAttempts = 12,
 ): Promise<void> {
   const hash = subscriberHash(email);
   const url = `${mailchimpBaseUrl(config.serverPrefix)}/lists/${config.audienceId}/members/${hash}`;
@@ -30,10 +30,13 @@ export async function waitForListMember(
     });
 
     if (response.ok) {
-      return;
+      const member = (await response.json()) as { status?: string };
+      if (member.status === "subscribed") {
+        return;
+      }
     }
 
-    await delay(400);
+    await delay(600);
   }
 
   throw new Error(

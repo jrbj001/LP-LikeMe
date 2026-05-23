@@ -1,3 +1,5 @@
+import { formatErrorMessage } from "../utils/formatErrorMessage";
+
 export type NewsletterLeadPayload = {
   firstName: string;
   lastName: string;
@@ -9,7 +11,7 @@ export type NewsletterLeadPayload = {
 type NewsletterApiResponse = {
   ok: boolean;
   message?: string;
-  error?: string;
+  error?: string | Record<string, unknown>;
   welcomeEmailSent?: boolean;
 };
 
@@ -35,7 +37,8 @@ export async function submitNewsletterLead(
 
   if (!response.ok || !data?.ok) {
     const reason =
-      data?.error ?? `Envio do cadastro falhou: HTTP ${response.status}`;
+      formatErrorMessage(data?.error) ||
+      `Envio do cadastro falhou: HTTP ${response.status}`;
     throw new Error(reason);
   }
 
