@@ -37,7 +37,7 @@ export function NewsletterSection(): JSX.Element {
 
     setSubmitState("loading");
     try {
-      await submitNewsletterLead({
+      const result = await submitNewsletterLead({
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: trimmedEmail,
@@ -45,7 +45,12 @@ export function NewsletterSection(): JSX.Element {
         message: message.trim(),
       });
       setSubmitState("success");
-      setFeedback("Cadastro enviado. Obrigado!");
+      setFeedback(
+        result.welcomeEmailSent === false
+          ? result.message ??
+              "Cadastro realizado, mas o e-mail de boas-vindas não foi enviado."
+          : result.message ?? "Cadastro enviado. Obrigado!",
+      );
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -58,9 +63,11 @@ export function NewsletterSection(): JSX.Element {
         error,
       });
       setSubmitState("error");
-      setFeedback(
-        "Não foi possível enviar agora. Tente novamente em instantes.",
-      );
+      const serverMessage =
+        error instanceof Error && error.message.length > 0
+          ? error.message
+          : "Não foi possível enviar agora. Tente novamente em instantes.";
+      setFeedback(serverMessage);
     }
   };
 
