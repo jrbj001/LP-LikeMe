@@ -1,7 +1,8 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
-import { handleNewsletterPost } from "./lib/mailchimp/handleNewsletterPost";
+import { handleNewsletterPost } from "./api/lib/mailchimp/handleNewsletterPost";
+import { formatErrorMessage } from "./src/utils/formatErrorMessage";
 
 function readJsonBody(req: IncomingMessage): Promise<unknown> {
   return new Promise((resolve, reject) => {
@@ -57,7 +58,7 @@ export function mailchimpApiPlugin(mode: string): Plugin {
           console.error("Falha em /api/newsletter (dev)", { error });
           sendJson(res, 500, {
             ok: false,
-            error: "Erro interno ao processar cadastro",
+            error: formatErrorMessage(error),
           });
         }
       });

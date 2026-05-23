@@ -4,6 +4,7 @@ import { NEWSLETTER_PROFILE_OPTIONS } from "../constants/newsletter";
 import { SECTION_ANCHORS } from "../constants/sectionAnchors";
 import { styles } from "../screens/Home/styles";
 import { submitNewsletterLead } from "../services/submitNewsletterLead";
+import { formatErrorMessage } from "../utils/formatErrorMessage";
 import { isValidEmail } from "../utils/isValidEmail";
 
 export function NewsletterSection(): JSX.Element {
@@ -63,11 +64,12 @@ export function NewsletterSection(): JSX.Element {
         error,
       });
       setSubmitState("error");
-      const serverMessage =
-        error instanceof Error && error.message.length > 0
-          ? error.message
-          : "Não foi possível enviar agora. Tente novamente em instantes.";
-      setFeedback(serverMessage);
+      const serverMessage = formatErrorMessage(error);
+      setFeedback(
+        serverMessage.length > 0
+          ? serverMessage
+          : "Não foi possível enviar agora. Tente novamente em instantes.",
+      );
     }
   };
 
