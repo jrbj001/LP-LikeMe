@@ -681,33 +681,38 @@ injectGlobal(`
   }
 }
 
-/* Carrossel showcase */
+/* Seção showcase */
 .showcase {
-  padding: 80px 0 50px;
+  padding: 80px 0px 50px;
+  max-width: 1360px;
+  margin: 0 auto;
 }
 
 .showcase__carousel {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .showcase__carousel-track {
   display: flex;
+  gap: 20px;
 }
 
 .showcase__card {
-  flex: 0 0 calc(100% - 24px);
-  margin: 0 12px;
+  flex: 1 1 0;
   border-radius: 44px;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  scroll-snap-align: center;
-  max-height: 400px;
+  height: 500px;
+}
+
+.showcase__pagination {
+  display: none;
 }
 
 .showcase__card.showcase__card--brand {
   background: #ff6300;
-  padding: 60px 44px;
+  padding: 60px 24px;
 }
 
 .showcase__logo {
@@ -728,21 +733,21 @@ injectGlobal(`
   margin: 0;
   color: #001137;
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 64px;
+  font-size: 38px;
   font-weight: 650;
   line-height: 1;
-  letter-spacing: -1.28px;
+  letter-spacing: -2px;
 }
 
 .showcase__text p:first-child {
-  max-width: 237px;
   position: relative;
+  z-index: 1;
 }
 
 .showcase__text p:first-child::before {
   content: "";
   position: absolute;
-  inset: -4px -6px;
+  inset: -6px -10px;
   background: rgba(253, 251, 237, 0.72);
   backdrop-filter: blur(1.25px);
   border-radius: 312px;
@@ -778,7 +783,9 @@ injectGlobal(`
   background: #f0eee1;
   align-items: center;
   justify-content: space-between;
-  padding: 60px 40px;
+  padding: 60px 20px;
+  max-width: 250px;
+  flex: 0 0 250px;
 }
 
 .showcase__badge {
@@ -812,15 +819,6 @@ injectGlobal(`
 .showcase__avatars img {
   width: 100px;
   height: auto;
-}
-
-.showcase__pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-top: 16px;
 }
 
 .showcase__pagination-dot {
@@ -1794,19 +1792,32 @@ injectGlobal(`
     padding: 0 16px;
   }
 
-  .showcase__card {
+  .showcase__carousel {
+    overflow: hidden;
+  }
+
+  .showcase__card,
+  .showcase__card.showcase__card--avatar {
     flex: 0 0 82%;
-    min-height: clamp(360px, calc(100vh - 220px), 460px);
-    height: auto;
+    max-width: none;
+    height: 400px;
+    min-height: auto;
     border-radius: 24px;
     padding: 24px;
+    scroll-snap-align: center;
+    margin: 0 12px;
   }
 
   .showcase__text p {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .showcase__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
     margin-top: 16px;
   }
 

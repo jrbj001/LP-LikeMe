@@ -140,14 +140,18 @@ const INSTITUTIONAL_CARDS: InstitutionalCard[] = [
     title: "Chats",
     description:
       "Converse com profissionais de saúde, tire dúvidas e receba orientações personalizadas, tudo dentro do app.",
-    image: publicImg("few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png"),
+    image: publicImg(
+      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png",
+    ),
     accentColor: "#958aaa",
   },
   {
     title: "Atividades",
     description:
       "Protocolos, desafios e rotinas de autocuidado personalizados para o seu estilo de vida. Automatize e acompanhe seu progresso.",
-    image: publicImg("woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png"),
+    image: publicImg(
+      "woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png",
+    ),
     accentColor: "#f6cffb",
   },
 ];
@@ -186,9 +190,10 @@ export const Home = (): JSX.Element => {
     { loop: true, align: "center", containScroll: false },
     [movementAutoplayPlugin.current],
   );
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 900;
   const [showcaseCarouselRef, showcaseCarouselApi] = useEmblaCarousel(
-    { loop: true, align: "center", containScroll: false },
-    [showcaseAutoplayPlugin.current],
+    { loop: true, align: "center", containScroll: false, active: isMobile },
+    isMobile ? [showcaseAutoplayPlugin.current] : [],
   );
   const [appCarouselRef] = useEmblaCarousel(
     {
@@ -324,8 +329,8 @@ export const Home = (): JSX.Element => {
                         src={LIKEME_LOGO_TITLE}
                         alt="Like"
                       />
-                      <span className={styles.movementTitleColon}>:</span>
-                      {" "}{card.titleSuffix}
+                      <span className={styles.movementTitleColon}>:</span>{" "}
+                      {card.titleSuffix}
                     </h2>
                     <img
                       className={`${styles.movementMarker} ${styles.movementMarkerMobile}`}
@@ -380,7 +385,9 @@ export const Home = (): JSX.Element => {
         <div className={styles.showcaseCarousel} ref={showcaseCarouselRef}>
           <div className={styles.showcaseCarouselTrack}>
             {/* Card 1 — Brand */}
-            <article className={`${styles.showcaseCard} ${styles.showcaseCardBrand}`}>
+            <article
+              className={`${styles.showcaseCard} ${styles.showcaseCardBrand}`}
+            >
               <img
                 className={styles.showcaseLogo}
                 src={ASSETS.showcaseLogo}
@@ -393,7 +400,9 @@ export const Home = (): JSX.Element => {
             </article>
 
             {/* Card 2 — Foto */}
-            <article className={`${styles.showcaseCard} ${styles.showcaseCardPhoto}`}>
+            <article
+              className={`${styles.showcaseCard} ${styles.showcaseCardPhoto}`}
+            >
               <div className={styles.showcasePhotoWrap}>
                 <img
                   className={styles.showcasePhotoImg}
@@ -405,12 +414,20 @@ export const Home = (): JSX.Element => {
             </article>
 
             {/* Card 3 — Avatar */}
-            <article className={`${styles.showcaseCard} ${styles.showcaseCardAvatar}`}>
-              <span className={styles.showcaseBadge}>SEM CULPA. SEM PRESSÃO.</span>
+            <article
+              className={`${styles.showcaseCard} ${styles.showcaseCardAvatar}`}
+            >
+              <span className={styles.showcaseBadge}>
+                SEM CULPA. SEM PRESSÃO.
+              </span>
               <div className={styles.showcaseAvatars}>
                 <img src={publicImg("showcase-avatars.png")} alt="" />
               </div>
-              <span className={`${styles.showcaseBadge} ${styles.showcaseBadgeSmall}`}>NO SEU TEMPO.</span>
+              <span
+                className={`${styles.showcaseBadge} ${styles.showcaseBadgeSmall}`}
+              >
+                NO SEU TEMPO.
+              </span>
             </article>
           </div>
         </div>
@@ -435,22 +452,18 @@ export const Home = (): JSX.Element => {
 
       {/* 3. Seções institucionais — grid de cards */}
       <section className={styles.institutional} id={SECTION_ANCHORS.SOBRE}>
-        <h2 className={styles.institutionalTitle}>
-          Tudo num só lugar
-        </h2>
+        <h2 className={styles.institutionalTitle}>Tudo num só lugar</h2>
         <div className={styles.institutionalGrid}>
           {INSTITUTIONAL_CARDS.map((card) => (
             <article
               className={styles.institutionalCard}
               key={card.title}
-              style={{ "--card-accent": card.accentColor } as React.CSSProperties}
+              style={
+                { "--card-accent": card.accentColor } as React.CSSProperties
+              }
             >
               <div className={styles.institutionalCardImageWrap}>
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  loading="lazy"
-                />
+                <img src={card.image} alt={card.title} loading="lazy" />
               </div>
               <div className={styles.institutionalCardBody}>
                 <h3>{card.title}</h3>
