@@ -41,12 +41,6 @@ type MovementCard = {
 
 const LIKEME_LOGO_TITLE = publicImg("likeme-logo-title.png");
 
-type InstitutionalCard = {
-  title: string;
-  description: string;
-  image: string;
-  accentColor: string;
-};
 
 const MOVEMENT_CARDS: MovementCard[] = [
   {
@@ -121,49 +115,51 @@ const MOVEMENT_CARDS: MovementCard[] = [
   },
 ];
 
-const INSTITUTIONAL_CARDS: InstitutionalCard[] = [
+
+type FeatureSlide = {
+  icon: string;
+  title: string;
+  description: string;
+  image: string;
+};
+
+const FEATURE_SLIDES: FeatureSlide[] = [
   {
+    icon: publicImg("icon-face-happy.png"),
+    title: "Seu Avatar de bem-estar",
+    description:
+      "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
+    image: publicImg("avatar-slide-avatar.png"),
+  },
+  {
+    icon: publicImg("icon-global.png"),
     title: "Comunidades",
     description:
-      "Conecte-se com pessoas reais, descubra marcas e profissionais que inspiram. Curadoria feita por especialistas em saúde e bem-estar.",
-    image: publicImg("section4-comunidades-screen.png"),
-    accentColor: "#d8e4d6",
+      "Conecte-se com pessoas reais, descubra marcas e profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
+    image: publicImg("avatar-slide-comunidades.png"),
   },
   {
+    icon: publicImg("icon-price-tag.png"),
     title: "Shop",
     description:
-      "O lugar certo para encontrar tudo que você procura. Sem complicação, com curadoria de quem entende do assunto.",
-    image: publicImg("section4-shop-screen.png"),
-    accentColor: "#f0eee1",
+      "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
+    image: publicImg("avatar-slide-shop.png"),
   },
   {
+    icon: publicImg("icon-message.png"),
     title: "Chats",
     description:
-      "Converse com profissionais de saúde, tire dúvidas e receba orientações personalizadas, tudo dentro do app.",
-    image: publicImg(
-      "few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png",
-    ),
-    accentColor: "#958aaa",
+      "Converse com especialistas e com a sua comunidade em um só lugar. Tire dúvidas, receba orientações e evolua sua jornada com chats baseados em IA, treinados com o conhecimento de cada profissional.\n\nParticipe de conversas nas comunidades e troque experiências com pessoas que compartilham dos mesmos objetivos.",
+    image: publicImg("avatar-slide-chats.png"),
   },
   {
+    icon: publicImg("icon-checklist.png"),
     title: "Atividades",
     description:
-      "Protocolos, desafios e rotinas de autocuidado personalizados para o seu estilo de vida. Automatize e acompanhe seu progresso.",
-    image: publicImg(
-      "woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png",
-    ),
-    accentColor: "#f6cffb",
+      "Descubra práticas, experiências e rotinas que ajudam você a evoluir no dia a dia. Explore atividades por categoria, participe de experiências digitais e físicas e encontre novas formas de cuidar do corpo e da mente, no seu ritmo.\n\nIntegre o que você já prática, crie lembretes, automatize compras e gerencie sua rotina de saúde com o apoio do Like:Me.",
+    image: publicImg("avatar-slide-atividades.png"),
   },
 ];
-
-const BENEFITS = [
-  "Integração de dados, exames, prescrições e outros aplicativos",
-  "Automação de atividades e rotinas de autocuidado",
-  "Shop com curadoria de especialistas",
-  "Cash back e descontos exclusivos",
-  "Protocolos, serviços e profissionais",
-  "Comunidades exclusivas de bem-estar",
-] as const;
 
 const APP_FEATURES = [
   "Integração de dados, exames, prescrições e outros aplicativos;",
@@ -177,14 +173,15 @@ const APP_FEATURES = [
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
   const [activeShowcaseIndex, setActiveShowcaseIndex] = useState(0);
+  const [activeFeaturesIndex, setActiveFeaturesIndex] = useState(0);
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
   );
   const showcaseAutoplayPlugin = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: false }),
   );
-  const appAutoplayPlugin = useRef(
-    Autoplay({ delay: 4500, stopOnInteraction: false }),
+  const featuresAutoplayPlugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false }),
   );
   const [movementCarouselRef, movementCarouselApi] = useEmblaCarousel(
     { loop: true, align: "center", containScroll: false },
@@ -195,14 +192,10 @@ export const Home = (): JSX.Element => {
     { loop: true, align: "center", containScroll: false, active: isMobile },
     isMobile ? [showcaseAutoplayPlugin.current] : [],
   );
-  const [appCarouselRef] = useEmblaCarousel(
-    {
-      loop: true,
-      align: "start",
-    },
-    [appAutoplayPlugin.current],
+  const [featuresCarouselRef, featuresCarouselApi] = useEmblaCarousel(
+    { loop: true, align: "center", containScroll: false },
+    [featuresAutoplayPlugin.current],
   );
-
   const [activeHeaderNav, setActiveHeaderNav] = useState<SectionAnchorId>(
     SECTION_ANCHORS.HERO,
   );
@@ -266,6 +259,25 @@ export const Home = (): JSX.Element => {
       showcaseCarouselApi.off("reInit", onSelect);
     };
   }, [showcaseCarouselApi]);
+
+  useEffect(() => {
+    if (!featuresCarouselApi) {
+      return;
+    }
+
+    const onSelect = (): void => {
+      setActiveFeaturesIndex(featuresCarouselApi.selectedScrollSnap());
+    };
+
+    onSelect();
+    featuresCarouselApi.on("select", onSelect);
+    featuresCarouselApi.on("reInit", onSelect);
+
+    return () => {
+      featuresCarouselApi.off("select", onSelect);
+      featuresCarouselApi.off("reInit", onSelect);
+    };
+  }, [featuresCarouselApi]);
 
   return (
     <main className={styles.landingDesktop}>
@@ -450,83 +462,56 @@ export const Home = (): JSX.Element => {
         </div>
       </section>
 
-      {/* 3. Seções institucionais — grid de cards */}
-      <section className={styles.institutional} id={SECTION_ANCHORS.SOBRE}>
-        <h2 className={styles.institutionalTitle}>Tudo num só lugar</h2>
-        <div className={styles.institutionalGrid}>
-          {INSTITUTIONAL_CARDS.map((card) => (
-            <article
-              className={styles.institutionalCard}
-              key={card.title}
-              style={
-                { "--card-accent": card.accentColor } as React.CSSProperties
-              }
-            >
-              <div className={styles.institutionalCardImageWrap}>
-                <img src={card.image} alt={card.title} loading="lazy" />
-              </div>
-              <div className={styles.institutionalCardBody}>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. Seção complementar — Avatar de bem-estar */}
-      <section className={styles.avatarStandalone}>
-        <div className={styles.avatarStandaloneContent}>
-          <div className={styles.avatarStandaloneText}>
-            <h2>Seu Avatar de bem-estar</h2>
-            <p>
-              Crie seu avatar de bem-estar, para te guiar e apoiar diariamente,
-              expandindo sua rotina de autocuidado através de descobertas
-              personalizadas, com base nos seus hábitos e informações de saúde.
-            </p>
+      {/* 4. Carrossel de features */}
+      <section className={styles.features}>
+        <div className={styles.featuresCarousel} ref={featuresCarouselRef}>
+          <div className={styles.featuresCarouselTrack}>
+            {FEATURE_SLIDES.map((slide) => (
+              <article className={styles.featuresCard} key={slide.title}>
+                <div className={styles.featuresCardHeader}>
+                  <img
+                    className={styles.featuresCardIcon}
+                    src={slide.icon}
+                    alt=""
+                  />
+                  <h2 className={styles.featuresCardTitle}>{slide.title}</h2>
+                </div>
+                <p className={styles.featuresCardDescription}>
+                  {slide.description}
+                </p>
+                <img
+                  className={styles.featuresCardImage}
+                  src={slide.image}
+                  alt={slide.title}
+                  loading="lazy"
+                />
+              </article>
+            ))}
           </div>
-          <div className={styles.avatarStandaloneImageWrap}>
-            <img
-              src={ASSETS.avatarScreen}
-              alt="Avatar de bem-estar"
-              loading="lazy"
+        </div>
+        <div className={styles.featuresPagination} aria-hidden>
+          {FEATURE_SLIDES.map((slide, i) => (
+            <span
+              className={`${styles.featuresPaginationDot} ${i === activeFeaturesIndex ? styles.featuresPaginationDotActive : ""}`}
+              key={slide.title}
+              onClick={() => featuresCarouselApi?.scrollTo(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  featuresCarouselApi?.scrollTo(i);
+                }
+              }}
             />
-          </div>
-        </div>
-      </section>
-
-      {/* 4b. Proposta de valor e benefícios */}
-      <section className={styles.simplify}>
-        <div className={styles.simplifyHeader}>
-          <h2 className={styles.simplifyTitle}>
-            Like:Me simplifica e conecta.
-          </h2>
-          <p className={styles.simplifySubtitle}>
-            Bem-estar que cabe na sua vida real.
-          </p>
-          <small className={styles.simplifyTagline}>
-            Sem culpa. Sem pressão. No seu tempo.
-          </small>
-        </div>
-        <div className={styles.simplifyArt}>
-          <img
-            className={styles.simplifyArtImage}
-            src={ASSETS.simplifyArtHighRes}
-            alt=""
-            loading="lazy"
-          />
-        </div>
-        <ul className={styles.benefitsList}>
-          {BENEFITS.map((benefit) => (
-            <li key={benefit}>{benefit}</li>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* 5. App */}
       <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
         <h3>App</h3>
-        <div className={styles.appCarousel} ref={appCarouselRef}>
+        <div className={styles.appCarousel}>
           <div className={styles.appCarouselTrack}>
             <article className={styles.appLeft}>
               <div className={styles.appHighlightGlow} aria-hidden />
