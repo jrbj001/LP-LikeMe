@@ -67,7 +67,9 @@ export const styles = {
   featuresCardIcon: "features__card-icon",
   featuresCardTitle: "features__card-title",
   featuresCardDescription: "features__card-description",
+  featuresCardContent: "features__card-content",
   featuresCardImage: "features__card-image",
+  featuresCardDesktopImage: "features__card-desktop-image",
   featuresPagination: "features__pagination",
   featuresPaginationDot: "features__pagination-dot",
   featuresPaginationDotActive: "features__pagination-dot--active",
@@ -1019,12 +1021,21 @@ injectGlobal(`
   white-space: pre-line;
 }
 
+.features__card-content {
+  display: flex;
+  flex-direction: column;
+}
+
 .features__card-image {
   width: 100%;
   height: auto;
   border-radius: 20px;
   object-fit: cover;
   margin-top: auto;
+}
+
+.features__card-desktop-image {
+  display: none;
 }
 
 .features__pagination {
@@ -1055,6 +1066,68 @@ injectGlobal(`
   background-repeat: no-repeat;
   background-size: 100% 100%;
   box-shadow: none;
+}
+
+@media (min-width: 901px) {
+  .features__card {
+    flex: 0 0 calc(100% - 24px);
+    height: auto;
+    min-height: 320px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #fdfbee;
+    border-radius: 44px;
+    padding: 44px;
+    margin: 0 12px;
+    box-shadow: none;
+    opacity: 0.88;
+  }
+
+
+  .features__card-content {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .features__card-header {
+    margin-bottom: 24px;
+  }
+
+  .features__card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .features__card-title {
+    font-size: 48px;
+    font-weight: 650;
+    letter-spacing: -0.96px;
+  }
+
+  .features__card-description {
+    font-size: 16px;
+    max-width: 380px;
+  }
+
+  .features__card-image {
+    display: none;
+  }
+
+  .features__card-desktop-image {
+    display: block;
+    flex: 0 0 auto;
+    width: 40%;
+    max-height: 400px;
+    border-radius: 32px;
+    object-fit: contain;
+  }
+
+  .features__pagination {
+    display: none;
+  }
 }
 
 .movement__carousel img {

@@ -119,6 +119,7 @@ type FeatureSlide = {
   title: string;
   description: string;
   image: string;
+  desktopImage?: string;
 };
 
 const FEATURE_SLIDES: FeatureSlide[] = [
@@ -128,6 +129,7 @@ const FEATURE_SLIDES: FeatureSlide[] = [
     description:
       "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
     image: publicImg("avatar-slide-avatar.png"),
+    desktopImage: publicImg("avatar-slide-avatar.png"),
   },
   {
     icon: publicImg("icon-global.png"),
@@ -135,6 +137,7 @@ const FEATURE_SLIDES: FeatureSlide[] = [
     description:
       "Conecte-se com pessoas reais, descubra marcas e profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
     image: publicImg("avatar-slide-comunidades.png"),
+    desktopImage: publicImg("features-comunidades-phone.png"),
   },
   {
     icon: publicImg("icon-price-tag.png"),
@@ -142,6 +145,7 @@ const FEATURE_SLIDES: FeatureSlide[] = [
     description:
       "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
     image: publicImg("avatar-slide-shop.png"),
+    desktopImage: publicImg("features-shop-phone.png"),
   },
   {
     icon: publicImg("icon-message.png"),
@@ -149,6 +153,7 @@ const FEATURE_SLIDES: FeatureSlide[] = [
     description:
       "Converse com especialistas e com a sua comunidade em um só lugar. Tire dúvidas, receba orientações e evolua sua jornada com chats baseados em IA, treinados com o conhecimento de cada profissional.\n\nParticipe de conversas nas comunidades e troque experiências com pessoas que compartilham dos mesmos objetivos.",
     image: publicImg("avatar-slide-chats.png"),
+    desktopImage: publicImg("features-chats-phone.png"),
   },
   {
     icon: publicImg("icon-checklist.png"),
@@ -156,6 +161,7 @@ const FEATURE_SLIDES: FeatureSlide[] = [
     description:
       "Descubra práticas, experiências e rotinas que ajudam você a evoluir no dia a dia. Explore atividades por categoria, participe de experiências digitais e físicas e encontre novas formas de cuidar do corpo e da mente, no seu ritmo.\n\nIntegre o que você já prática, crie lembretes, automatize compras e gerencie sua rotina de saúde com o apoio do Like:Me.",
     image: publicImg("avatar-slide-atividades.png"),
+    desktopImage: publicImg("features-atividades-phone.png"),
   },
 ];
 
@@ -468,23 +474,33 @@ export const Home = (): JSX.Element => {
           <div className={styles.featuresCarouselTrack}>
             {FEATURE_SLIDES.map((slide) => (
               <article className={styles.featuresCard} key={slide.title}>
-                <div className={styles.featuresCardHeader}>
-                  <img
-                    className={styles.featuresCardIcon}
-                    src={slide.icon}
-                    alt=""
-                  />
-                  <h2 className={styles.featuresCardTitle}>{slide.title}</h2>
+                <div className={styles.featuresCardContent}>
+                  <div className={styles.featuresCardHeader}>
+                    <img
+                      className={styles.featuresCardIcon}
+                      src={slide.icon}
+                      alt=""
+                    />
+                    <h2 className={styles.featuresCardTitle}>{slide.title}</h2>
+                  </div>
+                  <p className={styles.featuresCardDescription}>
+                    {slide.description}
+                  </p>
                 </div>
-                <p className={styles.featuresCardDescription}>
-                  {slide.description}
-                </p>
                 <img
                   className={styles.featuresCardImage}
                   src={slide.image}
                   alt={slide.title}
                   loading="lazy"
                 />
+                {slide.desktopImage ? (
+                  <img
+                    className={styles.featuresCardDesktopImage}
+                    src={slide.desktopImage}
+                    alt={slide.title}
+                    loading="lazy"
+                  />
+                ) : null}
               </article>
             ))}
           </div>
