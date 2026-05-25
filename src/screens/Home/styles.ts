@@ -1469,12 +1469,15 @@ injectGlobal(`
   .hero-section__phone-wrap {
     width: 100%;
     display: block;
+    overflow: hidden;
   }
 
   .hero-section__phone {
     width: 100%;
     height: 100%;
     display: block;
+    transform: scale(1.4);
+    transform-origin: -40% 50%;
   }
 
   .movement {
