@@ -162,13 +162,15 @@ const FEATURE_SLIDES: FeatureSlide[] = [
 ];
 
 const APP_FEATURES = [
-  "Integração de dados, exames, prescrições e outros aplicativos;",
-  "Automação de atividades;",
-  "Shop;",
-  "Cash back e descontos exclusivos;",
-  "Protocolos, serviços e profissionais;",
-  "Comunidades exclusivas.",
+  "Shop",
+  "Automação de atividades",
+  "Integração de dados, exames, prescrições e outros apps",
+  "Cashback e descontos exclusivos",
+  "Comunidades exclusivas",
+  "Protocolos, serviços e profissionais",
 ] as const;
+
+const APP_BULLET = publicImg("app-likeme-bullet.svg");
 
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
@@ -510,37 +512,24 @@ export const Home = (): JSX.Element => {
 
       {/* 5. App */}
       <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
-        <h3>App</h3>
-        <div className={styles.appCarousel}>
-          <div className={styles.appCarouselTrack}>
-            <article className={styles.appLeft}>
-              <div className={styles.appHighlightGlow} aria-hidden />
-              <h4>Tudo que importa para o seu bem-estar, em um só lugar.</h4>
-              <p>Ajudando usuários e profissionais a se conectarem.</p>
-              <span>Do seu jeito, no seu tempo</span>
-            </article>
-            <article className={styles.appMiddle}>
-              <ul>
-                {APP_FEATURES.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-            </article>
-            <article className={styles.appRight}>
-              <img
-                className={styles.appRightSlideImage}
-                src={ASSETS.appLastSlide}
-                alt=""
-              />
-            </article>
+        <article className={styles.appLeft}>
+          <h4>
+            Tudo que importa para o seu bem-estar, em um só{" "}
+            <span className={styles.appHighlightWord}>lugar.</span>
+          </h4>
+          <ul className={styles.appFeatureList}>
+            {APP_FEATURES.map((feature) => (
+              <li key={feature}>
+                <img src={APP_BULLET} alt="" className={styles.appBulletIcon} />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <div className={styles.appBottomRow}>
+            <span className={styles.appBadge}>Do seu jeito, no seu tempo</span>
+            <span className={styles.appBadgeBlur}>Sempre.</span>
           </div>
-        </div>
-        <button className={styles.appButton} type="button" disabled>
-          Experimente a versão Beta
-          <span className={styles.appButtonIcon} aria-hidden>
-            <img src={ASSETS.chevronRight} alt="" />
-          </span>
-        </button>
+        </article>
       </section>
 
       {/* 6. Newsletter + Footer */}
