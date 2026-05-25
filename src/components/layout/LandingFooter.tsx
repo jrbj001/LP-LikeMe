@@ -20,11 +20,10 @@ export function LandingFooter({
       <footer className={styles.footer}>
         <div>
           <img src={LANDING_FOOTER_ASSETS.footerLogo} alt="Like:me" />
-          <strong>Faça parte do Like:me</strong>
+          <strong>Sign up for Like:me</strong>
           <p>
-            Assine a nossa newsletter e receba dicas, insights e inspirações de
-            autocuidado. Curadoria humana, com conteúdo que faz sentido pra a sua
-            jornada de bem-estar.
+            Assine a nossa newsetter e receba dicas. insights e inspirações de
+            autocuidado.
           </p>
         </div>
         <div>
@@ -44,7 +43,7 @@ export function LandingFooter({
           </p>
         </div>
         <div>
-          <strong>Siga no Instagram</strong>
+          <strong>Redes</strong>
           <p>
             <a
               href={INSTAGRAM_PROFILE_URL}

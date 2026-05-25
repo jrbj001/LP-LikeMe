@@ -76,8 +76,8 @@ export function NewsletterSection(): JSX.Element {
   return (
     <section className={styles.newsletter} id={SECTION_ANCHORS.JUNTE_SE}>
       <h3>
-        Receba novidades, acesso antecipado
-        <br />e conteúdos exclusivos sobre bem-estar.
+        Receba novidades, acesso antecipado e conteúdos exclusivos sobre
+        bem-estar.
       </h3>
       <form
         onSubmit={(event) => {
@@ -89,7 +89,7 @@ export function NewsletterSection(): JSX.Element {
         <input
           name="firstName"
           autoComplete="given-name"
-          placeholder="PRIMEIRO NOME"
+          placeholder="Primeiro nome"
           value={firstName}
           onChange={(event) => {
             setFirstName(event.target.value);
@@ -98,7 +98,7 @@ export function NewsletterSection(): JSX.Element {
         <input
           name="lastName"
           autoComplete="family-name"
-          placeholder="SOBRENOME"
+          placeholder="Sobrenome"
           value={lastName}
           onChange={(event) => {
             setLastName(event.target.value);
@@ -119,7 +119,7 @@ export function NewsletterSection(): JSX.Element {
             aria-expanded={isProfileMenuOpen}
           >
             <span className={styles.newsletterSelectLabel}>
-              {selectedProfile ?? "SELECIONE SEU PERFIL"}
+              {selectedProfile ?? "Selecione o seu perfil"}
             </span>
             <span className={styles.newsletterSelectIcon} aria-hidden>
               <svg
@@ -164,21 +164,12 @@ export function NewsletterSection(): JSX.Element {
           name="email"
           type="email"
           autoComplete="email"
-          placeholder="E-MAIL *"
+          placeholder="E-mail"
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
           required
-        />
-        <textarea
-          name="message"
-          rows={3}
-          placeholder="SUA MENSAGEM"
-          value={message}
-          onChange={(event) => {
-            setMessage(event.target.value);
-          }}
         />
         <button
           className={styles.newsletterSubmitButton}

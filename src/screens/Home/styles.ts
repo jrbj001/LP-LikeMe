@@ -1215,8 +1215,8 @@ injectGlobal(`
 }
 
 .newsletter {
-  width: min(100%, 1360px);
-  padding: 0 120px;
+  width: 100%;
+  padding: 0;
 }
 
 .footer-area {
@@ -1224,30 +1224,32 @@ injectGlobal(`
   margin: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 207, 251, 0) 40%,
-    #f6cffb 70%,
-    #eb7dc6 100%
+    rgba(246, 207, 251, 0) 81.56%,
+    #f6cffb 95.94%,
+    #eb7dc6 112.35%
   );
-  padding: 140px 40px 96px;
-  display: grid;
-  gap: 114px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 }
 
 .newsletter h3 {
-  max-width: 892px;
-  margin: 0 auto 66px;
-  text-align: center;
-  font-family: "Bricolage Grotesque", Helvetica, Arial, sans-serif;
-  font-size: 48px;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  margin: 0 0 40px;
+  text-align: left;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  color: #001137;
 }
 
 .newsletter form {
   width: 100%;
-  max-width: min(50vw, 100%);
-  margin: 0 auto;
-  display: grid;
+  max-width: 354px;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -1255,32 +1257,25 @@ injectGlobal(`
   width: 100%;
 }
 
-.newsletter input,
-.newsletter textarea {
+.newsletter input {
   box-sizing: border-box;
   width: 100%;
   height: 48px;
   border: 0;
-  border-radius: 20.367px;
+  border-radius: 32px;
   background: #fdfbee;
   color: #001137;
-  padding: 17px 24px 18px;
-  font-family: "DM Sans", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  padding: 12px 40px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
 }
 
-.newsletter input::placeholder,
-.newsletter textarea::placeholder {
-  color: #8fa3a1;
-}
-
-.newsletter textarea {
-  height: 93px;
-  min-height: 93px;
-  resize: none;
+.newsletter input::placeholder {
+  color: #6e6a6a;
 }
 
 .newsletter__select {
@@ -1292,19 +1287,21 @@ injectGlobal(`
   height: 48px;
   width: 100%;
   border: 0;
-  border-radius: 20.367px;
+  border-radius: 32px;
   background: #fdfbee;
-  color: #8fa3a1;
-  padding: 17px 24px 18px;
+  color: #6e6a6a;
+  padding: 12px 0 12px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "DM Sans", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.2px;
   text-align: left;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .newsletter__select-button--open {
@@ -1383,11 +1380,14 @@ injectGlobal(`
   color: #fff;
   margin-top: 8px;
   min-height: 48px;
-  font-family: "DM Sans", Helvetica, Arial, sans-serif;
+  padding: 12px 16px;
+  width: fit-content;
+  font-family: "DM Sans", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  line-height: 1;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  line-height: normal;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .newsletter__submit-button:disabled {
@@ -1415,57 +1415,56 @@ injectGlobal(`
 
 .footer {
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: calc((100% - 342px) / 2) repeat(
-      3,
-      calc((100% - 342px) / 6)
-    );
-  align-items: start;
-  gap: 114px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .footer > div {
-  width: 100%;
-}
-
-.footer > div:first-child {
-  max-width: 492px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .footer img {
   display: block;
 }
 
+.footer > div:first-child {
+  gap: 32px;
+}
+
 .footer > div:first-child img {
-  width: 129.618px;
-  height: 23.874px;
-  margin-bottom: 34px;
+  width: 162.879px;
+  height: 30px;
 }
 
 .footer strong {
   display: block;
-  font-family: "Bricolage Grotesque", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.48px;
   color: #001137;
+}
+
+.footer > div:first-child strong {
+  font-size: 28px;
+  letter-spacing: -0.56px;
 }
 
 .footer p {
   margin: 0;
-  font-family: "DM Sans", Helvetica, Arial, sans-serif;
-  font-size: 13.125px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
   line-height: 1.3;
-  letter-spacing: -0.2625px;
+  letter-spacing: -0.4px;
   color: #001137;
 }
 
 .footer > div:nth-child(2) p {
-  font-size: 16.393px;
-  line-height: 1.1;
-  letter-spacing: -0.3279px;
   text-decoration: underline;
 }
 
@@ -1889,94 +1888,13 @@ injectGlobal(`
     height: 240px;
   }
 
-  .newsletter {
-    width: 100%;
-    padding: 0;
-  }
-
-  .footer-area {
-    padding: 104px 32px 56px;
-    gap: 24px;
-  }
-
   .newsletter h3 {
-    margin-bottom: 24px;
-    font-size: 36px;
-    line-height: 1.08;
+    font-size: 32px;
+    letter-spacing: -0.64px;
   }
 
   .newsletter form {
     max-width: 100%;
-    gap: 12px;
-  }
-
-  .newsletter input,
-  .newsletter textarea {
-    height: 48px;
-    padding: 14px 16px;
-    border-radius: 20px;
-  }
-
-  .newsletter__select-button {
-    height: 48px;
-    padding: 14px 16px;
-    border-radius: 20px;
-  }
-
-  .newsletter textarea {
-    height: 84px;
-    min-height: 84px;
-  }
-
-  .newsletter__submit-button {
-    margin-top: 0;
-  }
-
-  .footer {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .footer > div:first-child {
-    max-width: 100%;
-  }
-
-  .footer > div:first-child img {
-    margin-bottom: 20px;
-  }
-
-  .footer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 24px;
-    row-gap: 32px;
-    align-items: start;
-  }
-
-  .footer > div:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .footer > div:nth-child(2) {
-    grid-column: 1;
-  }
-
-  .footer > div:nth-child(3) {
-    grid-column: 2;
-  }
-
-  .footer > div:last-child {
-    grid-column: 1 / -1;
-  }
-
-  .footer > div:nth-child(2),
-  .footer > div:nth-child(3) {
-    width: 100%;
-  }
-
-  .footer > div:nth-child(2) p {
-    font-size: 16.393px;
-    line-height: 1.1;
-    letter-spacing: -0.3279px;
   }
 }
 
