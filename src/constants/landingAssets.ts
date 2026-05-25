@@ -4,7 +4,7 @@ export const LANDING_HEADER_ASSETS = {
   logo: publicImg("figma-header-logo-main.svg"),
   legalHeroBg: publicImg("hero-terms-privacy.png"),
   heroBg: publicImg("figma-hero-bg-container.svg"),
-  heroMobileBg: publicImg("figma-hero-bg-container.svg"),
+  heroMobileBg: publicImg("hero-mobile-bg.png"),
   heroMobileLogo: publicImg("figma-footer-logo.svg"),
 } as const;
 

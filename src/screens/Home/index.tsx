@@ -8,8 +8,15 @@ import {
   isSectionAnchorId,
   type SectionAnchorId,
 } from "../../constants/sectionAnchors";
+import { APP_STORE_URL, PLAY_STORE_URL } from "../../constants/socialLinks";
 import { publicImg } from "../../utils/publicImg";
 import { styles } from "./styles";
+
+function storeUrl(): string {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return PLAY_STORE_URL;
+  return APP_STORE_URL;
+}
 
 const ASSETS = {
   heroMobilePhone: publicImg("figma-hero-phone-mockup.png"),
@@ -17,6 +24,7 @@ const ASSETS = {
   simplifyArtHighRes: publicImg("section3-simplify-art.png"),
   appLastSlide: publicImg("group-10321-app-last-slide.svg"),
   chevronRight: publicImg("figma-chevron-right.svg"),
+  avatarScreen: publicImg("section4-bem-estar-screen.png"),
 };
 
 type MovementCard = {
@@ -26,12 +34,11 @@ type MovementCard = {
   marker: string;
 };
 
-type Section4Card = {
+type InstitutionalCard = {
   title: string;
   description: string;
   image: string;
-  logo: string;
-  imageClassName?: string;
+  accentColor: string;
 };
 
 const MOVEMENT_CARDS: MovementCard[] = [
@@ -107,32 +114,45 @@ const MOVEMENT_CARDS: MovementCard[] = [
   },
 ];
 
-const SECTION4_CARDS: Section4Card[] = [
-  {
-    title: "Seu Avatar de bem-estar",
-    description:
-      "Crie seu avatar de bem-estar, para te guiar e apoiar diariamente, expandindo sua rotina de autocuidado através de descobertas personalizadas, com base nos seus hábitos e informações de saúde.",
-    image: publicImg("section4-bem-estar-screen.png"),
-    logo: publicImg("figma-section4-logo-container.svg"),
-    imageClassName: styles.avatarSlideImageAvatar,
-  },
+const INSTITUTIONAL_CARDS: InstitutionalCard[] = [
   {
     title: "Comunidades",
     description:
-      "Conecte-se com pessoas reais e descubra marcas, profissionais que inspiram e soluções que cabem na sua rotina. A curadoria é feita por especialistas em saúde e bem-estar.\n\nParticipe de conversas, acesse conteúdos exclusivos, organize sua jornada e fique por dentro das novidades.",
+      "Conecte-se com pessoas reais, descubra marcas e profissionais que inspiram. Curadoria feita por especialistas em saúde e bem-estar.",
     image: publicImg("section4-comunidades-screen.png"),
-    logo: publicImg("like-me-11.svg"),
-    imageClassName: styles.avatarSlideImageCommunity,
+    accentColor: "#d8e4d6",
   },
   {
     title: "Shop",
     description:
-      "O lugar certo para encontrar tudo que você procura. Sem complicação e com curadoria de quem entende do assunto.\n\nConecte-se, descubra novas possibilidades, automatize itens recorrentes e amplie a sua rotina de autocuidado.",
+      "O lugar certo para encontrar tudo que você procura. Sem complicação, com curadoria de quem entende do assunto.",
     image: publicImg("section4-shop-screen.png"),
-    logo: publicImg("group-361.png"),
-    imageClassName: styles.avatarSlideImageShop,
+    accentColor: "#f0eee1",
+  },
+  {
+    title: "Chats",
+    description:
+      "Converse com profissionais de saúde, tire dúvidas e receba orientações personalizadas, tudo dentro do app.",
+    image: publicImg("few-people-working-a-coworking-space-ar-169-profile-nmy2u-4d-1.png"),
+    accentColor: "#958aaa",
+  },
+  {
+    title: "Atividades",
+    description:
+      "Protocolos, desafios e rotinas de autocuidado personalizados para o seu estilo de vida. Automatize e acompanhe seu progresso.",
+    image: publicImg("woman-45-years-old-meditating-in-a-living-room-ar-169-pro-dc-1.png"),
+    accentColor: "#f6cffb",
   },
 ];
+
+const BENEFITS = [
+  "Integração de dados, exames, prescrições e outros aplicativos",
+  "Automação de atividades e rotinas de autocuidado",
+  "Shop com curadoria de especialistas",
+  "Cash back e descontos exclusivos",
+  "Protocolos, serviços e profissionais",
+  "Comunidades exclusivas de bem-estar",
+] as const;
 
 const APP_FEATURES = [
   "Integração de dados, exames, prescrições e outros aplicativos;",
@@ -145,23 +165,15 @@ const APP_FEATURES = [
 
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
-  const [activeSection4Index, setActiveSection4Index] = useState(0);
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
-  );
-  const section4AutoplayPlugin = useRef(
-    Autoplay({ delay: 4200, stopOnInteraction: false }),
   );
   const appAutoplayPlugin = useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false }),
   );
   const [movementCarouselRef, movementCarouselApi] = useEmblaCarousel(
-    { loop: false, align: "start", containScroll: "keepSnaps" },
+    { loop: true, align: "center", containScroll: false },
     [movementAutoplayPlugin.current],
-  );
-  const [section4CarouselRef, section4CarouselApi] = useEmblaCarousel(
-    { loop: true, align: "start" },
-    [section4AutoplayPlugin.current],
   );
   const [appCarouselRef] = useEmblaCarousel(
     {
@@ -216,27 +228,9 @@ export const Home = (): JSX.Element => {
     };
   }, [movementCarouselApi]);
 
-  useEffect(() => {
-    if (!section4CarouselApi) {
-      return;
-    }
-
-    const onSelect = (): void => {
-      setActiveSection4Index(section4CarouselApi.selectedScrollSnap());
-    };
-
-    onSelect();
-    section4CarouselApi.on("select", onSelect);
-    section4CarouselApi.on("reInit", onSelect);
-
-    return () => {
-      section4CarouselApi.off("select", onSelect);
-      section4CarouselApi.off("reInit", onSelect);
-    };
-  }, [section4CarouselApi]);
-
   return (
     <main className={styles.landingDesktop}>
+      {/* 1. Hero */}
       <section className={styles.heroSection} id={SECTION_ANCHORS.HERO}>
         <LandingHeader
           variant="home"
@@ -254,12 +248,19 @@ export const Home = (): JSX.Element => {
               <strong>comunidades</strong> e com{" "}
               <strong>quem cuida de você</strong>.
             </p>
-            <p className={styles.heroSectionHighlight}>
-              Amplie o seu autocuidado, no seu tempo e do seu jeito.
-            </p>
-            <button type="button" disabled>
-              Experimente a versão Beta
-            </button>
+            <div className={styles.heroCtaCard}>
+              <p className={styles.heroCtaCardText}>
+                Amplie o seu autocuidado, no seu tempo e do seu jeito
+              </p>
+              <a
+                className={styles.heroCtaCardButton}
+                href={storeUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Experimente a versão beta
+              </a>
+            </div>
           </div>
           <picture className={styles.heroSectionPhoneWrap}>
             <source
@@ -275,6 +276,7 @@ export const Home = (): JSX.Element => {
         </div>
       </section>
 
+      {/* 2. Carrossel de categorias com peek */}
       <section className={styles.movement}>
         <div className={styles.movementCarousel} ref={movementCarouselRef}>
           <div className={styles.movementCarouselTrack}>
@@ -302,6 +304,7 @@ export const Home = (): JSX.Element => {
                   className={styles.movementImage}
                   src={card.image}
                   alt={card.title}
+                  loading="lazy"
                 />
               </article>
             ))}
@@ -330,7 +333,57 @@ export const Home = (): JSX.Element => {
         </div>
       </section>
 
-      <section className={styles.simplify} id={SECTION_ANCHORS.SOBRE}>
+      {/* 3. Seções institucionais — grid de cards */}
+      <section className={styles.institutional} id={SECTION_ANCHORS.SOBRE}>
+        <h2 className={styles.institutionalTitle}>
+          Tudo num só lugar
+        </h2>
+        <div className={styles.institutionalGrid}>
+          {INSTITUTIONAL_CARDS.map((card) => (
+            <article
+              className={styles.institutionalCard}
+              key={card.title}
+              style={{ "--card-accent": card.accentColor } as React.CSSProperties}
+            >
+              <div className={styles.institutionalCardImageWrap}>
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  loading="lazy"
+                />
+              </div>
+              <div className={styles.institutionalCardBody}>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. Seção complementar — Avatar de bem-estar */}
+      <section className={styles.avatarStandalone}>
+        <div className={styles.avatarStandaloneContent}>
+          <div className={styles.avatarStandaloneText}>
+            <h2>Seu Avatar de bem-estar</h2>
+            <p>
+              Crie seu avatar de bem-estar, para te guiar e apoiar diariamente,
+              expandindo sua rotina de autocuidado através de descobertas
+              personalizadas, com base nos seus hábitos e informações de saúde.
+            </p>
+          </div>
+          <div className={styles.avatarStandaloneImageWrap}>
+            <img
+              src={ASSETS.avatarScreen}
+              alt="Avatar de bem-estar"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 4b. Proposta de valor e benefícios */}
+      <section className={styles.simplify}>
         <div className={styles.simplifyHeader}>
           <h2 className={styles.simplifyTitle}>
             Like:Me simplifica e conecta.
@@ -347,51 +400,17 @@ export const Home = (): JSX.Element => {
             className={styles.simplifyArtImage}
             src={ASSETS.simplifyArtHighRes}
             alt=""
+            loading="lazy"
           />
         </div>
-      </section>
-
-      <section className={styles.avatar}>
-        <div className={styles.avatarCarousel} ref={section4CarouselRef}>
-          <div className={styles.avatarCarouselTrack}>
-            {SECTION4_CARDS.map((card) => (
-              <article className={styles.avatarSlide} key={card.title}>
-                <div className={styles.avatarCard}>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                  <img
-                    className={`${styles.avatarPhone} ${card.imageClassName || ""}`}
-                    src={card.image}
-                    alt={card.title}
-                  />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-        <div className={styles.avatarPagination} aria-hidden>
-          {SECTION4_CARDS.map((card, index) => (
-            <span
-              className={`${styles.avatarPaginationDot} ${index === activeSection4Index ? styles.avatarPaginationDotActive : ""}`}
-              key={card.title}
-              onClick={() => {
-                section4CarouselApi?.scrollTo(index);
-              }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(event) => {
-                if (event.key !== "Enter" && event.key !== " ") {
-                  return;
-                }
-
-                event.preventDefault();
-                section4CarouselApi?.scrollTo(index);
-              }}
-            />
+        <ul className={styles.benefitsList}>
+          {BENEFITS.map((benefit) => (
+            <li key={benefit}>{benefit}</li>
           ))}
-        </div>
+        </ul>
       </section>
 
+      {/* 5. App */}
       <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
         <h3>App</h3>
         <div className={styles.appCarousel} ref={appCarouselRef}>
@@ -426,6 +445,7 @@ export const Home = (): JSX.Element => {
         </button>
       </section>
 
+      {/* 6. Newsletter + Footer */}
       <LandingFooter showNewsletter />
     </main>
   );
