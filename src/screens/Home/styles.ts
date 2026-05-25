@@ -36,6 +36,22 @@ export const styles = {
   movementPagination: "movement__pagination",
   movementPaginationDot: "movement__pagination-dot",
   movementPaginationDotActive: "movement__pagination-dot--active",
+  showcase: "showcase",
+  showcaseCarousel: "showcase__carousel",
+  showcaseCarouselTrack: "showcase__carousel-track",
+  showcaseCard: "showcase__card",
+  showcaseCardBrand: "showcase__card--brand",
+  showcaseCardPhoto: "showcase__card--photo",
+  showcaseCardAvatar: "showcase__card--avatar",
+  showcaseLogo: "showcase__logo",
+  showcaseText: "showcase__text",
+  showcasePhotoWrap: "showcase__photo-wrap",
+  showcasePhotoImg: "showcase__photo-img",
+  showcaseBadge: "showcase__badge",
+  showcaseAvatars: "showcase__avatars",
+  showcasePagination: "showcase__pagination",
+  showcasePaginationDot: "showcase__pagination-dot",
+  showcasePaginationDotActive: "showcase__pagination-dot--active",
   institutional: "institutional",
   institutionalTitle: "institutional__title",
   institutionalGrid: "institutional__grid",
@@ -662,6 +678,136 @@ injectGlobal(`
   .benefits__list li {
     font-size: 15px;
   }
+}
+
+/* Carrossel showcase */
+.showcase {
+  padding: 32px 0;
+}
+
+.showcase__carousel {
+  overflow: hidden;
+}
+
+.showcase__carousel-track {
+  display: flex;
+  gap: 20px;
+}
+
+.showcase__card {
+  flex: 0 0 100%;
+  border-radius: 44px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  scroll-snap-align: center;
+}
+
+.showcase__card--brand {
+  background: #ff6300;
+  justify-content: space-between;
+  padding: 44px;
+}
+
+.showcase__logo {
+  width: 136px;
+  height: auto;
+}
+
+.showcase__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.showcase__text p {
+  margin: 0;
+  color: #001137;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.56px;
+}
+
+.showcase__card.showcase__card--photo {
+  background: #f6dea9;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 70px;
+}
+
+.showcase__photo-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.showcase__photo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.showcase__card--avatar {
+  background: #f0eee1;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px;
+}
+
+.showcase__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 0.623px solid #001137;
+  border-radius: 20px;
+  color: #001137;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12px;
+  text-align: center;
+  width: 100%;
+}
+
+.showcase__avatars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.showcase__avatars img {
+  width: 88px;
+  height: auto;
+}
+
+.showcase__pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.showcase__pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.showcase__pagination-dot--active {
+  background: #001137;
 }
 
 /* Seção institucional — grid de cards */
@@ -1612,6 +1758,22 @@ injectGlobal(`
     justify-content: center;
     gap: 6px;
     padding: 0 16px;
+  }
+
+  .showcase__card {
+    flex: 0 0 82%;
+    min-height: clamp(360px, calc(100vh - 220px), 460px);
+    height: auto;
+    border-radius: 24px;
+    padding: 24px;
+  }
+
+  .showcase__text p {
+    font-size: 22px;
+  }
+
+  .showcase__pagination {
+    margin-top: 16px;
   }
 
   .app {

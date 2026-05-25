@@ -25,6 +25,11 @@ const ASSETS = {
   appLastSlide: publicImg("group-10321-app-last-slide.svg"),
   chevronRight: publicImg("figma-chevron-right.svg"),
   avatarScreen: publicImg("section4-bem-estar-screen.png"),
+  showcaseLogo: publicImg("showcase-likeme-logo.svg"),
+  showcasePhoto: publicImg("showcase-photo.png"),
+  showcasePhone: publicImg("showcase-phone.png"),
+  showcaseBodyAvatar: publicImg("showcase-body-avatar.svg"),
+  showcaseMindAvatar: publicImg("showcase-mind-avatar.svg"),
 };
 
 type MovementCard = {
@@ -167,8 +172,12 @@ const APP_FEATURES = [
 
 export const Home = (): JSX.Element => {
   const [activeMovementIndex, setActiveMovementIndex] = useState(0);
+  const [activeShowcaseIndex, setActiveShowcaseIndex] = useState(0);
   const movementAutoplayPlugin = useRef(
     Autoplay({ delay: 3500, stopOnInteraction: false }),
+  );
+  const showcaseAutoplayPlugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false }),
   );
   const appAutoplayPlugin = useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false }),
@@ -176,6 +185,10 @@ export const Home = (): JSX.Element => {
   const [movementCarouselRef, movementCarouselApi] = useEmblaCarousel(
     { loop: true, align: "center", containScroll: false },
     [movementAutoplayPlugin.current],
+  );
+  const [showcaseCarouselRef, showcaseCarouselApi] = useEmblaCarousel(
+    { loop: true, align: "center", containScroll: false },
+    [showcaseAutoplayPlugin.current],
   );
   const [appCarouselRef] = useEmblaCarousel(
     {
@@ -229,6 +242,25 @@ export const Home = (): JSX.Element => {
       movementCarouselApi.off("reInit", onSelect);
     };
   }, [movementCarouselApi]);
+
+  useEffect(() => {
+    if (!showcaseCarouselApi) {
+      return;
+    }
+
+    const onSelect = (): void => {
+      setActiveShowcaseIndex(showcaseCarouselApi.selectedScrollSnap());
+    };
+
+    onSelect();
+    showcaseCarouselApi.on("select", onSelect);
+    showcaseCarouselApi.on("reInit", onSelect);
+
+    return () => {
+      showcaseCarouselApi.off("select", onSelect);
+      showcaseCarouselApi.off("reInit", onSelect);
+    };
+  }, [showcaseCarouselApi]);
 
   return (
     <main className={styles.landingDesktop}>
@@ -337,6 +369,65 @@ export const Home = (): JSX.Element => {
 
                 event.preventDefault();
                 movementCarouselApi?.scrollTo(index);
+              }}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* 2b. Carrossel showcase */}
+      <section className={styles.showcase}>
+        <div className={styles.showcaseCarousel} ref={showcaseCarouselRef}>
+          <div className={styles.showcaseCarouselTrack}>
+            {/* Card 1 — Brand */}
+            <article className={`${styles.showcaseCard} ${styles.showcaseCardBrand}`}>
+              <img
+                className={styles.showcaseLogo}
+                src={ASSETS.showcaseLogo}
+                alt="Like:Me"
+              />
+              <div className={styles.showcaseText}>
+                <p>Simplifica e conecta.</p>
+                <p>Bem-estar que cabe na sua vida real.</p>
+              </div>
+            </article>
+
+            {/* Card 2 — Foto */}
+            <article className={`${styles.showcaseCard} ${styles.showcaseCardPhoto}`}>
+              <div className={styles.showcasePhotoWrap}>
+                <img
+                  className={styles.showcasePhotoImg}
+                  src={publicImg("showcase-photo-card.svg")}
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+            </article>
+
+            {/* Card 3 — Avatar */}
+            <article className={`${styles.showcaseCard} ${styles.showcaseCardAvatar}`}>
+              <span className={styles.showcaseBadge}>SEM CULPA. SEM PRESSÃO.</span>
+              <div className={styles.showcaseAvatars}>
+                <img src={ASSETS.showcaseBodyAvatar} alt="" />
+                <img src={ASSETS.showcaseMindAvatar} alt="" />
+              </div>
+              <span className={styles.showcaseBadge}>NO SEU TEMPO.</span>
+            </article>
+          </div>
+        </div>
+        <div className={styles.showcasePagination} aria-hidden>
+          {[0, 1, 2].map((i) => (
+            <span
+              className={`${styles.showcasePaginationDot} ${i === activeShowcaseIndex ? styles.showcasePaginationDotActive : ""}`}
+              key={i}
+              onClick={() => showcaseCarouselApi?.scrollTo(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  showcaseCarouselApi?.scrollTo(i);
+                }
               }}
             />
           ))}
