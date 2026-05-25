@@ -41,7 +41,6 @@ type MovementCard = {
 
 const LIKEME_LOGO_TITLE = publicImg("likeme-logo-title.png");
 
-
 const MOVEMENT_CARDS: MovementCard[] = [
   {
     titleSuffix: "o seu Movimento",
@@ -114,7 +113,6 @@ const MOVEMENT_CARDS: MovementCard[] = [
     marker: publicImg("likeme-oral-health-marker.svg"),
   },
 ];
-
 
 type FeatureSlide = {
   icon: string;
@@ -512,24 +510,36 @@ export const Home = (): JSX.Element => {
 
       {/* 5. App */}
       <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
-        <article className={styles.appLeft}>
-          <h4>
-            Tudo que importa para o seu bem-estar, em um só{" "}
-            <span className={styles.appHighlightWord}>lugar.</span>
-          </h4>
-          <ul className={styles.appFeatureList}>
-            {APP_FEATURES.map((feature) => (
-              <li key={feature}>
-                <img src={APP_BULLET} alt="" className={styles.appBulletIcon} />
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-          <div className={styles.appBottomRow}>
-            <span className={styles.appBadge}>Do seu jeito, no seu tempo</span>
-            <span className={styles.appBadgeBlur}>Sempre.</span>
-          </div>
-        </article>
+        <div className={styles.appRow}>
+          <article className={styles.appLeft}>
+            <h4>
+              Tudo que importa para o seu bem-estar, em um só{" "}
+              <span className={styles.appHighlightWord}>lugar.</span>
+            </h4>
+            <ul className={styles.appFeatureList}>
+              {APP_FEATURES.map((feature) => (
+                <li key={feature}>
+                  <img src={APP_BULLET} alt="" className={styles.appBulletIcon} />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div className={styles.appBottomRow}>
+              <span className={styles.appBadge}>Do seu jeito, no seu tempo</span>
+              <span className={styles.appBadgeBlur}>Sempre.</span>
+            </div>
+          </article>
+          <article className={styles.appRight}>
+            <p className={styles.appRightTitle}>
+              Ajudando usuários e profissionais a se conectarem
+            </p>
+            <img
+              className={styles.appRightPhoto}
+              src={publicImg("app-connect-photo.png")}
+              alt="Usuária conectada pelo app"
+            />
+          </article>
+        </div>
       </section>
 
       {/* 6. Newsletter + Footer */}

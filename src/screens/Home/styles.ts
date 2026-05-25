@@ -85,7 +85,11 @@ export const styles = {
   benefitsList: "benefits__list",
   app: "app",
   appLeft: "app__left",
+  appRow: "app__row",
   appHighlightWord: "app__highlight-word",
+  appRight: "app__right",
+  appRightTitle: "app__right-title",
+  appRightPhoto: "app__right-photo",
   appFeatureList: "app__feature-list",
   appBulletIcon: "app__bullet-icon",
   appBottomRow: "app__bottom-row",
@@ -1065,14 +1069,53 @@ injectGlobal(`
   box-sizing: border-box;
 }
 
-.app__left {
-  background: #958aaa;
+.app__row {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.app__left,
+.app__right {
   border-radius: 24px;
   padding: 32px 24px;
-  color: #001137;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.app__left {
+  flex: 0 0 35%;
+  background: #958aaa;
+  color: #001137;
+}
+
+.app__right {
+  flex: 0 0 calc(65% - 24px);
+  background: #d5e4d5;
+  color: #001137;
+  opacity: 0.88;
+  overflow: clip;
+}
+
+.app__right-title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  color: #001137;
+}
+
+.app__right-photo {
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 .app__left h4 {
@@ -1817,6 +1860,16 @@ injectGlobal(`
     align-items: stretch;
   }
 
+  .app__row {
+    flex-direction: column;
+  }
+
+  .app__left,
+  .app__right {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
   .app__left h4 {
     font-size: 32px;
     letter-spacing: -0.64px;
@@ -1824,6 +1877,16 @@ injectGlobal(`
 
   .app__feature-list li {
     font-size: 16px;
+  }
+
+  .app__right-title {
+    font-size: 32px;
+    letter-spacing: -0.64px;
+  }
+
+  .app__right-photo {
+    flex: 0 0 auto;
+    height: 240px;
   }
 
   .newsletter {
