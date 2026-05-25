@@ -26,6 +26,8 @@ export const styles = {
   movementCard: "movement__card",
   movementText: "movement__text",
   movementHeading: "movement__heading",
+  movementTitleLogo: "movement__title-logo",
+  movementTitleColon: "movement__title-colon",
   movementDescription: "movement__description",
   movementMarker: "movement__marker",
   movementMarkerDesktop: "movement__marker-desktop",
@@ -362,7 +364,7 @@ injectGlobal(`
 .movement__card {
   background: #fdfbee;
   border-radius: 44px;
-  padding: 44px 44px 44px 116px;
+  padding: 44px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(20rem, 43.7%);
   gap: 40px;
@@ -374,21 +376,52 @@ injectGlobal(`
 
 .movement__text h2 {
   margin: 0;
-  font-family: "Bricolage Grotesque", Helvetica, Arial, sans-serif;
-  font-size: 58px;
-  line-height: 1;
+  color: #001137;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -2.48px;
 }
 
 .movement__text {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  justify-content: space-between;
+  flex: 1;
+  height: 100%;
+  padding: 60px 0;
 }
 
 .movement__heading {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 40px;
+}
+
+.movement__heading h2 {
+  display: inline;
+}
+
+.movement__title-logo {
+  height: 0.75em;
+  width: auto;
+  object-fit: contain;
+  vertical-align: baseline;
+  display: inline;
+}
+
+.movement__title-colon {
+  color: #001137;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 650;
+  line-height: 100%;
+  letter-spacing: -2.48px;
+  margin-left: 5px;
 }
 
 .movement__description {
@@ -399,9 +432,12 @@ injectGlobal(`
 
 .movement__description p {
   margin: 0;
-  font-size: 24px;
-  font-style: italic;
-  line-height: 1.1;
+  color: #6E6A6A;
+  font-family: "DM Sans", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
 }
 
 .movement__marker {
@@ -411,11 +447,11 @@ injectGlobal(`
 }
 
 .movement__marker-desktop {
-  display: block;
+  display: none;
 }
 
 .movement__marker-mobile {
-  display: none;
+  display: block;
 }
 
 .movement__image {
@@ -1506,12 +1542,6 @@ injectGlobal(`
     gap: 20px;
     align-content: start;
     scroll-snap-align: center;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-  }
-
-  .movement__card.is-selected {
-    opacity: 1;
   }
 
   .movement__image {
@@ -1527,11 +1557,13 @@ injectGlobal(`
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    padding: 0;
   }
 
   .movement__heading {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     width: 100%;
   }
@@ -1542,6 +1574,10 @@ injectGlobal(`
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
+  }
+
+  .movement__title-colon {
+    font-size: 30px;
   }
 
   .movement__description {

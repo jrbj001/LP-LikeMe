@@ -28,11 +28,13 @@ const ASSETS = {
 };
 
 type MovementCard = {
-  title: string;
+  titleSuffix: string;
   description: string;
   image: string;
   marker: string;
 };
+
+const LIKEME_LOGO_TITLE = publicImg("likeme-logo-title.png");
 
 type InstitutionalCard = {
   title: string;
@@ -43,70 +45,70 @@ type InstitutionalCard = {
 
 const MOVEMENT_CARDS: MovementCard[] = [
   {
-    title: "Like: o seu Movimento",
+    titleSuffix: "o seu Movimento",
     description:
       "Seu corpo, seu ritmo. Profissionais e conteúdos que entendem onde você está e te ajudam a ir mais longe.",
     image: publicImg("movement-like-seu-movimento.png"),
     marker: publicImg("likeme-movement-slide-01.svg"),
   },
   {
-    title: "Like: o seu Sono",
+    titleSuffix: "o seu Sono",
     description:
       "Sono reparador não é luxo, é fundamental. Especialistas, protocolos e produtos selecionados para você dormir melhor.",
     image: publicImg("movement-like-seu-sono.png"),
     marker: publicImg("likeme-sleep-marker.svg"),
   },
   {
-    title: "Like: a sua Nutrição",
+    titleSuffix: "a sua Nutrição",
     description:
       "Comer bem não precisa ser difícil. Profissionais, comunidade e protocolos que ajudam a traduzir dados em escolhas reais para o seu dia a dia.",
     image: publicImg("movement-like-sua-nutricao.png"),
     marker: publicImg("likeme-nutrition-marker.svg"),
   },
   {
-    title: "Like: os seus Relacionamentos",
+    titleSuffix: "os seus Relacionamentos",
     description:
       "Porque conexões reais fazem bem para a saúde, física e mental.",
     image: publicImg("movement-like-seus-relacionamentos.png"),
     marker: publicImg("likeme-relationships-marker.svg"),
   },
   {
-    title: "Like: o seu Estresse",
+    titleSuffix: "o seu Estresse",
     description:
       "Sua saúde emocional é tão importante quanto a física. Descubra conteúdos, produtos e especialistas que te ajudam a viver com mais equilíbrio.",
     image: publicImg("movement-like-seu-estresse.png"),
     marker: publicImg("likeme-stress-marker.svg"),
   },
   {
-    title: "Like: a sua Autoestima",
+    titleSuffix: "a sua Autoestima",
     description:
       "Hábitos e atitudes que te ajudam a gostar cada vez mais de você.",
     image: publicImg("movement-like-sua-autoestima.png"),
     marker: publicImg("likeme-self-esteem-marker.svg"),
   },
   {
-    title: "Like: a sua Espiritualidade",
+    titleSuffix: "a sua Espiritualidade",
     description:
       "Pequenos gestos para além do corpo e mente, que te ajudam a se sentir cada vez melhor.",
     image: publicImg("movement-like-sua-espiritualidade.png"),
     marker: publicImg("likeme-spirituality-marker.svg"),
   },
   {
-    title: "Like: o seu Propósito",
+    titleSuffix: "o seu Propósito",
     description:
       "O que te move, importa. Conteúdos e comunidades para você viver com mais sentido e menos ruído.",
     image: publicImg("movement-like-seu-proposito.png"),
     marker: publicImg("likeme-purpose-marker.svg"),
   },
   {
-    title: "Like: o seu Ambiente",
+    titleSuffix: "o seu Ambiente",
     description:
       "O espaço onde você vive afeta como você se sente. Pequenas mudanças no ambiente podem fazer uma grande diferença no seu bem-estar.",
     image: publicImg("movement-like-seu-ambiente.png"),
     marker: publicImg("likeme-environment-marker.svg"),
   },
   {
-    title: "Like: a sua Saúde bucal",
+    titleSuffix: "a sua Saúde bucal",
     description:
       "Saúde bucal é saúde integral. Profissionais e conteúdos para cuidar do seu sorriso sem medo.",
     image: publicImg("movement-like-sua-saude-bucal.png"),
@@ -281,15 +283,23 @@ export const Home = (): JSX.Element => {
         <div className={styles.movementCarousel} ref={movementCarouselRef}>
           <div className={styles.movementCarouselTrack}>
             {MOVEMENT_CARDS.map((card) => (
-              <article className={styles.movementCard} key={card.title}>
+              <article className={styles.movementCard} key={card.titleSuffix}>
                 <div className={styles.movementText}>
                   <div className={styles.movementHeading}>
+                    <h2>
+                      <img
+                        className={styles.movementTitleLogo}
+                        src={LIKEME_LOGO_TITLE}
+                        alt="Like"
+                      />
+                      <span className={styles.movementTitleColon}>:</span>
+                      {" "}{card.titleSuffix}
+                    </h2>
                     <img
                       className={`${styles.movementMarker} ${styles.movementMarkerMobile}`}
                       src={card.marker}
                       alt=""
                     />
-                    <h2>{card.title}</h2>
                   </div>
                   <div className={styles.movementDescription}>
                     <img
@@ -303,7 +313,7 @@ export const Home = (): JSX.Element => {
                 <img
                   className={styles.movementImage}
                   src={card.image}
-                  alt={card.title}
+                  alt={card.titleSuffix}
                   loading="lazy"
                 />
               </article>
@@ -314,7 +324,7 @@ export const Home = (): JSX.Element => {
           {MOVEMENT_CARDS.map((card, index) => (
             <span
               className={`${styles.movementPaginationDot} ${index === activeMovementIndex ? styles.movementPaginationDotActive : ""}`}
-              key={card.title}
+              key={card.titleSuffix}
               onClick={() => {
                 movementCarouselApi?.scrollTo(index);
               }}
