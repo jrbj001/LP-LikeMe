@@ -49,6 +49,7 @@ export const styles = {
   showcasePhotoImg: "showcase__photo-img",
   showcaseBadge: "showcase__badge",
   showcaseAvatars: "showcase__avatars",
+  showcaseBadgeSmall: "showcase__badge--small",
   showcasePagination: "showcase__pagination",
   showcasePaginationDot: "showcase__pagination-dot",
   showcasePaginationDotActive: "showcase__pagination-dot--active",
@@ -374,7 +375,6 @@ injectGlobal(`
 
 .movement__carousel-track {
   display: flex;
-  gap: 20px;
 }
 
 .movement__card {
@@ -387,7 +387,8 @@ injectGlobal(`
   align-items: center;
   min-width: 0;
   scroll-snap-align: center;
-  flex: 0 0 100%;
+  flex: 0 0 calc(100% - 24px);
+  margin: 0 12px;
 }
 
 .movement__text h2 {
@@ -682,7 +683,7 @@ injectGlobal(`
 
 /* Carrossel showcase */
 .showcase {
-  padding: 32px 0;
+  padding: 80px 0 50px;
 }
 
 .showcase__carousel {
@@ -691,43 +692,62 @@ injectGlobal(`
 
 .showcase__carousel-track {
   display: flex;
-  gap: 20px;
 }
 
 .showcase__card {
-  flex: 0 0 100%;
+  flex: 0 0 calc(100% - 24px);
+  margin: 0 12px;
   border-radius: 44px;
   display: flex;
   flex-direction: column;
   min-width: 0;
   scroll-snap-align: center;
+  max-height: 400px;
 }
 
-.showcase__card--brand {
+.showcase__card.showcase__card--brand {
   background: #ff6300;
-  justify-content: space-between;
-  padding: 44px;
+  padding: 60px 44px;
 }
 
 .showcase__logo {
-  width: 136px;
-  height: auto;
+  width: 135.509px;
+  height: 25.419px;
+  object-fit: contain;
+  object-position: left;
 }
 
 .showcase__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
+  padding-top: 60px;
 }
 
 .showcase__text p {
   margin: 0;
   color: #001137;
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 28px;
+  font-size: 64px;
   font-weight: 650;
   line-height: 1;
-  letter-spacing: -0.56px;
+  letter-spacing: -1.28px;
+}
+
+.showcase__text p:first-child {
+  max-width: 237px;
+  position: relative;
+}
+
+.showcase__text p:first-child::before {
+  content: "";
+  position: absolute;
+  inset: -4px -6px;
+  background: rgba(253, 251, 237, 0.72);
+  backdrop-filter: blur(1.25px);
+  border-radius: 312px;
+  z-index: -1;
+  filter: blur(2.5px);
 }
 
 .showcase__card.showcase__card--photo {
@@ -754,12 +774,11 @@ injectGlobal(`
   object-fit: contain;
 }
 
-.showcase__card--avatar {
+.showcase__card.showcase__card--avatar {
   background: #f0eee1;
   align-items: center;
-  justify-content: center;
-  gap: 28px;
-  padding: 40px;
+  justify-content: space-between;
+  padding: 60px 40px;
 }
 
 .showcase__badge {
@@ -778,6 +797,11 @@ injectGlobal(`
   width: 100%;
 }
 
+.showcase__badge--small {
+  padding: 6px;
+  width: auto;
+}
+
 .showcase__avatars {
   display: flex;
   flex-direction: column;
@@ -786,28 +810,38 @@ injectGlobal(`
 }
 
 .showcase__avatars img {
-  width: 88px;
+  width: 100px;
   height: auto;
 }
 
 .showcase__pagination {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 8px;
+  width: 100%;
+  margin-top: 16px;
 }
 
 .showcase__pagination-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #d9d9d9;
+  width: 7px;
+  height: 6px;
+  border-radius: 2px;
+  background-color: transparent;
+  background-image: url("/img/movement-dot-inactive.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
   cursor: pointer;
-  transition: background 0.2s;
+  border: 0;
 }
 
 .showcase__pagination-dot--active {
-  background: #001137;
+  background-color: transparent;
+  background-image: url("/img/movement-dot-active.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
 }
 
 /* Seção institucional — grid de cards */

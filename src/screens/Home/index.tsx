@@ -408,10 +408,9 @@ export const Home = (): JSX.Element => {
             <article className={`${styles.showcaseCard} ${styles.showcaseCardAvatar}`}>
               <span className={styles.showcaseBadge}>SEM CULPA. SEM PRESSÃO.</span>
               <div className={styles.showcaseAvatars}>
-                <img src={ASSETS.showcaseBodyAvatar} alt="" />
-                <img src={ASSETS.showcaseMindAvatar} alt="" />
+                <img src={publicImg("showcase-avatars.png")} alt="" />
               </div>
-              <span className={styles.showcaseBadge}>NO SEU TEMPO.</span>
+              <span className={`${styles.showcaseBadge} ${styles.showcaseBadgeSmall}`}>NO SEU TEMPO.</span>
             </article>
           </div>
         </div>
