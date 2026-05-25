@@ -1253,7 +1253,7 @@ injectGlobal(`
   gap: 16px;
 }
 
-.newsletter form > * {
+.newsletter form > *:not(button) {
   width: 100%;
 }
 
@@ -1497,6 +1497,104 @@ injectGlobal(`
 
 .footer > div:last-child a:hover {
   opacity: 0.82;
+}
+
+@media (min-width: 901px) {
+  .footer-area {
+    padding: 120px 48px 80px;
+    gap: 80px;
+    background: linear-gradient(
+      180deg,
+      rgba(246, 207, 251, 0) 75.76%,
+      #f6cffb 93.5%,
+      #eb7dc6 113.76%
+    );
+  }
+
+  .newsletter h3 {
+    font-size: 48px;
+    font-weight: 650;
+    letter-spacing: -0.96px;
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  .newsletter form {
+    max-width: 520px;
+    gap: 16px;
+  }
+
+  .newsletter input {
+    height: 48px;
+    font-size: 16px;
+    padding: 12px 40px;
+  }
+
+  .newsletter__select-button {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .newsletter__submit-button {
+    width: fit-content;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 24px;
+    margin-top: 8px;
+  }
+
+  .footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .footer > div:first-child {
+    flex: 0 0 45%;
+    gap: 16px;
+  }
+
+  .footer > div:first-child img {
+    width: 200px;
+    height: 37px;
+  }
+
+  .footer > div:first-child strong {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.56px;
+  }
+
+  .footer > div:first-child p {
+    font-size: 16px;
+    letter-spacing: -0.32px;
+  }
+
+  .footer > div:nth-child(2),
+  .footer > div:nth-child(3),
+  .footer > div:last-child {
+    flex: 0 0 auto;
+  }
+
+  .footer > div:nth-child(2) {
+    gap: 20px;
+  }
+
+  .footer strong {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .footer p {
+    font-size: 16px;
+    letter-spacing: -0.32px;
+  }
 }
 
 @media (max-width: 1240px) {
