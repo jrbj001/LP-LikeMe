@@ -12,11 +12,6 @@ import { APP_STORE_URL, PLAY_STORE_URL } from "../../constants/socialLinks";
 import { publicImg } from "../../utils/publicImg";
 import { styles } from "./styles";
 
-function storeUrl(): string {
-  const ua = navigator.userAgent;
-  if (/android/i.test(ua)) return PLAY_STORE_URL;
-  return APP_STORE_URL;
-}
 
 const ASSETS = {
   heroMobilePhone: publicImg("figma-hero-phone-mockup.png"),
@@ -295,7 +290,7 @@ export const Home = (): JSX.Element => {
           onNavigateSection={scrollToSection}
         />
 
-        <div className={styles.heroSectionContent}>
+        <div className={styles.heroSectionContent} id={SECTION_ANCHORS.VERSAO_BETA}>
           <div className={styles.heroSectionCopy}>
             <h1>Já pensou em ter tudo que importa, num único lugar?</h1>
             <p>
@@ -309,14 +304,32 @@ export const Home = (): JSX.Element => {
               <p className={styles.heroCtaCardText}>
                 Amplie o seu autocuidado, no seu tempo e do seu jeito
               </p>
-              <a
-                className={styles.heroCtaCardButton}
-                href={storeUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Experimente a versão beta
-              </a>
+              <div className={styles.heroCtaCardStores}>
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Baixar na App Store"
+                >
+                  <img
+                    src={publicImg("appstore.png")}
+                    alt="App Store"
+                    className={styles.heroCtaStoreBadge}
+                  />
+                </a>
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Baixar no Google Play"
+                >
+                  <img
+                    src={publicImg("googleplay.png")}
+                    alt="Google Play"
+                    className={styles.heroCtaStoreBadge}
+                  />
+                </a>
+              </div>
             </div>
           </div>
           <picture className={styles.heroSectionPhoneWrap}>
@@ -469,7 +482,7 @@ export const Home = (): JSX.Element => {
       </section>
 
       {/* 4. Carrossel de features */}
-      <section className={styles.features}>
+      <section className={styles.features} id={SECTION_ANCHORS.SOBRE}>
         <div className={styles.featuresCarousel} ref={featuresCarouselRef}>
           <div className={styles.featuresCarouselTrack}>
             {FEATURE_SLIDES.map((slide) => (
@@ -525,7 +538,7 @@ export const Home = (): JSX.Element => {
       </section>
 
       {/* 5. App */}
-      <section className={styles.app} id={SECTION_ANCHORS.VERSAO_BETA}>
+      <section className={styles.app}>
         <div className={styles.appRow}>
           <article className={styles.appLeft}>
             <h4>

@@ -16,6 +16,8 @@ export const styles = {
   heroCtaCard: "hero-cta-card",
   heroCtaCardText: "hero-cta-card__text",
   heroCtaCardButton: "hero-cta-card__button",
+  heroCtaCardStores: "hero-cta-card__stores",
+  heroCtaStoreBadge: "hero-cta-card__store-badge",
   heroSectionPhoneWrap: "hero-section__phone-wrap",
   heroSectionPhone: "hero-section__phone",
   chip: "chip",
@@ -169,6 +171,7 @@ injectGlobal(`
 }
 
 .hero-section,
+.hero-section__content,
 .simplify,
 .app,
 .newsletter {
@@ -322,6 +325,20 @@ injectGlobal(`
   line-height: normal;
   text-decoration: none;
   cursor: pointer;
+}
+
+.hero-cta-card__stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-cta-card__store-badge {
+  display: block;
+  height: 31px;
+  width: auto;
 }
 
 .hero-section__phone-wrap {
