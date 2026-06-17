@@ -1,0 +1,3 @@
+export const PRIVACY_POLICY_SECTION_COUNT = 12;
+
+export const PRIVACY_POLICY_DEFAULT_OPEN_SECTION_IDS = [1, 2] as const;

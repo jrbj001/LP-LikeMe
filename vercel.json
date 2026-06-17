@@ -7,6 +7,9 @@
   "functions": {
     "api/newsletter.ts": {
       "maxDuration": 30
+    },
+    "api/i18n/labels.ts": {
+      "maxDuration": 15
     }
   },
   "rewrites": [

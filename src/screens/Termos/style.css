@@ -134,6 +134,40 @@
   z-index: 1;
 }
 
+.termos-hero-description {
+  max-width: 52.5rem;
+  margin: 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.termos-hero-description p {
+  font-family: var(--BRANDBOOK-texto-font-family), "DM Sans", sans-serif;
+  font-size: var(--BRANDBOOK-texto-font-size, 17px);
+  font-weight: var(--BRANDBOOK-texto-font-weight, 400);
+  line-height: var(--BRANDBOOK-texto-line-height, 1.15);
+  letter-spacing: var(--BRANDBOOK-texto-letter-spacing, 0);
+  color: var(--primitives-blue-blue-900, #001137);
+  margin: 0 0 1rem;
+}
+
+.termos-hero-description p:last-child {
+  margin-bottom: 0;
+}
+
+.termos-privacy-disclaimer {
+  font-family: var(--BRANDBOOK-texto-font-family), "DM Sans", sans-serif;
+  font-size: var(--body-font-size, 14px);
+  font-weight: var(--body-font-weight, 400);
+  line-height: 1.4;
+  letter-spacing: var(--body-letter-spacing, 0.2px);
+  color: var(--primitives-blue-blue-900, #001137);
+  max-width: 52.5rem;
+  margin: 0.5rem auto 0;
+  text-align: center;
+}
+
 /* Seções accordion */
 .termos-sections {
   width: 100%;

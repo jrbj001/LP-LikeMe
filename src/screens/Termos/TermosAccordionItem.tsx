@@ -1,8 +1,7 @@
 import React from "react";
-import type { TermsSectionId } from "./termosConstants";
 
 export type TermosAccordionItemProps = {
-  sectionId: TermsSectionId;
+  sectionId: number;
   title: string;
   isOpen: boolean;
   onToggle: () => void;
