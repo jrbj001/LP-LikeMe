@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
 
 type BoldSegment = {
@@ -7,6 +8,7 @@ type BoldSegment = {
 
 const EMAIL_SPLIT_PATTERN = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
 const EMAIL_VALUE_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const MARKDOWN_LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 
 function parseBoldSegments(text: string): BoldSegment[] {
   const segments: BoldSegment[] = [];
@@ -33,29 +35,65 @@ function parseBoldSegments(text: string): BoldSegment[] {
   return segments;
 }
 
-function renderInlineText(text: string, keyPrefix: string): ReactNode[] {
+function renderTextToken(part: string, key: string, bold: boolean): ReactNode {
+  if (EMAIL_VALUE_PATTERN.test(part)) {
+    const emailNode = <a href={`mailto:${part}`}>{part}</a>;
+    return bold ? <strong key={key}>{emailNode}</strong> : emailNode;
+  }
+
+  return bold ? <strong key={key}>{part}</strong> : <span key={key}>{part}</span>;
+}
+
+function renderInlineSegment(segment: BoldSegment, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   let partIndex = 0;
+  let remaining = segment.text;
 
-  for (const segment of parseBoldSegments(text)) {
-    const parts = segment.text.split(EMAIL_SPLIT_PATTERN);
+  while (remaining.length > 0) {
+    MARKDOWN_LINK_PATTERN.lastIndex = 0;
+    const linkMatch = MARKDOWN_LINK_PATTERN.exec(remaining);
 
-    for (const part of parts) {
-      if (!part) {
-        continue;
+    if (!linkMatch || linkMatch.index > 0) {
+      const plainEnd = linkMatch?.index ?? remaining.length;
+      const plainText = remaining.slice(0, plainEnd);
+      const emailParts = plainText.split(EMAIL_SPLIT_PATTERN);
+
+      for (const emailPart of emailParts) {
+        if (!emailPart) {
+          continue;
+        }
+
+        const key = `${keyPrefix}-${partIndex}`;
+        partIndex += 1;
+        nodes.push(renderTextToken(emailPart, key, segment.bold));
       }
 
+      if (!linkMatch) {
+        break;
+      }
+    }
+
+    if (linkMatch) {
       const key = `${keyPrefix}-${partIndex}`;
       partIndex += 1;
-
-      const content = EMAIL_VALUE_PATTERN.test(part) ? (
-        <a href={`mailto:${part}`}>{part}</a>
-      ) : (
-        part
+      const linkNode = (
+        <Link key={key} to={linkMatch[2]}>
+          {linkMatch[1]}
+        </Link>
       );
-
-      nodes.push(segment.bold ? <strong key={key}>{content}</strong> : <span key={key}>{content}</span>);
+      nodes.push(segment.bold ? <strong key={`${key}-bold`}>{linkNode}</strong> : linkNode);
+      remaining = remaining.slice(linkMatch.index + linkMatch[0].length);
     }
+  }
+
+  return nodes;
+}
+
+function renderInlineText(text: string, keyPrefix: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+
+  for (const segment of parseBoldSegments(text)) {
+    nodes.push(...renderInlineSegment(segment, keyPrefix));
   }
 
   return nodes;

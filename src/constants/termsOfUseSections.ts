@@ -1,0 +1,3 @@
+export const TERMS_OF_USE_SECTION_COUNT = 16;
+
+export const TERMS_OF_USE_PLANS_SECTION_ID = 5;
