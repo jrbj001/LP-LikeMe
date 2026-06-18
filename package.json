@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@emotion/css": "^11.13.5",
+    "@sendgrid/mail": "^8.1.6",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "prop-types": "^15.8.1",

@@ -46,9 +46,9 @@ Para começar, instale as dependências:
 npm install
 ```
 
-Crie o arquivo `.env.local` na raiz (copie de `.env.example` e complete com as variáveis Mailchimp). O `vercel dev` pode acrescentar/atualizar `VERCEL_OIDC_TOKEN` nesse mesmo arquivo — **não apague** esse bloco ao editar as chaves Mailchimp.
+Crie o arquivo `.env.local` na raiz (copie de `.env.example` e complete com as variáveis SendGrid e `BACKEND_URL`). O `vercel dev` pode acrescentar/atualizar `VERCEL_OIDC_TOKEN` nesse mesmo arquivo — **não apague** esse bloco ao editar as chaves.
 
-Para sincronizar variáveis do painel Vercel sem perder o Mailchimp local, cadastre também as `MAILCHIMP_*` em **Vercel → Settings → Environment Variables** e rode `vercel env pull .env.local`.
+Para sincronizar variáveis do painel Vercel, cadastre também as `SENDGRID_*` e `BACKEND_URL` em **Vercel → Settings → Environment Variables** e rode `vercel env pull .env.local`.
 
 Execute o projeto em modo de desenvolvimento (Vite + API serverless, igual à produção):
 
@@ -64,7 +64,7 @@ Após alguns segundos, use a URL que o terminal mostrar (geralmente [http://loca
 
 Se o formulário falhar com erro genérico, confira no DevTools (aba Network) se `POST /api/newsletter` retorna 404 — nesse caso reinicie com `vercel dev` após `npm install`.
 
-**Teste local da integração Mailchimp (sem subir deploy):**
+**Teste local da integração SendGrid (sem subir deploy):**
 
 ```bash
 vercel dev
@@ -94,29 +94,38 @@ O Vite usa `publicDir: "./static"`: arquivos em `static/img/` viram **`/img/nome
 - Os PNGs grandes **Simplify** e **slide do App** ficam no repositório em `static/img/` e são referenciados com `publicImg(...)`.
 - URLs **`figma.com/api/mcp/asset/...`** seguem o layout do Figma; se alguma falhar no ar, exporte do Figma para `static/img/` e troque a URL no código.
 
-## Formulário “Cadastre-se” (newsletter + Mailchimp)
+## Formulário “Cadastre-se” (newsletter + SendGrid)
 
-O envio chama `POST /api/newsletter` (função serverless em `api/newsletter.ts`), que inscreve o contato na audiência Mailchimp e aplica a tag `landing-page` (régua de boas-vindas da landing).
+O envio chama `POST /api/newsletter` (função serverless em `api/newsletter.ts`), que dispara o e-mail de boas-vindas via Dynamic Template do SendGrid.
 
 Variáveis de ambiente (`.env.local` e **Vercel → Settings → Environment Variables**):
 
 | Variável | Descrição |
 |----------|-----------|
-| `MAILCHIMP_API_KEY` | Chave da API (formato `xxxx-us14`) |
-| `MAILCHIMP_SERVER_PREFIX` | Prefixo do datacenter (ex.: `us14`) |
-| `MAILCHIMP_AUDIENCE_ID` | ID da audiência (lista Like:Me) |
-| `MAILCHIMP_WELCOME_CAMPAIGN_ID` | ID da campanha **01.1 Boas-Vindas — Cadastro na Landing Page** (`c8aad8e134`) |
+| `SENDGRID_API_KEY` | Chave da API SendGrid |
+| `SENDGRID_FROM_EMAIL` | Remetente autenticado (ex.: `suporte@likeme.global`) |
+| `SENDGRID_FROM_NAME` | Nome do remetente (padrão: `Like:Me`) |
+| `SENDGRID_REPLY_TO` | Reply-to (padrão: `fabricio.guimaraes@likeme.global`) |
+| `SENDGRID_TEMPLATE_ID_LANDING_WELCOME` | ID do Dynamic Template de boas-vindas (`d-...`) |
+| `SENDGRID_MARKETING_LIST_ID` | *(Opcional)* Lista Marketing Contacts (substitui audiência Mailchimp) |
+| `SENDGRID_MARKETING_PROFILE_FIELD_ID` | *(Opcional)* ID do custom field de perfil em Marketing → Field Definitions |
 
-Após o cadastro, a API inscreve o contato na lista e envia a campanha **01.1** como envio real (segmento com o e-mail do cadastro), com assunto **Que bom ter você no Like:Me** e nome personalizado via `*|FNAME|*`.
+Variáveis Handlebars enviadas ao template: `{{nome}}`, `{{firstName}}`, `{{email}}`, `{{profile}}`, `{{nome_completo}}`, `{{perfil}}`.
 
-Mantenha a campanha `01.1` com o conteúdo atualizado no Mailchimp; alterações no editor passam a valer nos próximos cadastros sem mudar código.
+Para listar templates e listas Marketing na conta SendGrid:
+
+```bash
+SENDGRID_API_KEY=SG.xxx node scripts/list-sendgrid-landing-resources.mjs
+```
+
+Mantenha o template atualizado no SendGrid; alterações no editor passam a valer nos próximos cadastros sem mudar código.
 
 ### E-mail não chega após deploy
 
-1. **Branch em produção:** a integração Mailchimp está na branch `mailchimp-integracao`. A `main` ainda não inclui `api/newsletter` — em `likeme.global` o `POST /api/newsletter` pode responder 405/HTML até fazer merge/deploy dessa branch.
-2. **Variáveis na Vercel (Production):** cadastre as quatro `MAILCHIMP_*` em Settings → Environment Variables (não só Development).
+1. **Variáveis na Vercel (Production):** cadastre as `SENDGRID_*` em Settings → Environment Variables (não só Development).
+2. **Template:** confirme que `SENDGRID_TEMPLATE_ID_LANDING_WELCOME` aponta para um Dynamic Template ativo com as variáveis acima.
 3. **Teste rápido:** após o deploy, `POST https://www.likeme.global/api/newsletter` deve retornar JSON (`ok: true`), não HTML da landing.
-4. **Spam:** confira também a pasta de spam; o envio usa a campanha `01.1` via API Mailchimp.
+4. **Spam:** confira também a pasta de spam; o envio usa SendGrid Transactional.
 
 ## Storybook
 

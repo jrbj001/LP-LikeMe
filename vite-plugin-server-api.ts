@@ -2,8 +2,8 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
 import { fetchBackendI18nLabels } from "./lib/i18n/fetchBackendI18nLabels";
-import { handleNewsletterPost } from "./lib/mailchimp/handleNewsletterPost";
-import { formatErrorMessage } from "./src/utils/formatErrorMessage";
+import { handleNewsletterPost } from "./lib/newsletter/handleNewsletterPost";
+import { formatErrorMessage } from "./lib/formatErrorMessage";
 
 function readJsonBody(req: IncomingMessage): Promise<unknown> {
   return new Promise((resolve, reject) => {
@@ -27,9 +27,9 @@ function sendJson(res: ServerResponse, status: number, body: unknown): void {
   res.end(JSON.stringify(body));
 }
 
-export function mailchimpApiPlugin(mode: string): Plugin {
+export function serverApiPlugin(mode: string): Plugin {
   return {
-    name: "mailchimp-api-dev",
+    name: "server-api-dev",
     configureServer(server) {
       const env = loadEnv(mode, process.cwd(), "");
       Object.assign(process.env, env);

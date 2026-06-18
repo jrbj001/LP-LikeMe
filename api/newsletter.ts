@@ -1,4 +1,4 @@
-import { handleNewsletterPost } from "../lib/mailchimp/handleNewsletterPost.js";
+import { handleNewsletterPost } from "../lib/newsletter/handleNewsletterPost.js";
 import { formatErrorMessage } from "../lib/formatErrorMessage.js";
 
 export const config = {
