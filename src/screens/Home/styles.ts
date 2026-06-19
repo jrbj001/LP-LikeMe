@@ -1038,7 +1038,7 @@ injectGlobal(`
 
 .features__card {
   flex: 0 0 354px;
-  height: 700px;
+  height: 791px;
   background: #fdfbed;
   border-radius: 24px;
   padding: 32px 24px;
@@ -1092,7 +1092,7 @@ injectGlobal(`
 
 .features__card-image-wrap {
   flex: 1 1 0;
-  min-height: min(413px, 52vh);
+  min-height: clamp(328px, 48dvh, 413px);
   width: 100%;
   margin-top: 24px;
   position: relative;
@@ -1117,7 +1117,7 @@ injectGlobal(`
 
 .features__card-image-wrap--avatar {
   flex: 0 0 auto;
-  min-height: 0;
+  min-height: clamp(300px, 44dvh, 351px);
   overflow: visible;
   margin-top: auto;
 }
@@ -2238,8 +2238,16 @@ injectGlobal(`
       margin: 0 12px;
       padding: 24px;
       height: auto;
-      min-height: 100%;
+      min-height: min(791px, calc(100dvh - 86px));
       align-self: stretch;
+    }
+
+    .features__card-image-wrap:not(.features__card-image-wrap--avatar) {
+      min-height: clamp(328px, 48dvh, 413px);
+    }
+
+    .features__card-image-wrap--avatar {
+      min-height: clamp(300px, 44dvh, 351px);
     }
   }
 
