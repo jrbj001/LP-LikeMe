@@ -1,5 +1,5 @@
+import { MarkdownText } from "../../components/text/MarkdownText";
 import { publicImg } from "../../utils/publicImg";
-import { parsePlainLegalText } from "../../utils/parsePlainLegalText";
 import {
   TERMS_OF_USE_PLANS_SECTION_ID,
 } from "../../constants/termsOfUseSections";
@@ -20,16 +20,12 @@ export function TermsSectionContent({
   if (section.id === TERMS_OF_USE_PLANS_SECTION_ID) {
     return (
       <>
-        <div className="termos-accordion-text">
-          {parsePlainLegalText(labels.section5ContentBefore)}
-        </div>
+        <MarkdownText className="termos-accordion-text" text={labels.section5ContentBefore} />
         <TermsPlansTable
           subtitle={labels.section5PlansSubtitle}
           table={labels.section5PlansTable}
         />
-        <div className="termos-accordion-text">
-          {parsePlainLegalText(labels.section5ContentAfter)}
-        </div>
+        <MarkdownText className="termos-accordion-text" text={labels.section5ContentAfter} />
       </>
     );
   }
@@ -37,9 +33,7 @@ export function TermsSectionContent({
   if (section.id === 1 && labels.section1HasIllustration) {
     return (
       <>
-        <div className="termos-accordion-text">
-          {parsePlainLegalText(section.content ?? "")}
-        </div>
+        <MarkdownText className="termos-accordion-text" text={section.content ?? ""} />
         <div className="termos-accordion-image">
           <img src={TERMS_ACCEPTANCE_ILLUSTRATION} alt="" />
         </div>
@@ -47,9 +41,5 @@ export function TermsSectionContent({
     );
   }
 
-  return (
-    <div className="termos-accordion-text">
-      {parsePlainLegalText(section.content ?? "")}
-    </div>
-  );
+  return <MarkdownText className="termos-accordion-text" text={section.content ?? ""} />;
 }

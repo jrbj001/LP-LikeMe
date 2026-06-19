@@ -4,7 +4,7 @@ import { LandingHeader } from "../../components/layout/LandingHeader";
 import { PRIVACY_POLICY_DEFAULT_OPEN_SECTION_IDS } from "../../constants/privacyPolicySections";
 import { usePrivacyPoliciesLabels } from "../../hooks/usePrivacyPoliciesLabels";
 import { privacyIntroParts } from "../../utils/privacyPoliciesFromTranslation";
-import { parsePlainLegalText, renderLegalInline } from "../../utils/parsePlainLegalText";
+import { MarkdownText } from "../../components/text/MarkdownText";
 import { TermosAccordionItem } from "../Termos/TermosAccordionItem";
 import { styles } from "../Home/styles";
 import "../Termos/style.css";
@@ -58,9 +58,7 @@ export const Privacy = (): JSX.Element => {
                 <div className="termos-hero-bg" aria-hidden />
                 <h1 className="termos-hero-title">{labels.title.toUpperCase()}</h1>
                 {labels.description ? (
-                  <div className="termos-hero-description">
-                    {parsePlainLegalText(labels.description)}
-                  </div>
+                  <MarkdownText className="termos-hero-description" text={labels.description} />
                 ) : null}
                 {intro.dateLine ? (
                   <p className="termos-hero-date">{intro.dateLine}</p>
@@ -81,13 +79,11 @@ export const Privacy = (): JSX.Element => {
                     isOpen={Boolean(openSections[id])}
                     onToggle={() => toggle(id)}
                   >
-                    <div className="termos-accordion-text">{parsePlainLegalText(content)}</div>
+                    <MarkdownText className="termos-accordion-text" text={content} />
                   </TermosAccordionItem>
                 ))}
                 {labels.disclaimer ? (
-                  <p className="termos-privacy-disclaimer">
-                    {renderLegalInline(labels.disclaimer, "disclaimer")}
-                  </p>
+                  <MarkdownText className="termos-privacy-disclaimer" text={labels.disclaimer} />
                 ) : null}
               </section>
             </>

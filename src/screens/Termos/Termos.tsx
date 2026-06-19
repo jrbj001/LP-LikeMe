@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { LandingFooter } from "../../components/layout/LandingFooter";
 import { LandingHeader } from "../../components/layout/LandingHeader";
+import { MarkdownText } from "../../components/text/MarkdownText";
 import { useTermsOfUseLabels } from "../../hooks/useTermsOfUseLabels";
 import { TermosAccordionItem } from "./TermosAccordionItem";
 import { TermsSectionContent } from "./TermsSectionContent";
@@ -61,7 +62,7 @@ export const Termos = (): JSX.Element => {
                   <span className="termos-hero-title-line">{labels.titleLine2}</span>
                 </h1>
                 <p className="termos-hero-date">{labels.dateLabel}</p>
-                <p className="termos-hero-intro">{labels.intro}</p>
+                <MarkdownText className="termos-hero-intro" text={labels.intro} />
               </section>
 
               <section className="termos-sections">
