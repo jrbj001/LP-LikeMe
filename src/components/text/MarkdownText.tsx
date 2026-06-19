@@ -2,6 +2,7 @@ import { Fragment, useMemo } from "react";
 import { parseMarkdownSegments } from "../../utils/parseMarkdown";
 import { parseMarkdownBlocks } from "../../utils/parseMarkdownBlocks";
 import { parseLinkifiedSegments, type LinkifiedSegment } from "../../utils/text/parseLinkifiedSegments";
+import "./MarkdownText.css";
 
 type MarkdownTextProps = {
   text: string;
@@ -90,7 +91,7 @@ export function MarkdownText({ text, className }: MarkdownTextProps): JSX.Elemen
   }
 
   return (
-    <div className={className}>
+    <div className={className ? `markdown-text ${className}` : "markdown-text"}>
       {blocks.map((block, blockIndex) => {
         if (block.type === "spacer") {
           return <div key={`spacer-${blockIndex}`} aria-hidden className="markdown-spacer" />;

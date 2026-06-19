@@ -1,0 +1,4 @@
+.markdown-text p,
+.markdown-text li {
+  white-space: pre-line;
+}
