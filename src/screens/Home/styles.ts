@@ -2130,6 +2130,37 @@ injectGlobal(`
     height: 40px;
   }
 
+  @media (max-width: 900px) {
+    .features {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 32px 0;
+    }
+
+    .features__carousel {
+      flex: 1 1 0;
+      min-height: 0;
+    }
+
+    .features__carousel-track {
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .features__pagination {
+      flex-shrink: 0;
+    }
+
+    .features__card {
+      height: auto;
+      min-height: 100%;
+      align-self: stretch;
+    }
+  }
+
   .app {
     display: flex;
     max-width: none;
