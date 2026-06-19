@@ -69,12 +69,17 @@ export const styles = {
   featuresCarousel: "features__carousel",
   featuresCarouselTrack: "features__carousel-track",
   featuresCard: "features__card",
+  featuresCardAvatar: "features__card--avatar",
   featuresCardHeader: "features__card-header",
   featuresCardIcon: "features__card-icon",
   featuresCardTitle: "features__card-title",
   featuresCardDescription: "features__card-description",
   featuresCardContent: "features__card-content",
+  featuresCardImageWrap: "features__card-image-wrap",
+  featuresCardImageWrapAvatar: "features__card-image-wrap--avatar",
   featuresCardImage: "features__card-image",
+  featuresCardDesktopImageWrap: "features__card-desktop-image-wrap",
+  featuresCardDesktopImageWrapAvatar: "features__card-desktop-image-wrap--avatar",
   featuresCardDesktopImage: "features__card-desktop-image",
   featuresPagination: "features__pagination",
   featuresPaginationDot: "features__pagination-dot",
@@ -1082,14 +1087,57 @@ injectGlobal(`
 .features__card-content {
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
+}
+
+.features__card-image-wrap {
+  flex: 1 1 0;
+  min-height: min(413px, 52vh);
+  width: 100%;
+  margin-top: 24px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.features__card-image-wrap .features__card-image {
+  position: absolute;
+  width: 165%;
+  height: 155%;
+  left: -32%;
+  top: -27%;
+  max-width: none;
+  margin: 0;
+  min-height: 0;
+  flex: none;
+  border-radius: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+.features__card-image-wrap--avatar {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+  margin-top: auto;
+}
+
+.features__card-image-wrap--avatar .features__card-image {
+  position: static;
+  width: 100%;
+  height: auto;
+  left: auto;
+  top: auto;
+  object-fit: cover;
+  object-position: bottom center;
 }
 
 .features__card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  object-fit: cover;
-  margin-top: auto;
+  display: block;
+}
+
+.features__card-desktop-image-wrap {
+  display: none;
 }
 
 .features__card-desktop-image {
@@ -1130,7 +1178,7 @@ injectGlobal(`
   .features__card {
     flex: 0 0 calc(100% - 24px);
     height: auto;
-    min-height: 320px;
+    min-height: 560px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -1141,7 +1189,6 @@ injectGlobal(`
     box-shadow: none;
     opacity: 0.88;
   }
-
 
   .features__card-content {
     flex: 1 1 0;
@@ -1170,17 +1217,56 @@ injectGlobal(`
     max-width: 380px;
   }
 
-  .features__card-image {
+  .features__card-image-wrap {
     display: none;
   }
 
-  .features__card-desktop-image {
+  .features__card-desktop-image-wrap {
     display: block;
+    flex: 0 0 46%;
+    width: 46%;
+    max-width: 46%;
+    min-height: 480px;
+    position: relative;
+    overflow: visible;
+    border-radius: 32px;
+    align-self: center;
+  }
+
+  .features__card-desktop-image-wrap .features__card-desktop-image {
+    display: block;
+    position: absolute;
+    width: 165%;
+    height: 155%;
+    left: -32%;
+    top: -27%;
+    max-width: none;
+    min-height: 0;
+    border-radius: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .features__card--avatar {
+    min-height: 320px;
+  }
+
+  .features__card--avatar .features__card-desktop-image-wrap {
     flex: 0 0 auto;
     width: 40%;
+    max-width: 40%;
+    min-height: 0;
     max-height: 400px;
-    border-radius: 32px;
-    object-fit: contain;
+    overflow: visible;
+  }
+
+  .features__card--avatar .features__card-desktop-image-wrap .features__card-desktop-image {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    left: auto;
+    top: auto;
   }
 
   .features__pagination {
@@ -2110,27 +2196,20 @@ injectGlobal(`
     margin-top: 16px;
   }
 
-  .features__card {
-    flex: 0 0 82%;
-    height: 500px;
-    margin: 0 12px;
-    padding: 24px;
-  }
-
-  .features__card-title {
-    font-size: 28px;
-  }
-
-  .features__card-description {
-    font-size: 14px;
-  }
-
-  .features__card-icon {
-    width: 40px;
-    height: 40px;
-  }
-
   @media (max-width: 900px) {
+    .features__card-title {
+      font-size: 28px;
+    }
+
+    .features__card-description {
+      font-size: 14px;
+    }
+
+    .features__card-icon {
+      width: 40px;
+      height: 40px;
+    }
+
     .features {
       min-height: 100vh;
       min-height: 100dvh;
@@ -2155,6 +2234,9 @@ injectGlobal(`
     }
 
     .features__card {
+      flex: 0 0 82%;
+      margin: 0 12px;
+      padding: 24px;
       height: auto;
       min-height: 100%;
       align-self: stretch;

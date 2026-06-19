@@ -485,8 +485,11 @@ export const Home = (): JSX.Element => {
       <section className={styles.features} id={SECTION_ANCHORS.SOBRE}>
         <div className={styles.featuresCarousel} ref={featuresCarouselRef}>
           <div className={styles.featuresCarouselTrack}>
-            {FEATURE_SLIDES.map((slide) => (
-              <article className={styles.featuresCard} key={slide.title}>
+            {FEATURE_SLIDES.map((slide, slideIndex) => (
+              <article
+                className={`${styles.featuresCard} ${slideIndex === 0 ? styles.featuresCardAvatar : ""}`}
+                key={slide.title}
+              >
                 <div className={styles.featuresCardContent}>
                   <div className={styles.featuresCardHeader}>
                     <img
@@ -500,19 +503,27 @@ export const Home = (): JSX.Element => {
                     {slide.description}
                   </p>
                 </div>
-                <img
-                  className={styles.featuresCardImage}
-                  src={slide.image}
-                  alt={slide.title}
-                  loading="lazy"
-                />
-                {slide.desktopImage ? (
+                <div
+                  className={`${styles.featuresCardImageWrap} ${slideIndex === 0 ? styles.featuresCardImageWrapAvatar : ""}`}
+                >
                   <img
-                    className={styles.featuresCardDesktopImage}
-                    src={slide.desktopImage}
+                    className={styles.featuresCardImage}
+                    src={slide.image}
                     alt={slide.title}
                     loading="lazy"
                   />
+                </div>
+                {slide.desktopImage ? (
+                  <div
+                    className={`${styles.featuresCardDesktopImageWrap} ${slideIndex === 0 ? styles.featuresCardDesktopImageWrapAvatar : ""}`}
+                  >
+                    <img
+                      className={styles.featuresCardDesktopImage}
+                      src={slide.desktopImage}
+                      alt={slide.title}
+                      loading="lazy"
+                    />
+                  </div>
                 ) : null}
               </article>
             ))}
