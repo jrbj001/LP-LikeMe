@@ -16,6 +16,25 @@ export type LandingHeaderProps =
     }
   | { variant: "legal" };
 
+function homeNavChipClassName(): string {
+  return [styles.chip, styles.chipHome].join(" ");
+}
+
+function HomeNavChipContent(): JSX.Element {
+  return (
+    <>
+      <span className={styles.chipHomeIconWrap} aria-hidden>
+        <img
+          className={styles.chipHomeIcon}
+          src={LANDING_HEADER_ASSETS.homeNavIcon}
+          alt=""
+        />
+      </span>
+      <span className={styles.chipHomeLabel}>Home</span>
+    </>
+  );
+}
+
 export function LandingHeader(props: LandingHeaderProps): JSX.Element {
   const isLegal = props.variant === "legal";
 
@@ -73,6 +92,34 @@ export function LandingHeader(props: LandingHeaderProps): JSX.Element {
 
       <nav className={styles.heroSectionMenu} aria-label="Seções da página">
         {LANDING_HEADER_NAV_ITEMS.map((item) => {
+          if (item.anchorId === SECTION_ANCHORS.HERO) {
+            if (props.variant === "home") {
+              return (
+                <a
+                  key={item.anchorId}
+                  className={homeNavChipClassName()}
+                  href={`#${item.anchorId}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    props.onNavigateSection(item.anchorId);
+                  }}
+                >
+                  <HomeNavChipContent />
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={item.anchorId}
+                className={homeNavChipClassName()}
+                to={ROUTES.HOME}
+              >
+                <HomeNavChipContent />
+              </Link>
+            );
+          }
+
           if (props.variant === "home") {
             const isActive = props.activeHeaderNav === item.anchorId;
             return (
@@ -87,18 +134,6 @@ export function LandingHeader(props: LandingHeaderProps): JSX.Element {
               >
                 {item.label}
               </a>
-            );
-          }
-
-          if (item.anchorId === SECTION_ANCHORS.HERO) {
-            return (
-              <Link
-                key={item.anchorId}
-                className={styles.chip}
-                to={ROUTES.HOME}
-              >
-                {item.label}
-              </Link>
             );
           }
 

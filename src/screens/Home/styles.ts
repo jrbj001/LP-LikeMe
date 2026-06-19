@@ -22,6 +22,10 @@ export const styles = {
   heroSectionPhone: "hero-section__phone",
   chip: "chip",
   chipActive: "chip--active",
+  chipHome: "chip--home",
+  chipHomeIconWrap: "chip__home-icon-wrap",
+  chipHomeIcon: "chip__home-icon",
+  chipHomeLabel: "chip__home-label",
   movement: "movement",
   movementCarousel: "movement__carousel",
   movementCarouselTrack: "movement__carousel-track",
@@ -157,6 +161,39 @@ injectGlobal(`
 .chip--active {
   background: #001137;
   color: #fff;
+}
+
+.chip--home {
+  gap: 4px;
+  padding: 0 12px 0 0;
+  align-items: stretch;
+  height: 26px;
+  overflow: hidden;
+}
+
+.chip--home.chip--active {
+  background: transparent;
+  color: #001137;
+}
+
+.chip__home-icon-wrap {
+  display: flex;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin: -1.037px 0 -1.037px -1.037px;
+}
+
+.chip__home-icon {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.chip__home-label {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  line-height: 1;
 }
 
 .hero-section__menu a.chip {
@@ -1776,16 +1813,6 @@ injectGlobal(`
     max-width: none;
   }
 
-  @media (max-width: 900px) {
-    .hero-section__bg {
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      transform: none;
-    }
-  }
-
   .hero-section__bg--legal {
     left: 0;
     top: 0;
@@ -1825,34 +1852,92 @@ injectGlobal(`
     scrollbar-width: none;
   }
 
+  @media (max-width: 900px) {
+    .hero-section__top {
+      min-height: unset;
+      height: auto;
+      aspect-ratio: 402 / 458;
+      overflow: hidden;
+    }
+
+    .hero-section__top > picture {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-section__bg {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      transform: none;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-section__menu {
+      left: 12px;
+      right: 12px;
+      width: auto;
+      max-width: none;
+      transform: none;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 11px;
+      row-gap: 8px;
+      overflow-x: visible;
+    }
+
+    .hero-section__menu .chip {
+      border-width: 0.5px;
+      min-height: 22px;
+      height: auto;
+      padding: 5.5px 7.5px;
+      font-family: "DM Sans", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .hero-section__menu .chip:not(.chip--active) {
+      background: rgba(240, 238, 225, 0.16);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      border-radius: 11px 11px 10px 10px;
+    }
+
+    .hero-section__menu .chip--home {
+      gap: 4px;
+      padding: 0 7.5px 0 0;
+      height: 22px;
+      min-height: 22px;
+      overflow: hidden;
+    }
+
+    .hero-section__menu .chip--home .chip__home-icon-wrap {
+      margin: -0.5px 0 -0.5px -0.5px;
+    }
+
+    .hero-section__logo-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 0;
+    }
+
+    .hero-section__logo {
+      margin: 0 auto;
+    }
+  }
+
   .hero-section__menu::-webkit-scrollbar {
     display: none;
   }
 
   .hero-section__menu .chip {
     flex: 0 0 auto;
-  }
-
-  .hero-section__menu .chip:first-child {
-    padding-left: 30px;
-    position: relative;
-  }
-
-  .hero-section__menu .chip:first-child::before {
-    content: "";
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at 30% 30%,
-      #f6cffb 0%,
-      #f2e984 55%,
-      #0067ff 100%
-    );
   }
 
   .hero-section__content {
