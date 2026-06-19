@@ -786,26 +786,30 @@ injectGlobal(`
 
 .showcase__card.showcase__card--photo {
   background: #f6dea9;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   overflow: hidden;
-  padding: 70px;
+  padding: 12px;
 }
 
 .showcase__photo-wrap {
   width: 100%;
   height: 100%;
+  flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .showcase__photo-img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  object-position: center;
+  border-radius: 16px;
 }
 
 .showcase__card.showcase__card--avatar {
@@ -2002,6 +2006,10 @@ injectGlobal(`
     padding: 24px;
     scroll-snap-align: center;
     margin: 0 12px;
+  }
+
+  .showcase__card.showcase__card--photo {
+    padding: 8px;
   }
 
   .showcase__text p {
